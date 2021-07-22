@@ -4,13 +4,12 @@ function PokemonDetail(props) {
   const data = props.result;
   const { id, name, types, abilities, stats, sprites, status } = data;
 
-  let capitalizeFirstLetter = (string) => {
-    if (string === "hp") {
-      return string.toUpperCase();
-    } else {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-  };
+  const CapitalCase = (string) =>
+    [...string].map((char, i) => {
+      const isLetter = /^[a-zA-Z]+$/.test(string[i - 1]);
+      const parsedChar = !isLetter || i === 0 ? char.toUpperCase() : char;
+      return parsedChar;
+    });
 
   useEffect(() => {}, [data]);
 
@@ -21,25 +20,25 @@ function PokemonDetail(props) {
           <div>
             <img src={`${sprites.front_default}`} alt="pokemon" />
           </div>
-          <p>{capitalizeFirstLetter(name)}</p>
+          <p>{CapitalCase(name)}</p>
           <p>{`Ndex #${id}`}</p>
           <h4>Types</h4>
           <ul>
             {types.map((i) => (
-              <li>{capitalizeFirstLetter(i.type.name)}</li>
+              <li>{CapitalCase(i.type.name)}</li>
             ))}
           </ul>
           <h4>Abilities</h4>
           <ul>
             {abilities.map((i) => (
-              <li>{capitalizeFirstLetter(i.ability.name)}</li>
+              <li>{CapitalCase(i.ability.name)}</li>
             ))}
           </ul>
           <h4>Stats</h4>
           <ul>
             {stats.map((i) => (
               <li>
-                {capitalizeFirstLetter(i.stat.name)}: {i.base_stat}
+                {CapitalCase(i.stat.name)}: {i.base_stat}
               </li>
             ))}
           </ul>
