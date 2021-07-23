@@ -1,9 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export function SearchBar() {
+function PokemonSearch(props) {
+  const setResult = props.setResult;
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [res, setRes] = useState({});
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -25,16 +25,14 @@ export function SearchBar() {
     }
 
     if (response !== {} && response.status) {
-      setRes(response);
+      setResult(response);
     }
 
     if (response.status >= 200 && response.status <= 299) {
       const data = await response.json();
-      setRes(data);
+      setResult(data);
     }
   };
-
-  useEffect(() => {}, [res]);
 
   return (
     <div>
@@ -42,16 +40,8 @@ export function SearchBar() {
       <button type="submit" onClick={handleQuery}>
         Catch 'em all!
       </button>
-      {res.name ? (
-        <>
-          <p>{res.name}</p>
-          <img src={`${res.sprites.front_default}`} alt="pokeman" />
-        </>
-      ) : res.status === 404 ? (
-        <p>No pokemon with that name, try again</p>
-      ) : null}
     </div>
   );
 }
 
-export default SearchBar;
+export default PokemonSearch;
