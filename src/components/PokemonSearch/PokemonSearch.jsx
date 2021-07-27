@@ -21,10 +21,10 @@ function PokemonSearch(props) {
   };
 
   const handleQuery = (e) => {
-    if (e.key === "Enter" || e.type === "click") {
+    // if (e.key === "Enter" || e.type === "click") {
       e.preventDefault();
       fetchPokemon();
-    }
+    // }
   };
 
   const fetchPokemon = async () => {

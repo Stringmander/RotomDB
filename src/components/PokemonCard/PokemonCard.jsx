@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: "rotate(180deg)",
-  }
+  },
 }));
 
-export default function PokemonCard({ result }) {
+export default function PokemonCard({ result, handleAddToTeam }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -41,15 +41,24 @@ export default function PokemonCard({ result }) {
     setExpanded(!expanded);
   };
 
-  const { id, name, types, abilities, stats, sprites, status } = result;
+  const { id, name, types, abilities, stats } = result;
 
   return name ? (
     <Card className={classes.root}>
       <CardHeader
-        avatar={<img src={`${sprites.front_default}`} alt="pokemon" />}
+        avatar={
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`}
+            alt="pokemon"
+          />
+        }
         title={CapitalCase(name)}
         subheader={types.map((i) => (
-          <img src={`/icons/${i.type.name}_icon.png`} alt="type icon" height={25} />
+          <img
+            src={`/icons/${i.type.name}_icon.png`}
+            alt="type icon"
+            height={25}
+          />
         ))}
       />
       <CardMedia
@@ -58,17 +67,21 @@ export default function PokemonCard({ result }) {
         title={CapitalCase(name)}
       />
       <CardContent>
-        <h4>Stats</h4>
+        <h4>Types</h4>
         <ul>
-          {stats.map((i) => (
-            <li>
-              {CapitalCase(i.stat.name)}: {i.base_stat}
-            </li>
+          {types.map((i) => (
+            <li>{CapitalCase(i.type.name)}</li>
+          ))}
+        </ul>
+        <h4>Abilities</h4>
+        <ul>
+          {abilities.map((i) => (
+            <li>{CapitalCase(i.ability.name)}</li>
           ))}
         </ul>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={()=>{handleAddToTeam(result)}}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -87,16 +100,12 @@ export default function PokemonCard({ result }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <h4>Types</h4>
+          <h4>Stats</h4>
           <ul>
-            {types.map((i) => (
-              <li>{CapitalCase(i.type.name)}</li>
-            ))}
-          </ul>
-          <h4>Abilities</h4>
-          <ul>
-            {abilities.map((i) => (
-              <li>{CapitalCase(i.ability.name)}</li>
+            {stats.map((i) => (
+              <li>
+                {CapitalCase(i.stat.name)}: {i.base_stat}
+              </li>
             ))}
           </ul>
         </CardContent>
