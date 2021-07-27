@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonCard from "./components/PokemonCard";
+
+const AppWrapper = styled.div`
+  
+`
 
 function App() {
   const [result, setResult] = useState({});
@@ -32,11 +38,11 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <AppWrapper>
       <PokemonTeam team={team} />
       <PokemonSearch setResult={setResult} />
       <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
-    </div>
+    </AppWrapper>
   );
 }
 

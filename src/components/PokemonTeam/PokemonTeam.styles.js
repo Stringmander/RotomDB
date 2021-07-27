@@ -18,33 +18,23 @@ export const TeamAvatarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   transform: scale(1);
   padding: 0 0;
-  transition: all 0.45s ease-in-out;
-  transition: padding 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
   .PokemonTeamName {
     opacity: 0;
     font-weight: bold;
     margin-left: 0.75rem;
-    transition: margin-left 0.3s ease-in-out;
-    transition: opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   :hover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transform: scale(1.5);
-    position: block;
     padding: 1rem 1rem;
-    transition: transform 0.45s ease-in-out;
-    transition: padding 0.3s ease-in-out;
     > .PokemonTeamName {
       opacity: 1;
-      font-weight: bold;
-      margin-left: 0.75rem;
-      transition: margin-left 0.3s ease-in-out;
-      transition: opacity 0.3s ease-in-out;
     }
   }
 `;
