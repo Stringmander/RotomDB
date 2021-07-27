@@ -21,10 +21,8 @@ function PokemonSearch(props) {
   };
 
   const handleQuery = (e) => {
-    if (e.key === "Enter" || e.type === "click") {
-      e.preventDefault();
-      fetchPokemon();
-    }
+    e.preventDefault();
+    fetchPokemon();
   };
 
   const fetchPokemon = async () => {
@@ -44,28 +42,18 @@ function PokemonSearch(props) {
     }
   };
 
-  // const formStyle = {
-  //   display: "flex",
-  //   flexFlow: "row wrap",
-  //   alignItems: "center",
-  //   padding: '4em'
-  // };
-
   return (
     <div>
-      <StyledForm
-        autoComplete="off"
-        onChange={handleChange}
-        onKeyDown={handleQuery}
-      >
+      <StyledForm autoComplete="off" onSubmit={handleQuery}>
         <TextField
           id="outlined-basic"
           label="Pokemon"
           variant="outlined"
+          onChange={handleChange}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <IconButton type="submit" onClick={handleQuery}>
+                <IconButton type="submit">
                   <SearchRoundedIcon />
                 </IconButton>
               </InputAdornment>
