@@ -1,4 +1,14 @@
 import { useState } from "react";
+import styled from "styled-components";
+import { IconButton , TextField, InputAdornment  } from "@material-ui/core";
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+
+const StyledForm = styled.form`
+display: "flex";
+flex-flow: "row wrap";
+align-items: "center";
+padding: 4em;
+`;
 
 function PokemonSearch(props) {
   const setResult = props.setResult;
@@ -34,13 +44,35 @@ function PokemonSearch(props) {
     }
   };
 
+  // const formStyle = {
+  //   display: "flex",
+  //   flexFlow: "row wrap",
+  //   alignItems: "center",
+  //   padding: '4em'
+  // };
+
   return (
+     
     <div>
-      <input onChange={handleChange} onKeyDown={handleQuery} />
-      <button type="submit" onClick={handleQuery}>
-        Catch 'em all!
-      </button>
+        <StyledForm autoComplete="off" onChange={handleChange} onKeyDown={handleQuery} >
+          <TextField 
+            id="outlined-basic" 
+            label="Pokemon" 
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton type="submit" onClick={handleQuery} >
+                    <SearchRoundedIcon />
+                  </IconButton>
+                   
+                </InputAdornment>
+              ),
+            }}
+             />
+        </StyledForm>
     </div>
+     
   );
 }
 
