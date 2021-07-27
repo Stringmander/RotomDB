@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IconButton , TextField, InputAdornment  } from "@material-ui/core";
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import { IconButton, TextField, InputAdornment } from "@material-ui/core";
+import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 
 const StyledForm = styled.form`
-display: "flex";
-flex-flow: "row wrap";
-align-items: "center";
-padding: 4em;
+  display: "flex";
+  flex-flow: "row wrap";
+  align-items: "center";
+  padding: 4em;
 `;
 
 function PokemonSearch(props) {
@@ -21,10 +21,10 @@ function PokemonSearch(props) {
   };
 
   const handleQuery = (e) => {
-    // if (e.key === "Enter" || e.type === "click") {
+    if (e.key === "Enter" || e.type === "click") {
       e.preventDefault();
       fetchPokemon();
-    // }
+    }
   };
 
   const fetchPokemon = async () => {
@@ -52,27 +52,28 @@ function PokemonSearch(props) {
   // };
 
   return (
-     
     <div>
-        <StyledForm autoComplete="off" onChange={handleChange} onKeyDown={handleQuery} >
-          <TextField 
-            id="outlined-basic" 
-            label="Pokemon" 
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton type="submit" onClick={handleQuery} >
-                    <SearchRoundedIcon />
-                  </IconButton>
-                   
-                </InputAdornment>
-              ),
-            }}
-             />
-        </StyledForm>
+      <StyledForm
+        autoComplete="off"
+        onChange={handleChange}
+        onKeyDown={handleQuery}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Pokemon"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton type="submit" onClick={handleQuery}>
+                  <SearchRoundedIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </StyledForm>
     </div>
-     
   );
 }
 
