@@ -35,7 +35,7 @@ function PokemonSearch(props) {
   };
 
   return (
-    <div>
+    <div style={{ padding: "5rem"}}>
       <input onChange={handleChange} onKeyDown={handleQuery} />
       <button type="submit" onClick={handleQuery}>
         Catch 'em all!

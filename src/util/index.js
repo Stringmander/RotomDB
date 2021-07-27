@@ -1,5 +1,3 @@
-
-
 export const CapitalCase = (string) =>
 [...string].map((char, i) => {
   const isLetter = /^[a-zA-Z]+$/.test(string[i - 1]);
