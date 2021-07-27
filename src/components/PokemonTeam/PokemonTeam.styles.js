@@ -1,9 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-const breatheAnimation = keyframes`
- 0% { height: 40px; width: 40px; }
- 100% { height: 70px; width: 70px; }
- `;
+import styled from "styled-components";
 
 export const PokemonTeamWrapper = styled.div`
   display: flex;
@@ -25,7 +20,7 @@ export const TeamAvatarWrapper = styled.div`
   align-items: center;
   transform: scale(1);
   padding: 0 0;
-  transition: transform 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
   transition: padding 0.3s ease-in-out;
   .PokemonTeamName {
     opacity: 0;

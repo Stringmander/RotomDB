@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
-import PokemonCard from "./components/Result/PokemonCard";
+import PokemonCard from "./components/PokemonCard";
 
 function App() {
   const [result, setResult] = useState({});

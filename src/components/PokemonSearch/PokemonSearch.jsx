@@ -11,10 +11,10 @@ function PokemonSearch(props) {
   };
 
   const handleQuery = (e) => {
-    if (e.key === "Enter" || e.type === "click") {
+    // if (e.key === "Enter" || e.type === "click") {
       e.preventDefault();
       fetchPokemon();
-    }
+    // }
   };
 
   const fetchPokemon = async () => {
@@ -35,12 +35,12 @@ function PokemonSearch(props) {
   };
 
   return (
-    <div style={{ padding: "5rem"}}>
-      <input onChange={handleChange} onKeyDown={handleQuery} />
-      <button type="submit" onClick={handleQuery}>
+    <form style={{ padding: "5rem"}} onSubmit={handleQuery}>
+      <input onChange={handleChange}/>
+      <button type="submit">
         Catch 'em all!
       </button>
-    </div>
+    </form>
   );
 }
 
