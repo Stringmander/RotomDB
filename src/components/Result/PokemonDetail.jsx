@@ -1,15 +1,8 @@
 import { useEffect } from "react";
-
+import { CapitalCase } from "../../util";
 function PokemonDetail(props) {
   const data = props.result;
   const { id, name, types, abilities, stats, sprites, status } = data;
-
-  const CapitalCase = (string) =>
-    [...string].map((char, i) => {
-      const isLetter = /^[a-zA-Z]+$/.test(string[i - 1]);
-      const parsedChar = !isLetter || i === 0 ? char.toUpperCase() : char;
-      return parsedChar;
-    });
 
   useEffect(() => {}, [data]);
 
