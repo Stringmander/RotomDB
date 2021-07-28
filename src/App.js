@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { Container } from "@material-ui/core";
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonCard from "./components/PokemonCard";
+import { PokemonDetails } from "./components/PokemonCard";
 
 function App() {
   const [result, setResult] = useState({});
@@ -33,9 +35,12 @@ function App() {
 
   return (
     <div className="App">
-      <PokemonTeam team={team} />
-      <PokemonSearch setResult={setResult} />
-      <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
+      <Container>
+        <PokemonTeam team={team} />
+        <PokemonSearch setResult={setResult} />
+        <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
+        <PokemonDetails result={result} />
+      </Container>
     </div>
   );
 }
