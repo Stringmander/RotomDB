@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { CapitalCase } from "../../util";
+import { capitalCase } from "../../util";
 import StatGraph from "../StatGraph";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,7 @@ export default function PokemonCard({ result, handleAddToTeam }) {
             alt="pokemon"
           />
         }
-        title={CapitalCase(name)}
+        title={capitalCase(name)}
         subheader={types.map((i) => (
           <img
             src={`/icons/${i.type.name}_icon.png`}
@@ -65,24 +65,29 @@ export default function PokemonCard({ result, handleAddToTeam }) {
       <CardMedia
         className={classes.media}
         image={types.map((i) => `/img/${i.type.name}.png`)[0]}
-        title={CapitalCase(name)}
+        title={capitalCase(name)}
       />
       <CardContent>
         <h4>Types</h4>
         <ul>
           {types.map((i) => (
-            <li>{CapitalCase(i.type.name)}</li>
+            <li>{capitalCase(i.type.name)}</li>
           ))}
         </ul>
         <h4>Abilities</h4>
         <ul>
           {abilities.map((i) => (
-            <li>{CapitalCase(i.ability.name)}</li>
+            <li>{capitalCase(i.ability.name)}</li>
           ))}
         </ul>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={() => { handleAddToTeam(result) }}>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={() => {
+            handleAddToTeam(result);
+          }}
+        >
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

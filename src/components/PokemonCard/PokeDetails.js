@@ -26,7 +26,7 @@ const PokemonDetails = ({ result }) => {
           alt="pokemon"
         />
       </ArtworkCard>
-      <PokeNameCard id={id} name={name} />
+      <PokeNameCard id={id} name={name} types={types} />
     </FlexContainer>
   ) : null;
 };
