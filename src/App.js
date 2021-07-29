@@ -1,14 +1,19 @@
-import { useState, useEffect } from "react";
-import { Container } from "@material-ui/core";
-
+import { useState, useEffect, useMemo, useContext } from "react";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { Switch, CssBaseline } from '@material-ui/core';
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonCard from "./components/PokemonCard";
-import { PokemonDetails } from "./components/PokemonCard";
+
+import { DarkModeContext } from "./context/darkModeContext";
+
 
 function App() {
   const [result, setResult] = useState({});
   const [team, setTeam] = useState([]);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const darkModeContext = useContext(DarkModeContext);
 
   useEffect(() => {
     const cachedTeam = localStorage.getItem("team");
@@ -19,9 +24,8 @@ function App() {
     }
   }, []);
 
-  const handleAddToTeam = (pokemon) => {
-    // console.log(team)
 
+  const handleAddToTeam = (pokemon) => {
     if (!team) {
       setTeam([pokemon]);
     } else {
@@ -35,15 +39,44 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Container>
+    <>
+        <Switch checked={(prefersDarkMode === "dark" ?? "light")} onChange={darkModeContext.toggleDarkMode} />
         <PokemonTeam team={team} />
         <PokemonSearch setResult={setResult} />
         <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
-        <PokemonDetails result={result} />
-      </Container>
-    </div>
+    </>
   );
 }
 
-export default App;
+export default function DarkModeApp() {
+  const [mode, setMode] = useState('light');
+
+  const currentMode = useMemo(
+    () => ({
+      toggleDarkMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
+
+  return (
+    <DarkModeContext.Provider value={currentMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </DarkModeContext.Provider>
+  )
+}
+

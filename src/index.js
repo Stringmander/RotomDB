@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import DarkModeApp from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "@fontsource/roboto";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DarkModeApp />
   </React.StrictMode>,
   document.getElementById("root")
 );
