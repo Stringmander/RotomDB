@@ -12,6 +12,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { CapitalCase } from "../../util";
+import StatGraph from "../StatGraph";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +82,7 @@ export default function PokemonCard({ result, handleAddToTeam }) {
         </ul>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={()=>{handleAddToTeam(result)}}>
+        <IconButton aria-label="add to favorites" onClick={() => { handleAddToTeam(result) }}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -100,14 +101,8 @@ export default function PokemonCard({ result, handleAddToTeam }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <h4>Stats</h4>
-          <ul>
-            {stats.map((i) => (
-              <li>
-                {CapitalCase(i.stat.name)}: {i.base_stat}
-              </li>
-            ))}
-          </ul>
+          <h4>Statistics</h4>
+          <StatGraph stats={stats} types={types} />
         </CardContent>
       </Collapse>
     </Card>
