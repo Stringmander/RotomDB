@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { Container } from "@material-ui/core";
 
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonCard from "./components/PokemonCard";
-
-const AppWrapper = styled.div`
-  
-`
+import { PokemonDetails } from "./components/PokemonCard";
 
 function App() {
   const [result, setResult] = useState({});
@@ -38,11 +35,14 @@ function App() {
   };
 
   return (
-    <AppWrapper>
-      <PokemonTeam team={team} />
-      <PokemonSearch setResult={setResult} />
-      <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
-    </AppWrapper>
+    <div className="App">
+      <Container>
+        <PokemonTeam team={team} />
+        <PokemonSearch setResult={setResult} />
+        <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
+        <PokemonDetails result={result} />
+      </Container>
+    </div>
   );
 }
 
