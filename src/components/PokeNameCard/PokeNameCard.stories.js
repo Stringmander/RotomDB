@@ -1,30 +1,12 @@
 import React from "react";
+import { pokeTypeOptions, pokeTypeMap } from "../../stories";
 
 import PokeNameCard from "./PokeNameCard";
 
-const mockTypes = {
-  single: [
-    {
-      slot: 1,
-      type: { name: "fire", url: "https://pokeapi.co/api/v2/type/10/" },
-    },
-  ],
-  dual: [
-    {
-      slot: 1,
-      type: {
-        name: "grass",
-        url: "https://pokeapi.co/api/v2/type/12/",
-      },
-    },
-    {
-      slot: 2,
-      type: {
-        name: "poison",
-        url: "https://pokeapi.co/api/v2/type/4/",
-      },
-    },
-  ],
+const pokeTypeArg = {
+  options: pokeTypeOptions,
+  mapping: pokeTypeMap,
+  control: { type: "select" },
 };
 
 export default {
@@ -33,24 +15,40 @@ export default {
   argTypes: {
     id: { control: "number" },
     name: { control: "text" },
-    options: [],
+    typeX: pokeTypeArg,
+    typeY: pokeTypeArg,
   },
 };
 
-const PokemonNameCardStory = (args) => <PokeNameCard {...args} />;
+const concatPokeTypeArrays = (typeX, typeY) => typeX.concat(typeY);
 
-export const SingleType = PokemonNameCardStory.bind({});
-
-SingleType.args = {
-  id: 4,
-  name: "charmander",
-  types: mockTypes.single,
+export const SingleTypePokemon = ({ id, name, typeX }) => {
+  return <PokeNameCard id={id} name={name} types={typeX} />;
 };
 
-export const DualType = PokemonNameCardStory.bind({});
+SingleTypePokemon.argTypes = {
+  typeY: {
+    table: {
+      disable: true,
+    },
+  },
+};
 
-DualType.args = {
+SingleTypePokemon.args = {
+  id: 4,
+  name: "charmander",
+  typeX: "Fire",
+};
+
+export const DualTypePokemon = ({ id, name, typeX, typeY }) => {
+  const types = concatPokeTypeArrays(typeX, typeY);
+
+  return <PokeNameCard id={id} name={name} types={types} />;
+};
+
+DualTypePokemon.args = {
   id: 1,
   name: "bulbasaur",
-  types: mockTypes.dual,
+  typeX: "Grass",
+  typeY: "Poison",
 };
