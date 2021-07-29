@@ -3,13 +3,11 @@ import { useState, useEffect, useMemo } from "react";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Switch, CssBaseline } from '@material-ui/core';
-
 import PokemonSearch from "./components/PokemonSearch";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonCard from "./components/PokemonCard";
 import { FormatAlignLeftSharp } from "@material-ui/icons";
-
-
+import { PokemonDetails } from "./components/PokemonCard";
 
 
 function App() {
