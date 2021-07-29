@@ -2,8 +2,6 @@ import React from 'react';
 
 import PokemonTeam from './PokemonTeam.jsx';
 
-
-
 const mockTeam = [
   {
      "abilities":[
