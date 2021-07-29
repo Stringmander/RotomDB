@@ -1,8 +1,3 @@
-export const CapitalCase = (string) =>{
-  const convertedString = [...string].map((char, i) => {
-  const isLetter = /^[a-zA-Z]+$/.test(string[i - 1]);
-  const parsedChar = !isLetter || i === 0 ? char.toUpperCase() : char;
-  return parsedChar
-})
-  return convertedString.join("")
-};
+export { default as capitalCase } from "./capitalCase";
+export { default as formatPokeId } from "./formatPokeId";
+export { default as getPokeColor } from "./getPokeColor";
