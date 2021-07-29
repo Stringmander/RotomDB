@@ -7,6 +7,7 @@
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/styled-engine-sc": "^5.0.0-alpha.11",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -60,6 +61,7 @@
     "@storybook/addon-links": "^6.3.6",
     "@storybook/node-logger": "^6.3.6",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.6"
+    "@storybook/react": "^6.3.6",
+    "babel-plugin-styled-components": "^1.13.2"
   }
 }
