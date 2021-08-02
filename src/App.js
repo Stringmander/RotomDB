@@ -1,13 +1,12 @@
 import { useState, useEffect, useMemo, useContext } from "react";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { Switch, CssBaseline } from '@material-ui/core';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { Switch, CssBaseline } from "@material-ui/core";
 import PokemonSearch from "./components/PokemonSearch";
+import PokeDetails from "./components/PokeDetails";
 import PokemonTeam from "./components/PokemonTeam";
-import PokemonCard from "./components/PokemonCard";
 
 import { DarkModeContext } from "./context/darkModeContext";
-
 
 function App() {
   const [result, setResult] = useState({});
@@ -24,7 +23,6 @@ function App() {
     }
   }, []);
 
-
   const handleAddToTeam = (pokemon) => {
     if (!team) {
       setTeam([pokemon]);
@@ -40,24 +38,27 @@ function App() {
 
   return (
     <>
-        <Switch checked={(prefersDarkMode === "dark" ?? "light")} onChange={darkModeContext.toggleDarkMode} />
-        <PokemonTeam team={team} />
-        <PokemonSearch setResult={setResult} />
-        <PokemonCard result={result} handleAddToTeam={handleAddToTeam} />
+      <Switch
+        checked={prefersDarkMode === "dark" ?? "light"}
+        onChange={darkModeContext.toggleDarkMode}
+      />
+      <PokemonTeam team={team} />
+      <PokemonSearch setResult={setResult} />
+      <PokeDetails result={result} />
     </>
   );
 }
 
 export default function DarkModeApp() {
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState("light");
 
   const currentMode = useMemo(
     () => ({
       toggleDarkMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    [],
+    []
   );
 
   const theme = useMemo(
@@ -67,7 +68,7 @@ export default function DarkModeApp() {
           mode,
         },
       }),
-    [mode],
+    [mode]
   );
 
   return (
@@ -77,6 +78,5 @@ export default function DarkModeApp() {
         <App />
       </ThemeProvider>
     </DarkModeContext.Provider>
-  )
+  );
 }
-

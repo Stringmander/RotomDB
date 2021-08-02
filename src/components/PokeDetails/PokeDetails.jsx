@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import PokeNameCard from "../PokeNameCard";
 
-const PokemonDetails = ({ result }) => {
-  const { id, name, types, abilities, stats } = result;
+const PokeDetails = ({ result }) => {
+  const { id, name, types } = result;
 
   const FlexContainer = styled.div`
     display: flex;
@@ -31,4 +31,4 @@ const PokemonDetails = ({ result }) => {
   ) : null;
 };
 
-export default PokemonDetails;
+export default PokeDetails;
