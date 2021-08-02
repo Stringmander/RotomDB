@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import { Typography } from "@material-ui/core";
+import { typeColor } from "../../themes";
 
 export const NameCard = styled(Card)`
-  width: 500px;
-  height: 4.5rem;
-  display: flex;
-  margin: 5px;
-  background-color: black;
+  && {
+    width: 35rem;
+    height: 4.5rem;
+    display: flex;
+    margin: 5px;
+    background-color: black;
+  }
 `;
 
 export const SpriteIdBg = styled.div`
@@ -28,38 +31,39 @@ export const SpriteIdBg = styled.div`
 
       @keyframes typeColors {
         from {
-          background-color: ${accent[0]};
+          background-color: ${typeColor[accent[0]]};
         }
         to {
-          background-color: ${accent[1]};
+          background-color: ${typeColor[accent[1]]};
         }
       }
     `
         : `
-      background-color: ${accent[0]}
+      background-color: ${typeColor[accent[0]]}
     `;
     return css;
   }}
 `;
 
 export const SpriteImgContainer = styled.span`
-  position: absolute;
-  height: 4.5rem;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  > img {
-    margin-left: 1rem;
+  && {
+    position: absolute;
+    height: 4.5rem;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export const IdTypography = styled(Typography)`
-  margin-left: 1rem;
-  color: white;
+  && {
+    color: white;
+  }
 `;
 
 export const NameTypography = styled(IdTypography)`
-  padding-left: 12px;
-  margin: auto 0;
+  && {
+    margin: auto 0;
+  }
 `;

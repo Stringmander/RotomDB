@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
-import PokeNameCard from "../PokeNameCard";
+import NameCard from "../NameCard";
+import { mapPokeTypeName } from "../../util";
 
 const PokeDetails = ({ result }) => {
   const { id, name, types } = result;
+
+  const pokeTypes = types ? mapPokeTypeName(types) : [];
 
   const FlexContainer = styled.div`
     display: flex;
@@ -18,7 +21,7 @@ const PokeDetails = ({ result }) => {
     }
   `;
 
-  return name ? (
+  return id ? (
     <FlexContainer>
       <ArtworkCard>
         <img
@@ -26,7 +29,7 @@ const PokeDetails = ({ result }) => {
           alt="pokemon"
         />
       </ArtworkCard>
-      <PokeNameCard id={id} name={name} types={types} />
+      <NameCard id={id} name={name} types={pokeTypes} />
     </FlexContainer>
   ) : null;
 };
