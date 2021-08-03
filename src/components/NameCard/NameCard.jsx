@@ -5,20 +5,19 @@ import {
   IdTypography,
   NameTypography,
 } from "./NameCard.styles";
-import { capitalCase, formatPokeId } from "../../util";
+import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
 
 const TypographyVariant = "h5";
 
 const PokeNameCard = ({ id, name, types }) => {
-  const displayId = formatPokeId(id);
-  // const typeThemed = getPokeColor(types);
-  const capitilizedName = capitalCase(name);
-
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  const displayId = formatPokeId(id);
+  const capitilizedName = capitalCase(name);
+  const pokeTypes = types ? mapPokeTypeName(types) : [];
 
   return (
     <NameCard>
-      <SpriteIdBg accent={types} />
+      <SpriteIdBg accent={pokeTypes} />
       <SpriteImgContainer>
         <img src={src} alt="pokemon" />
         <IdTypography variant={TypographyVariant}>No. {displayId}</IdTypography>

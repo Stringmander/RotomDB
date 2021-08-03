@@ -29,7 +29,7 @@ SingleTypePokemon.argTypes = {
 SingleTypePokemon.args = {
   id: 4,
   name: "charmander",
-  typeX: "fire",
+  typeX: "Fire",
 };
 
 export const DualTypePokemon = ({ id, name, typeX, typeY }) => {
@@ -41,6 +41,6 @@ export const DualTypePokemon = ({ id, name, typeX, typeY }) => {
 DualTypePokemon.args = {
   id: 1,
   name: "bulbasaur",
-  typeX: "grass",
-  typeY: "poison",
+  typeX: "Grass",
+  typeY: "Poison",
 };
