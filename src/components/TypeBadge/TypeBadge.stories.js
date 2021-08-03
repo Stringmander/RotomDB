@@ -4,7 +4,7 @@ import TypeBadge from ".";
 import { pokeTypeArg } from "../../stories";
 
 export default {
-  title: "RotomDB/Design System/TypeBadge",
+  title: "Design System/TypeBadge",
   component: TypeBadge,
   argTypes: {
     type: pokeTypeArg,

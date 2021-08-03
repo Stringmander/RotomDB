@@ -3,7 +3,7 @@ import React from 'react';
 import App from '../App.js';
 
 export default {
-   title: 'RotomDB/Organisms/Pokedex',
+   title: 'Features/Pokedex',
    component: App,
    argTypes: {
    },

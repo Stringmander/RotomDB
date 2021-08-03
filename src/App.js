@@ -42,7 +42,7 @@ function App() {
         checked={prefersDarkMode === "dark" ?? "light"}
         onChange={darkModeContext.toggleDarkMode}
       />
-      <PokemonTeam team={team} />
+      <PokemonTeam team={team} setResult={setResult} />
       <PokemonSearch setResult={setResult} />
       <PokeDetails result={result} />
     </>

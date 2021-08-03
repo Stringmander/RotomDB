@@ -63,7 +63,7 @@ const type = [
 ]
 
 export default {
-    title: 'RotomDB/Atoms/StatGraph',
+    title: 'Design System/StatGraph',
     component: StatGraph,
     argTypes: {
         stats: stats,
