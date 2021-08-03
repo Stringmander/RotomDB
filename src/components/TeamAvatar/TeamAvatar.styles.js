@@ -11,6 +11,7 @@ export const NameCard = styled(Card)`
     display: flex;
     margin: 5px;
     cursor: pointer;
+    overflow: hidden;
     ${({ accent }) => {
       const css =
         accent.length > 1
@@ -101,7 +102,7 @@ export const SpriteImgContainer = styled.span`
     align-items: center;
   }
   > img {
-    transition: all 0.15s ease-in-out;
+    position: relative;
     margin-left: -0.65rem;
   }
 `;
