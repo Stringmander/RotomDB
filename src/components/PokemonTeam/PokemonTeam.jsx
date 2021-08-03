@@ -4,7 +4,7 @@ import { mapPokeTypeName } from "../../util";
 
 function PokemonTeam({ team, setResult }) {
   return (
-    <PokemonTeamWrapper>
+    <PokemonTeamWrapper className="PokemonTeam">
       {team &&
         team.map(({ id, name, types }, index) => {
           const pokeTypes = mapPokeTypeName(types);

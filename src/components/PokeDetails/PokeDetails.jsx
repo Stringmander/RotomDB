@@ -1,18 +1,19 @@
 import styled from "styled-components";
-import Card from "@material-ui/core/Card";
 import NameCard from "../NameCard";
 import { mapPokeTypeName } from "../../util";
+import StatGraph from "../StatGraph";
 
-const PokeDetails = ({ result }) => {
+const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types } = result;
 
   const pokeTypes = types ? mapPokeTypeName(types) : [];
 
-  const FlexContainer = styled.div`
+  const TopRow = styled.div`
     display: flex;
-  `;
+    width: 100%;
+  `
 
-  const ArtworkCard = styled(Card)`
+  const ArtworkCard = styled.div`
     width: 25rem;
     padding: 5px;
     margin: 5px;
@@ -22,7 +23,8 @@ const PokeDetails = ({ result }) => {
   `;
 
   return id ? (
-    <FlexContainer>
+    <div className="PokeDetails">
+      <TopRow>
       <ArtworkCard>
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
@@ -30,7 +32,11 @@ const PokeDetails = ({ result }) => {
         />
       </ArtworkCard>
       <NameCard id={id} name={name} types={pokeTypes} />
-    </FlexContainer>
+      </TopRow>
+      <StatGraph types={types} stats={result.stats} />
+      
+      <button onClick={()=>{addToTeam(result)}}> add to team </button>
+    </div>
   ) : null;
 };
 

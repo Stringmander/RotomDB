@@ -2,11 +2,11 @@ import { Radar } from "react-chartjs-2";
 import styled from "styled-components";
 import { capitalCase, getPokeColor } from "../../util";
 
-const StyledForm = styled.form`
-  display: "flex";
-  flex-flow: "row wrap";
-  align-items: "center";
-  padding: 0.5em;
+const StatGraphWrapper = styled.div`
+  > canvas {
+    width: 25rem !important;
+    height: 25rem !important;
+  }
 `;
 
 const getPokeGraphData = (pokemonStats) => {
@@ -64,12 +64,13 @@ function StatGraph({ stats, types }) {
           maxTicksLimit: 5,
           beginAtZero: true,
           font: {
-            size: 10,
+            size: 40,
           },
         },
         pointLabels: {
           display: true,
           font: {
+            size: 40,
             family: "Helvetica",
             weight: "bold",
           },
@@ -91,10 +92,10 @@ function StatGraph({ stats, types }) {
 
   return (
     stats && (
-      <StyledForm>
+      <StatGraphWrapper>
         <Radar data={data} options={options} />
-      </StyledForm>
-    )
+        </StatGraphWrapper>
+      )
   );
 }
 
