@@ -5,10 +5,10 @@ import { typeColor } from "../../themes";
 
 export const NameCard = styled(Card)`
   && {
-    width: 35rem;
+    width: 100%;
     height: 4.5rem;
     display: flex;
-    margin: 5px;
+    /* margin: 5px; */
     background-color: black;
   }
 `;

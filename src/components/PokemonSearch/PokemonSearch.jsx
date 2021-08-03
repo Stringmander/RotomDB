@@ -4,10 +4,7 @@ import { IconButton, TextField, InputAdornment } from "@material-ui/core";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 
 const StyledForm = styled.form`
-  display: "flex";
-  flex-flow: "row wrap";
-  align-items: "center";
-  padding: 4em;
+
 `;
 
 function PokemonSearch(props) {
@@ -43,7 +40,7 @@ function PokemonSearch(props) {
   };
 
   return (
-    <div>
+    <div className="PokemonSearch">
       <StyledForm autoComplete="off" onSubmit={handleQuery}>
         <TextField
           id="outlined-basic"

@@ -8,6 +8,8 @@ import PokemonTeam from "./components/PokemonTeam";
 
 import { DarkModeContext } from "./context/darkModeContext";
 
+import { AppWrapper } from "./app.styles";
+
 function App() {
   const [result, setResult] = useState({});
   const [team, setTeam] = useState([]);
@@ -37,15 +39,15 @@ function App() {
   };
 
   return (
-    <>
+    <AppWrapper className="AppWrapper">
       <Switch
         checked={prefersDarkMode === "dark" ?? "light"}
         onChange={darkModeContext.toggleDarkMode}
       />
       <PokemonTeam team={team} setResult={setResult} />
       <PokemonSearch setResult={setResult} />
-      <PokeDetails result={result} />
-    </>
+      <PokeDetails result={result} addToTeam={handleAddToTeam} />
+    </AppWrapper>
   );
 }
 
