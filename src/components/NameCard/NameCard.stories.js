@@ -4,7 +4,7 @@ import { pokeTypeArg } from "../../stories";
 import NameCard from "./NameCard";
 
 export default {
-  title: "RotomDB/Atoms/NameCard",
+  title: "Design System/NameCard",
   component: NameCard,
   argTypes: {
     id: { control: "number" },

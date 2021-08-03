@@ -3,7 +3,7 @@ import React from 'react';
 import PokemonSearch from './PokemonSearch';
 
 export default {
-   title: 'RotomDB/Molecules/PokemonSearch',
+   title: 'Features/PokeSearch',
    component: PokemonSearch
  };
  

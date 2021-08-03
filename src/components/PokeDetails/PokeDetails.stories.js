@@ -4,7 +4,7 @@ import PokeDetails from ".";
 import { mockPokeResult } from "../../stories";
 
 export default {
-  title: "RotomDB/Molecules/PokeDetails",
+  title: "Features/PokeDetails",
   component: PokeDetails,
   argTypes: {
     result: { controls: "object" },
