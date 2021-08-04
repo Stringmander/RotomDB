@@ -1,21 +1,46 @@
+import { Card } from "@material-ui/core";
 import styled from "styled-components";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types } = result;
+  const { id, name, types, stats } = result;
 
   const TopRow = styled.div`
     display: flex;
     width: 100%;
+    height: 19rem;
   `;
 
-  const ArtworkCard = styled.div`
+  const ArtworkCard = styled(Card)`
     width: 25rem;
+    height: max-content;
     padding: 5px;
-    margin: 5px;
+    margin: 0 0.3rem;
     > img {
       width: 100%;
+    }
+  `;
+
+  const InfoCard = styled(Card)`
+    margin: 0 0.3rem;
+    width: 100%;
+
+    > .NameCard {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: none;
+    }
+  `;
+
+  const InfoCardBottomRow = styled.div`
+    width: auto;
+    height: 16rem;
+    display: flex;
+
+    > .StatGraph {
+      /* width: fit-content; */
+      height: 100%;
     }
   `;
 
@@ -28,9 +53,13 @@ const PokeDetails = ({ result, addToTeam }) => {
             alt="pokemon"
           />
         </ArtworkCard>
-        <NameCard id={id} name={name} types={types} />
+        <InfoCard>
+          <NameCard id={id} name={name} types={types} />
+          <InfoCardBottomRow>
+            <StatGraph stats={stats} types={types} />
+          </InfoCardBottomRow>
+        </InfoCard>
       </TopRow>
-      <StatGraph types={types} stats={result.stats} />
 
       <button
         onClick={() => {

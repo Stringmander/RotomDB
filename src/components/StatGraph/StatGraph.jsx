@@ -4,8 +4,11 @@ import { capitalCase, getPokeColor } from "../../util";
 
 const StatGraphWrapper = styled.div`
   > canvas {
-    width: 25rem !important;
-    height: 25rem !important;
+    width: inherit !important;
+    height: inherit !important;
+    max-width: 30rem;
+    max-height: 30rem;
+    font-size: inherit;
   }
 `;
 
@@ -64,13 +67,13 @@ function StatGraph({ stats, types }) {
           maxTicksLimit: 5,
           beginAtZero: true,
           font: {
-            size: 40,
+            size: 10,
           },
         },
         pointLabels: {
           display: true,
           font: {
-            size: 40,
+            size: "10rem",
             family: "Helvetica",
             weight: "bold",
           },
@@ -92,10 +95,10 @@ function StatGraph({ stats, types }) {
 
   return (
     stats && (
-      <StatGraphWrapper>
+      <StatGraphWrapper className="StatGraph">
         <Radar data={data} options={options} />
-        </StatGraphWrapper>
-      )
+      </StatGraphWrapper>
+    )
   );
 }
 

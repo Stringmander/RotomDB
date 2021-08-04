@@ -6,9 +6,8 @@ import { typeColor } from "../../themes";
 export const NameCard = styled(Card)`
   && {
     width: 100%;
-    height: 4.5rem;
+    height: 3rem;
     display: flex;
-    /* margin: 5px; */
     background-color: black;
   }
 `;
@@ -48,11 +47,23 @@ export const SpriteIdBg = styled.div`
 export const SpriteImgContainer = styled.span`
   && {
     position: absolute;
-    height: 4.5rem;
+    height: 3rem;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    > img {
+      /* position: relative;
+      top: -34px; */
+      max-height: 80px;
+      max-width: 80px;
+      ${({ id }) => {
+        if (id < 650) {
+          return "padding: 1rem;";
+        }
+      }}
+    }
   }
 `;
 
