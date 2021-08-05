@@ -17,20 +17,14 @@ const PokeDetails = ({ result, addToTeam }) => {
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
-    console.log(massagedStats);
     const keys = Object.keys(massagedStats);
     const values = Object.values(massagedStats);
-    console.log(keys);
 
     return keys.map((label, baseStat) => {
       return (
-        <TableRow className="Row">
-          <LabelCell classname="LabelCell" align="left">
-            {capitalCase(label)}
-          </LabelCell>
-          <StatTableCell classname="BaseStatCell" align="left">
-            {values[baseStat]}
-          </StatTableCell>
+        <TableRow className="Row" key={label}>
+          <LabelCell align="left">{capitalCase(label)}</LabelCell>
+          <StatTableCell align="left">{values[baseStat]}</StatTableCell>
         </TableRow>
       );
     });
