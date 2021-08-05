@@ -20,15 +20,15 @@ export const NameCard = styled(Card)`
             
             @keyframes typeColors {
               from {
-                background-color: ${typeColor[accent[0]]} !important;
+                background-color: ${typeColor[accent[0]]};
               }
               to {
-                background-color: ${typeColor[accent[1]]} !important;
+                background-color: ${typeColor[accent[1]]};
               }
             }
           `
           : `
-            background-color: ${typeColor[accent[0]]} !important;
+            background-color: ${typeColor[accent[0]]};
           `
       return css;
     }}
