@@ -1,23 +1,40 @@
-import styled from "styled-components";
+import { Table, TableBody, TableRow } from "@material-ui/core";
+import {
+  TopRow,
+  ArtworkCard,
+  InfoCard,
+  InfoCardBottomRow,
+  StatTable,
+  LabelCell,
+  StatTableCell,
+} from "./PokeDetails.styles";
+import { capitalCase, massageStats } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types } = result;
+  const { id, name, types, stats } = result;
 
-  const TopRow = styled.div`
-    display: flex;
-    width: 100%;
-  `;
+  const mapStatTableRows = (stats) => {
+    const massagedStats = massageStats(stats);
+    console.log(massagedStats);
+    const keys = Object.keys(massagedStats);
+    const values = Object.values(massagedStats);
+    console.log(keys);
 
-  const ArtworkCard = styled.div`
-    width: 25rem;
-    padding: 5px;
-    margin: 5px;
-    > img {
-      width: 100%;
-    }
-  `;
+    return keys.map((label, baseStat) => {
+      return (
+        <TableRow className="Row">
+          <LabelCell classname="LabelCell" align="left">
+            {capitalCase(label)}
+          </LabelCell>
+          <StatTableCell classname="BaseStatCell" align="left">
+            {values[baseStat]}
+          </StatTableCell>
+        </TableRow>
+      );
+    });
+  };
 
   return id ? (
     <div className="PokeDetails">
@@ -28,9 +45,20 @@ const PokeDetails = ({ result, addToTeam }) => {
             alt="pokemon"
           />
         </ArtworkCard>
-        <NameCard id={id} name={name} types={types} />
+        <InfoCard>
+          <NameCard id={id} name={name} types={types} />
+          <InfoCardBottomRow>
+            <StatTable>
+              <Table className="Table" size="small">
+                <TableBody className="Body">
+                  {mapStatTableRows(stats)}
+                </TableBody>
+              </Table>
+            </StatTable>
+            <StatGraph stats={stats} types={types} />
+          </InfoCardBottomRow>
+        </InfoCard>
       </TopRow>
-      <StatGraph types={types} stats={result.stats} />
 
       <button
         onClick={() => {
