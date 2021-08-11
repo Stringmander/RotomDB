@@ -1,7 +1,6 @@
 import { Table, TableBody, TableRow } from "@material-ui/core";
 import {
   TopRow,
-  ArtworkCard,
   InfoCard,
   InfoCardBottomRow,
   StatTable,
@@ -11,9 +10,10 @@ import {
 import { capitalCase, massageStats } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
+import AblitiyTable from "../AbilityTable/AbilityTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types, stats } = result;
+  const { id, name, types, stats, abilities } = result;
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -32,27 +32,18 @@ const PokeDetails = ({ result, addToTeam }) => {
 
   return id ? (
     <div className="PokeDetails">
-      <TopRow>
-        <ArtworkCard>
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-            alt="pokemon"
-          />
-        </ArtworkCard>
-        <InfoCard>
-          <NameCard id={id} name={name} types={types} />
-          <InfoCardBottomRow>
-            <StatTable>
-              <Table className="Table" size="small">
-                <TableBody className="Body">
-                  {mapStatTableRows(stats)}
-                </TableBody>
-              </Table>
-            </StatTable>
-            <StatGraph stats={stats} types={types} />
-          </InfoCardBottomRow>
-        </InfoCard>
-      </TopRow>
+      <InfoCard>
+        <NameCard id={id} name={name} types={types} />
+        <InfoCardBottomRow>
+          <StatTable>
+            <Table className="Table" size="small">
+              <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
+            </Table>
+          </StatTable>
+          <StatGraph stats={stats} types={types} />
+          <AblitiyTable abilities={abilities} />
+        </InfoCardBottomRow>
+      </InfoCard>
 
       <button
         onClick={() => {

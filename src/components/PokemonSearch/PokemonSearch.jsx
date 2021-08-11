@@ -2,14 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import { IconButton, TextField, InputAdornment } from "@material-ui/core";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
+import { queryApi } from "../../util";
 
-const StyledForm = styled.form`
+const StyledForm = styled.form``;
 
-`;
-
-function PokemonSearch(props) {
-  const setResult = props.setResult;
-
+function PokemonSearch({ result, setResult }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
@@ -17,26 +14,12 @@ function PokemonSearch(props) {
     setSearchTerm(e.target.value.toLowerCase());
   };
 
-  const handleQuery = (e) => {
+  const handleQuery = async (e) => {
     e.preventDefault();
-    fetchPokemon();
-  };
-
-  const fetchPokemon = async () => {
-    let response = {};
-
-    if (searchTerm !== "") {
-      response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`);
-    }
-
-    if (response !== {} && response.status) {
-      setResult(response);
-    }
-
-    if (response.status >= 200 && response.status <= 299) {
-      const data = await response.json();
-      setResult(data);
-    }
+    const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
+    const data = endpoint !== "" ? await queryApi(endpoint) : result;
+    // console.log(data);
+    setResult(data);
   };
 
   return (
