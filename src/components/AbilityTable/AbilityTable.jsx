@@ -39,7 +39,7 @@ const AblitiyTable = ({ abilities }) => {
   return (
     <TableContainer>
       <Table>
-        <TableBody>{abilityRows}</TableBody>~
+        <TableBody>{abilityRows}</TableBody>
       </Table>
     </TableContainer>
   );
