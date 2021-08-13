@@ -28,10 +28,25 @@ const AblitiyTable = ({ abilities }) => {
   console.log(abilityData);
 
   const abilityRows = abilityData.map((ability, i) => {
+
+    const languageFilter = (arr, lang) => {
+      for (let i = 0; i < arr.length; i++) {
+        const ABILITY_LANG = arr[i].language.name;
+        const EFFECT_ENTRY = arr[i].effect;
+        console.log(`this is written in ${ABILITY_LANG}`);
+    
+        if (ABILITY_LANG === lang) {
+          return EFFECT_ENTRY;
+        }
+      }
+    };
+
+    const effectText = languageFilter(ability.effect_entries, "en")
+    
     return (
       <TableRow key={ability.name + i}>
         <TableCell>{ability.name}</TableCell>
-        <TableCell>{ability.effect_entries[0].effect}</TableCell>
+        <TableCell>{effectText}</TableCell>
       </TableRow>
     );
   });
