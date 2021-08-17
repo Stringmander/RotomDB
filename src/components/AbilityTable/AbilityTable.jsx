@@ -6,7 +6,7 @@ import {
   TableCell,
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { queryApi } from "../../util";
+import { queryApi, capitalCase } from "../../util";
 
 const AblitiyTable = ({ abilities }) => {
   const [abilityData, setAbilityData] = useState([]);
@@ -45,7 +45,7 @@ const AblitiyTable = ({ abilities }) => {
     
     return (
       <TableRow key={ability.name + i}>
-        <TableCell>{ability.name}</TableCell>
+        <TableCell>{capitalCase(ability.name)}</TableCell>
         <TableCell>{effectText}</TableCell>
       </TableRow>
     );
