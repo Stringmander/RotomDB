@@ -25,8 +25,6 @@ const AblitiyTable = ({ abilities }) => {
     fetchAblities(abilities);
   }, [abilities]);
 
-  console.log(abilityData);
-
   const abilityRows = abilityData.map((ability, i) => {
     return (
       <TableRow key={ability.name + i}>
