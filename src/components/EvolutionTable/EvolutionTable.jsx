@@ -17,8 +17,10 @@ const EvolutionTable = ({ speciesData }) => {
           massageEvoChain(obj[property]);
         } else {
           if (obj.species) {
+            const URLParameters = obj.species.url.split("/");
+            const hopefullyID = URLParameters[URLParameters.length - 2];
             massagedEvoChain.push({
-              id: obj.species.url.charAt(42),
+              id: hopefullyID,
               name: obj.species.name,
             });
           }
@@ -60,7 +62,7 @@ const EvolutionTable = ({ speciesData }) => {
     fetchEvolutionChain();
   }, [evolution_chain]);
 
-  return evoChain !== [] ? (
+  return evoChain !== [] && massagedEvoChain.length > 1 ? (
     <EvoTable className="EvoTable">{mappedEvoChain}</EvoTable>
   ) : null;
 };
