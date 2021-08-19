@@ -10,19 +10,23 @@ import {
 import {
   TopRow,
   InfoCard,
-  InfoCardBottomRow,
+  // InfoCardBottomRow,
   StatTable,
   LabelCell,
   StatTableCell,
 } from "./PokeDetails.styles";
-import { capitalCase, massageStats } from "../../util";
+import { capitalCase, massageStats, queryApi } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import { ExpandMore } from "@material-ui/icons";
+import { useState, useEffect } from "react";
+import EvolutionTable from "../EvolutionTable/EvolutionTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types, stats, abilities } = result;
+  const { id, name, types, stats, abilities, species } = result;
+
+  const [speciesData, setSpeciesData] = useState({});
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -39,6 +43,32 @@ const PokeDetails = ({ result, addToTeam }) => {
     });
   };
 
+  const AboutAccordian = () => {
+    return (
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="about-panel-content"
+          id="about-panel-header"
+        >
+          <Typography>About</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <EvolutionTable speciesData={speciesData} />
+        </AccordionDetails>
+      </Accordion>
+    );
+  };
+
+  useEffect(() => {
+    const fetchAdditionalData = async () => {
+      const speciesEndpoint = species ? species.url : "";
+      const speciesRes = await queryApi(speciesEndpoint);
+      setSpeciesData(speciesRes);
+    };
+    fetchAdditionalData();
+  }, [species]);
+
   return id ? (
     <div className="PokeDetails">
       <InfoCard>
@@ -50,19 +80,9 @@ const PokeDetails = ({ result, addToTeam }) => {
               <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
             </Table>
           </StatTable>
+          <AblitiyTable abilities={abilities} />
         </TopRow>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="abilities-panel-content"
-            id="abilities-panel-header"
-          >
-            <Typography>Abilities</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AblitiyTable abilities={abilities} />
-          </AccordionDetails>
-        </Accordion>
+        <AboutAccordian />
       </InfoCard>
 
       <button

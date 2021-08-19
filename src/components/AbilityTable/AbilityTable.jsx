@@ -25,8 +25,6 @@ const AblitiyTable = ({ abilities }) => {
     fetchAblities(abilities);
   }, [abilities]);
 
-  console.log(abilityData);
-
   const abilityRows = abilityData.map((ability, i) => {
 
     const languageFilter = (arr, lang) => {
