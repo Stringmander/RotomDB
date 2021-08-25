@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const MoveCard = styled.div`
-  display: flex;
-  align-content: center;
+import { typeColor } from "../../themes";
+
+export const TypeCell = styled.td`
+  color: white;
+  background-color: ${({ type }) => typeColor[type]};
 `;
