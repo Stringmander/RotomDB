@@ -6,7 +6,7 @@ import {
   TableCell,
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { queryApi, capitalCase } from "../../util";
+import { queryApi, capitalCase, filterLanguage } from "../../util";
 
 const AblitiyTable = ({ abilities }) => {
   const [abilityData, setAbilityData] = useState([]);
@@ -26,21 +26,8 @@ const AblitiyTable = ({ abilities }) => {
   }, [abilities]);
 
   const abilityRows = abilityData.map((ability, i) => {
+    const effectText = filterLanguage(ability.effect_entries, "effect", "en");
 
-    const languageFilter = (arr, lang) => {
-      for (let i = 0; i < arr.length; i++) {
-        const ABILITY_LANG = arr[i].language.name;
-        const EFFECT_ENTRY = arr[i].effect;
-        console.log(`this is written in ${ABILITY_LANG}`);
-    
-        if (ABILITY_LANG === lang) {
-          return EFFECT_ENTRY;
-        }
-      }
-    };
-
-    const effectText = languageFilter(ability.effect_entries, "en")
-    
     return (
       <TableRow key={ability.name + i}>
         <TableCell>{capitalCase(ability.name)}</TableCell>

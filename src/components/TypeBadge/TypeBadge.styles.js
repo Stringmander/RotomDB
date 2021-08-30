@@ -5,20 +5,21 @@ import { typeColor } from "../../themes";
 
 export const BadgeBg = styled.div`
   display: flex;
-  width: 10rem;
   border-radius: 5px;
   margin: 5px;
   padding: 5px;
   align-content: center;
   background-color: ${({ type }) => typeColor[type]};
   > img {
-    height: 2rem;
+    width: 2em;
   }
 `;
 
 export const BadgeTypography = styled(Typography)`
   && {
+    font-size: 2em;
+    font-weight: bold;
+    margin: auto 1em;
     color: white;
-    margin: auto;
   }
 `;
