@@ -5,7 +5,7 @@ import { Switch, CssBaseline } from "@material-ui/core";
 import PokemonSearch from "./components/PokemonSearch";
 import PokeDetails from "./components/PokeDetails";
 import PokemonTeam from "./components/PokemonTeam";
-import PokemonBG from './components/PokeBG'
+import PokemonBG from "./components/PokeBG";
 
 import { DarkModeContext } from "./context/darkModeContext";
 
@@ -17,7 +17,6 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const darkModeContext = useContext(DarkModeContext);
   const [shift, setShift] = useState(true);
-
 
   useEffect(() => {
     const cachedTeam = localStorage.getItem("team");
@@ -44,7 +43,7 @@ function App() {
   const handleSetResult = (res) => {
     setResult(res);
     setShift(!shift);
-  }
+  };
 
   return (
     <AppWrapper className="AppWrapper">
@@ -52,7 +51,7 @@ function App() {
         checked={prefersDarkMode === "dark" ?? "light"}
         onChange={darkModeContext.toggleDarkMode}
       />
-      <PokemonBG shift={shift} types={result.types}/>
+      <PokemonBG shift={shift} types={result.types} />
       <PokemonTeam team={team} setResult={handleSetResult} />
       <PokemonSearch setResult={handleSetResult} />
       <PokeDetails result={result} addToTeam={handleAddToTeam} />

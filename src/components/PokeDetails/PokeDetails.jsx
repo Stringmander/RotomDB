@@ -22,9 +22,10 @@ import AblitiyTable from "../AbilityTable/AbilityTable";
 import { ExpandMore } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import EvolutionTable from "../EvolutionTable/EvolutionTable";
+import MovesTable from "../MovesTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types, stats, abilities, species } = result;
+  const { id, name, types, stats, abilities, species, moves } = result;
 
   const [speciesData, setSpeciesData] = useState({});
 
@@ -60,6 +61,23 @@ const PokeDetails = ({ result, addToTeam }) => {
     );
   };
 
+  const MovesAccordian = () => {
+    return (
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="moves-panel-content"
+          id="moves-panel-header"
+        >
+          <Typography>Moves</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <MovesTable moves={moves} pokeTypes={types} />
+        </AccordionDetails>
+      </Accordion>
+    );
+  };
+
   useEffect(() => {
     const fetchAdditionalData = async () => {
       const speciesEndpoint = species ? species.url : "";
@@ -83,6 +101,7 @@ const PokeDetails = ({ result, addToTeam }) => {
           <AblitiyTable abilities={abilities} />
         </TopRow>
         <AboutAccordian />
+        <MovesAccordian />
       </InfoCard>
 
       <button

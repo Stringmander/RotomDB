@@ -20,18 +20,31 @@ const MovesTable = ({ moves, pokeTypes }) => {
     return StabTextStyle;
   };
 
-  useEffect(() => {
-    const fetchMoves = async (moves) => {
-      const moveEndpoints = moves.map(({ move }) => move.url);
-      const movePromises = [];
+  useEffect(async () => {
+    // generation that serves as cutoff point for moves data
+    const targetGen = "red-blue";
 
-      moveEndpoints.map((endpoint) => {
-        return movePromises.push(queryApi(endpoint));
-      });
-      return Promise.all(movePromises).then((res) => setMovesData(res));
-    };
+    // filters moves based on targetGen
+    const filteredMoves = moves.filter(({ version_group_details }) => {
+      const endpoint = version_group_details.filter(
+        (detail) => detail.version_group.name === targetGen
+      );
+      return endpoint.length > 0;
+    });
 
-    fetchMoves(moves);
+    // array of endpoints that serve move data
+    const moveEndpoints = filteredMoves.map(({ move }) => move.url);
+
+    // array of promises that serve filtered moves data
+    const movePromisesArray = moveEndpoints.map((endpoint) =>
+      queryApi(endpoint)
+    );
+
+    // awaits array of promises, serves moves data from 1st gen to target gen
+    const resolvedMovePromisesArray = await Promise.all(movePromisesArray);
+
+    // sets movesData in state that is then rendered in the DOM
+    setMovesData(resolvedMovePromisesArray);
   }, [moves]);
 
   return (
@@ -44,6 +57,7 @@ const MovesTable = ({ moves, pokeTypes }) => {
           <th>Power</th>
           <th>Acc</th>
           <th>PP</th>
+          <th>Gen</th>
         </tr>
       </thead>
       <tbody>
@@ -52,8 +66,6 @@ const MovesTable = ({ moves, pokeTypes }) => {
             const name = filterLanguage(names, "name", "en");
             const moveType = type.name;
             const moveClass = damage_class.name;
-
-            console.log(determineSTAB(type, damage_class));
 
             return (
               <tr key={`${name}_${i}`}>
