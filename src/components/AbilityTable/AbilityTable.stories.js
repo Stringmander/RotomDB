@@ -1,7 +1,7 @@
 import React from "react";
 
 import AbilityTable from "./AbilityTable";
-import { mockPokeResult } from "../../stories";
+import { mockBulbasaur } from "../../stories";
 
 export default {
   title: "Features/AbilityTable",
@@ -15,5 +15,5 @@ const AbilityTableStory = (args) => <AbilityTable {...args} />;
 
 export const Primary = AbilityTableStory.bind({});
 Primary.args = {
-  abilities: mockPokeResult.abilities,
+  abilities: mockBulbasaur.abilities,
 };
