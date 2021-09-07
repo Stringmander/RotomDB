@@ -3,83 +3,83 @@ import { createContext } from "react";
 const versionGroups = {
   "red-blue": {
     name: "red-blue",
-    versions: ["red", "blue"],
+    version: ["red", "blue"],
   },
   yellow: {
     name: "yellow",
-    versions: ["yellow"],
+    version: ["yellow"],
   },
   "gold-silver": {
     name: "gold-silver",
-    versions: ["gold", "silver"],
+    version: ["gold", "silver"],
   },
   crystal: {
     name: "crystal",
-    versions: ["crystal"],
+    version: ["crystal"],
   },
   "ruby-sapphire": {
     name: "ruby-sapphire",
-    versions: ["ruby", "sapphire"],
+    version: ["ruby", "sapphire"],
   },
   emerald: {
     name: "emerald",
-    versions: ["emerald"],
+    version: ["emerald"],
   },
   "firered-leafgreen": {
     name: "firered-leafgreen",
-    versions: ["firered"],
+    version: ["firered"],
   },
   "diamond-pearl": {
     name: "diamond-pearl",
-    versions: [],
+    version: [],
   },
   platinum: {
     name: "platinum",
-    versions: ["platinum"],
+    version: ["platinum"],
   },
   "heartgold-soulsilver": {
     name: "heartgold-soulsilver",
-    versions: ["heartgold", "soulsilver"],
+    version: ["heartgold", "soulsilver"],
   },
   "black-white": {
     name: "black-white",
-    versions: ["black", "white"],
+    version: ["black", "white"],
   },
   colosseum: {
     name: "colosseum",
-    versions: ["colosseum"],
+    version: ["colosseum"],
   },
   xd: {
     name: "xd",
-    versions: ["xd"],
+    version: ["xd"],
   },
   "black-2-white-2": {
     name: "black-2-white-2",
-    versions: ["black-2", "white-2"],
+    version: ["black-2", "white-2"],
   },
   "x-y": {
     name: "x-y",
-    versions: ["x", "y"],
+    version: ["x", "y"],
   },
   "omega-ruby-alpha-sapphire": {
     name: "omega-ruby-alpha-sapphire",
-    versions: ["omega-ruby", "alpha-sapphire"],
+    version: ["omega-ruby", "alpha-sapphire"],
   },
   "sun-moon": {
     name: "sun-moon",
-    versions: ["sun", "moon"],
+    version: ["sun", "moon"],
   },
   "ultra-sun-ultra-moon": {
     name: "ultra-sun-ultra-moon",
-    versions: ["ultra-sun", "ultra-moon"],
+    version: ["ultra-sun", "ultra-moon"],
   },
   "lets-go": {
     name: "lets-go",
-    versions: [],
+    version: [],
   },
   "sword-shield": {
     name: "sword-shield",
-    versions: [],
+    version: [],
   },
 };
 

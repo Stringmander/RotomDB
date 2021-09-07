@@ -11,7 +11,7 @@ import { TypeCell } from "./MovesTable.styles";
 const MovesTable = ({ moves, pokeTypes }) => {
   const [movesData, setMovesData] = useState([]);
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
-  const version = useContext(VersionGroupContext);
+  const versionGroup = useContext(VersionGroupContext);
 
   const determineSTAB = (moveType, moveClass) => {
     const StabTextStyle = pokeTypesArr.includes(moveType.name)
@@ -24,10 +24,14 @@ const MovesTable = ({ moves, pokeTypes }) => {
 
   useEffect(() => {
     (async () => {
-      const resolvedMovesArr = await filterVersionGroup(moves, version.name);
+      const resolvedMovesArr = await filterVersionGroup(
+        moves,
+        "move",
+        versionGroup.name
+      );
       setMovesData(resolvedMovesArr);
     })();
-  }, [moves, version]);
+  }, [moves, versionGroup]);
 
   return (
     <table>

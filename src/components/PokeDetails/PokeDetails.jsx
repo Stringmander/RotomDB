@@ -21,8 +21,8 @@ import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import { ExpandMore } from "@material-ui/icons";
 import { useState, useEffect } from "react";
-import EvolutionTable from "../EvolutionTable/EvolutionTable";
 import MovesTable from "../MovesTable";
+import AboutAccordian from "../AboutAccordian/AboutAccordian";
 
 const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -42,23 +42,6 @@ const PokeDetails = ({ result, addToTeam }) => {
         </TableRow>
       );
     });
-  };
-
-  const AboutAccordian = () => {
-    return (
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="about-panel-content"
-          id="about-panel-header"
-        >
-          <Typography>About</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <EvolutionTable speciesData={speciesData} />
-        </AccordionDetails>
-      </Accordion>
-    );
   };
 
   const MovesAccordian = () => {
@@ -84,6 +67,7 @@ const PokeDetails = ({ result, addToTeam }) => {
       const speciesRes = await queryApi(speciesEndpoint);
       setSpeciesData(speciesRes);
     };
+
     fetchAdditionalData();
   }, [species]);
 
@@ -100,7 +84,7 @@ const PokeDetails = ({ result, addToTeam }) => {
           </StatTable>
           <AblitiyTable abilities={abilities} />
         </TopRow>
-        <AboutAccordian />
+        <AboutAccordian species={speciesData} />
         <MovesAccordian />
       </InfoCard>
 
