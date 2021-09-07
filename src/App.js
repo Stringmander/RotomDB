@@ -7,9 +7,8 @@ import PokeDetails from "./components/PokeDetails";
 import PokemonTeam from "./components/PokemonTeam";
 import PokemonBG from "./components/PokeBG";
 
-import { DarkModeContext } from "./context/darkModeContext";
-
 import { AppWrapper } from "./app.styles";
+import { DarkModeContext, VersionGroupContext } from "./context";
 
 function App() {
   const [result, setResult] = useState({});
@@ -85,7 +84,9 @@ export default function DarkModeApp() {
     <DarkModeContext.Provider value={currentMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <VersionGroupContext.Provider>
+          <App />
+        </VersionGroupContext.Provider>
       </ThemeProvider>
     </DarkModeContext.Provider>
   );
