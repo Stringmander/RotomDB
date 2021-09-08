@@ -1,6 +1,6 @@
 # RotomDB
 
-RotomDB is the ideal tool for building Pokémon teams. RotomDB's advanced search and filtering makes assembling the perfect team for whatever battles you might come across as a trainer a breeze, regardless of game or generation. RotomDB also allows for full customization of individual Pokémon ,down to held items, so that one may finely tailor their team as they desire. Trainers can also then save their customized teams to an account, and share them with friends. RotomDB is the last Pokédex you will ever need.
+RotomDB is the ideal tool for building Pokémon teams. RotomDB's advanced search and filtering makes assembling the perfect team for whatever battles you might come across as a trainer a breeze, regardless of game or generation. RotomDB also allows for full customization of individual Pokémon, down to held items, so that one may finely tailor their team as they desire. Trainers can also then save their customized teams to an account, and share them with friends. RotomDB is the last Pokédex you will ever need.
 
 ## Available Scripts
 
