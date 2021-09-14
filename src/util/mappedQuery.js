@@ -1,16 +1,8 @@
 import { queryApi } from ".";
 
-export default async function filterVersion(arr, targetVersionArr) {
-  // filters moves based on targetGen
-  const filteredArr = arr.filter(({ version }) => {
-    const endpoint = version.filter((property) =>
-      targetVersionArr.includes(property)
-    );
-    return endpoint.length > 0;
-  });
-
+export default async function mappedQuery(arr, targetProperty) {
   // array of endpoints that serve move data
-  const endpointsArr = filteredArr.map(({ property }) => property.url);
+  const endpointsArr = arr.map((property) => property[targetProperty].url);
 
   // array of promises that serve filtered moves data
   const promisesArr = endpointsArr.map((endpoint) => queryApi(endpoint));

@@ -22,7 +22,7 @@ import AblitiyTable from "../AbilityTable/AbilityTable";
 import { ExpandMore } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import MovesTable from "../MovesTable";
-import AboutAccordian from "../AboutAccordian/AboutAccordian";
+import AboutAccordian from "../AboutAccordian";
 
 const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -84,7 +84,6 @@ const PokeDetails = ({ result, addToTeam }) => {
           </StatTable>
           <AblitiyTable abilities={abilities} />
         </TopRow>
-        <AboutAccordian species={speciesData} />
         <MovesAccordian />
       </InfoCard>
 

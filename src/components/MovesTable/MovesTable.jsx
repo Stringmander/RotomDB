@@ -6,6 +6,7 @@ import {
   mapPokeTypeName,
   filterVersionGroup,
 } from "../../util";
+import mappedQuery from "../../util/mappedQuery";
 import { TypeCell } from "./MovesTable.styles";
 
 const MovesTable = ({ moves, pokeTypes }) => {
@@ -24,11 +25,12 @@ const MovesTable = ({ moves, pokeTypes }) => {
 
   useEffect(() => {
     (async () => {
-      const resolvedMovesArr = await filterVersionGroup(
+      const MovePromisesArr = await filterVersionGroup(
         moves,
-        "move",
         versionGroup.name
       );
+
+      const resolvedMovesArr = await mappedQuery(MovePromisesArr, "move");
       setMovesData(resolvedMovesArr);
     })();
   }, [moves, versionGroup]);
