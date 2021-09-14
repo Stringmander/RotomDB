@@ -85,6 +85,7 @@ const PokeDetails = ({ result, addToTeam }) => {
           <AblitiyTable abilities={abilities} />
         </TopRow>
         <MovesAccordian />
+        <AboutAccordian species={speciesData} />
       </InfoCard>
 
       <button
