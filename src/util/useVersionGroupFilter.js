@@ -13,7 +13,7 @@ const useVersionGroupFilter = (arr) => {
     return endpoint.length > 0;
   });
 
-  filteredArr = useLanguageFilter(filteredArr);
+  // filteredArr = useLanguageFilter(filteredArr);
 
   return filteredArr;
 };

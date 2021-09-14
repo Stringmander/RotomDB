@@ -1,18 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { VersionGroupContext } from "../../context";
-import {
-  capitalCase,
-  filterLanguage,
-  mapPokeTypeName,
-  filterVersionGroup,
-} from "../../util";
+import { languageContext } from "../../context";
+import { capitalCase, filterLanguage, mapPokeTypeName } from "../../util";
 import mappedQuery from "../../util/mappedQuery";
+import useVersionGroupFilter from "../../util/useVersionGroupFilter";
 import { TypeCell } from "./MovesTable.styles";
 
 const MovesTable = ({ moves, pokeTypes }) => {
   const [movesData, setMovesData] = useState([]);
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
-  const versionGroup = useContext(VersionGroupContext);
+  const lang = useContext(languageContext);
 
   const determineSTAB = (moveType, moveClass) => {
     const StabTextStyle = pokeTypesArr.includes(moveType.name)
@@ -23,17 +19,14 @@ const MovesTable = ({ moves, pokeTypes }) => {
     return StabTextStyle;
   };
 
+  const filteredMoves = useVersionGroupFilter(moves);
+
   useEffect(() => {
     (async () => {
-      const MovePromisesArr = await filterVersionGroup(
-        moves,
-        versionGroup.name
-      );
-
-      const resolvedMovesArr = await mappedQuery(MovePromisesArr, "move");
-      setMovesData(resolvedMovesArr);
+      const fetchedMoves = await mappedQuery(filteredMoves, "move");
+      setMovesData(fetchedMoves);
     })();
-  }, [moves, versionGroup]);
+  }, [filteredMoves]);
 
   return (
     <table>
@@ -45,13 +38,12 @@ const MovesTable = ({ moves, pokeTypes }) => {
           <th>Power</th>
           <th>Acc</th>
           <th>PP</th>
-          <th>Gen</th>
         </tr>
       </thead>
       <tbody>
         {movesData.map(
           ({ names, type, damage_class, power, accuracy, pp }, i) => {
-            const name = filterLanguage(names, "name", "en");
+            const name = filterLanguage(names, "name", lang);
             const moveType = type.name;
             const moveClass = damage_class.name;
 
