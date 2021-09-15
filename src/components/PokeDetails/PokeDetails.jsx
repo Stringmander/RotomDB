@@ -24,10 +24,8 @@ import { useState, useEffect } from "react";
 import MovesTable from "../MovesTable";
 import AboutAccordian from "../AboutAccordian";
 
-const PokeDetails = ({ result, addToTeam }) => {
+const PokeDetails = ({ result, speciesData, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
-
-  const [speciesData, setSpeciesData] = useState({});
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -60,16 +58,6 @@ const PokeDetails = ({ result, addToTeam }) => {
       </Accordion>
     );
   };
-
-  useEffect(() => {
-    const fetchAdditionalData = async () => {
-      const speciesEndpoint = species ? species.url : "";
-      const speciesRes = await queryApi(speciesEndpoint);
-      setSpeciesData(speciesRes);
-    };
-
-    fetchAdditionalData();
-  }, [species]);
 
   return id ? (
     <div className="PokeDetails">

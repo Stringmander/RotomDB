@@ -104,3 +104,11 @@ const versionGroups = {
 };
 
 export const VersionGroupContext = createContext(versionGroups["x-y"]);
+
+export const VersionGroupProvider = ({ children }) => {
+  return (
+    <VersionGroupContext.Provider value={versionGroups["x-y"]}>
+      {children}
+    </VersionGroupContext.Provider>
+  );
+}

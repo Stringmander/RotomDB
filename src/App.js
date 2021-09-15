@@ -8,7 +8,8 @@ import PokemonTeam from "./components/PokemonTeam";
 import PokemonBG from "./components/PokeBG";
 
 import { AppWrapper } from "./app.styles";
-import { DarkModeContext, VersionGroupContext } from "./context";
+import { DarkModeContext, VersionGroupContext, VersionGroupProvider } from "./context";
+import { queryApi } from "./util";
 
 function App() {
   const [result, setResult] = useState({});
@@ -16,6 +17,7 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const darkModeContext = useContext(DarkModeContext);
   const [shift, setShift] = useState(true);
+  const [ speciesData, setSpeciesData ] = useState({});
 
   useEffect(() => {
     const cachedTeam = localStorage.getItem("team");
@@ -44,6 +46,16 @@ function App() {
     setShift(!shift);
   };
 
+  useEffect(() => {
+    const test = async() => {
+      const speciesEndpoint = result.species ? result.species.url : "";
+      const speciesRes = await queryApi(speciesEndpoint);
+      setSpeciesData(speciesRes);
+    }
+
+    test()
+  },[result]);
+
   return (
     <AppWrapper className="AppWrapper">
       <Switch
@@ -53,7 +65,7 @@ function App() {
       <PokemonBG shift={shift} types={result.types} />
       <PokemonTeam team={team} setResult={handleSetResult} />
       <PokemonSearch setResult={handleSetResult} />
-      <PokeDetails result={result} addToTeam={handleAddToTeam} />
+      <PokeDetails result={result} speciesData={speciesData} addToTeam={handleAddToTeam} />
     </AppWrapper>
   );
 }
@@ -84,9 +96,9 @@ export default function DarkModeApp() {
     <DarkModeContext.Provider value={currentMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <VersionGroupContext.Provider>
+        <VersionGroupProvider>
           <App />
-        </VersionGroupContext.Provider>
+        </VersionGroupProvider>
       </ThemeProvider>
     </DarkModeContext.Provider>
   );

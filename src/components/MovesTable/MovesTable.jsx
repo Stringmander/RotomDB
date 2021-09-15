@@ -26,7 +26,7 @@ const MovesTable = ({ moves, pokeTypes }) => {
       const fetchedMoves = await mappedQuery(filteredMoves, "move");
       setMovesData(fetchedMoves);
     })();
-  }, [filteredMoves]);
+  }, []);
 
   return (
     <table>
