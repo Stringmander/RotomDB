@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { languageContext } from "../context/languageContext";
+import { LanguageContext } from "../context/languageContext";
 
 const useLanguageFilter = (arr) => {
-  const lang = useContext(languageContext);
+  const lang = useContext(LanguageContext);
 
   const filteredArr = arr.filter((element) => element.language.name === lang);
 

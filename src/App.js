@@ -8,7 +8,11 @@ import PokemonTeam from "./components/PokemonTeam";
 import PokemonBG from "./components/PokeBG";
 
 import { AppWrapper } from "./app.styles";
-import { DarkModeContext, VersionGroupContext, VersionGroupProvider } from "./context";
+import {
+  DarkModeContext,
+  LanguageContextProvider,
+  VersionGroupProvider,
+} from "./context";
 import { queryApi } from "./util";
 
 function App() {
@@ -17,7 +21,7 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const darkModeContext = useContext(DarkModeContext);
   const [shift, setShift] = useState(true);
-  const [ speciesData, setSpeciesData ] = useState({});
+  const [speciesData, setSpeciesData] = useState({});
 
   useEffect(() => {
     const cachedTeam = localStorage.getItem("team");
@@ -47,14 +51,14 @@ function App() {
   };
 
   useEffect(() => {
-    const test = async() => {
+    const test = async () => {
       const speciesEndpoint = result.species ? result.species.url : "";
       const speciesRes = await queryApi(speciesEndpoint);
       setSpeciesData(speciesRes);
-    }
+    };
 
-    test()
-  },[result]);
+    test();
+  }, [result]);
 
   return (
     <AppWrapper className="AppWrapper">
@@ -65,7 +69,11 @@ function App() {
       <PokemonBG shift={shift} types={result.types} />
       <PokemonTeam team={team} setResult={handleSetResult} />
       <PokemonSearch setResult={handleSetResult} />
-      <PokeDetails result={result} speciesData={speciesData} addToTeam={handleAddToTeam} />
+      <PokeDetails
+        result={result}
+        speciesData={speciesData}
+        addToTeam={handleAddToTeam}
+      />
     </AppWrapper>
   );
 }
@@ -96,9 +104,11 @@ export default function DarkModeApp() {
     <DarkModeContext.Provider value={currentMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <VersionGroupProvider>
-          <App />
-        </VersionGroupProvider>
+        <LanguageContextProvider>
+          <VersionGroupProvider>
+            <App />
+          </VersionGroupProvider>
+        </LanguageContextProvider>
       </ThemeProvider>
     </DarkModeContext.Provider>
   );

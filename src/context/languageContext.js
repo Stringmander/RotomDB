@@ -59,4 +59,12 @@ const navigatorLang = navigator.language;
 
 const defaultLang = languages.find(({ name }) => navigatorLang.includes(name));
 
-export const languageContext = createContext(defaultLang.name);
+export const LanguageContext = createContext(defaultLang.name);
+
+export const LanguageContextProvider = ({ children }) => {
+  return (
+    <LanguageContext.Provider value={defaultLang}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};

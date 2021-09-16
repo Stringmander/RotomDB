@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { languageContext } from "../../context";
+import { LanguageContext } from "../../context";
 import { capitalCase, filterLanguage, mapPokeTypeName } from "../../util";
 import mappedQuery from "../../util/mappedQuery";
 import useVersionGroupFilter from "../../util/useVersionGroupFilter";
@@ -8,7 +8,7 @@ import { TypeCell } from "./MovesTable.styles";
 const MovesTable = ({ moves, pokeTypes }) => {
   const [movesData, setMovesData] = useState([]);
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
-  const lang = useContext(languageContext);
+  const lang = useContext(LanguageContext);
 
   const determineSTAB = (moveType, moveClass) => {
     const StabTextStyle = pokeTypesArr.includes(moveType.name)
