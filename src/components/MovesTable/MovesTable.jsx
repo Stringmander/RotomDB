@@ -21,12 +21,41 @@ const MovesTable = ({ moves, pokeTypes }) => {
 
   const filteredMoves = useVersionGroupFilter(moves);
 
-  useEffect(() => {
-    (async () => {
-      const fetchedMoves = await mappedQuery(filteredMoves, "move");
-      setMovesData(fetchedMoves);
-    })();
-  }, []);
+  const TableRows = () => {
+    return movesData.map(
+      ({ names, type, damage_class, power, accuracy, pp }, i) => {
+        const name = filterLanguage(names, "name", lang);
+        const moveType = type.name;
+        const moveClass = damage_class.name;
+
+        return (
+          <tr key={`${name}_${i}`}>
+            <td style={determineSTAB(type, damage_class)}>
+              {capitalCase(name)}
+            </td>
+            <TypeCell type={moveType}>{capitalCase(type.name)}</TypeCell>
+            <td>{capitalCase(moveClass)}</td>
+            <td>{power ? power : "—"}</td>
+            <td>{accuracy ? `${accuracy}%` : "—"}</td>
+            <td>{pp}</td>
+          </tr>
+        );
+      }
+    );
+  };
+
+  const fetchedMoves = mappedQuery(filteredMoves, "move");
+  // console.log(fetchedMoves);
+  // setMovesData(fetchedMoves);
+  // console.log(movesData);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const fetchedMoves = await mappedQuery(filteredMoves, "move");
+  //     setMovesData(fetchedMoves);
+  //     console.log(movesData);
+  //   })();
+  // }, []);
 
   return (
     <table>
@@ -40,28 +69,7 @@ const MovesTable = ({ moves, pokeTypes }) => {
           <th>PP</th>
         </tr>
       </thead>
-      <tbody>
-        {movesData.map(
-          ({ names, type, damage_class, power, accuracy, pp }, i) => {
-            const name = filterLanguage(names, "name", lang);
-            const moveType = type.name;
-            const moveClass = damage_class.name;
-
-            return (
-              <tr key={`${name}_${i}`}>
-                <td style={determineSTAB(type, damage_class)}>
-                  {capitalCase(name)}
-                </td>
-                <TypeCell type={moveType}>{capitalCase(type.name)}</TypeCell>
-                <td>{capitalCase(moveClass)}</td>
-                <td>{power ? power : "—"}</td>
-                <td>{accuracy ? `${accuracy}%` : "—"}</td>
-                <td>{pp}</td>
-              </tr>
-            );
-          }
-        )}
-      </tbody>
+      <tbody>{movesData !== [] ? <TableRows /> : null}</tbody>
     </table>
   );
 };

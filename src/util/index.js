@@ -7,3 +7,4 @@ export { default as mapPokeTypeName } from "./mapPokeTypeName";
 export { default as massageStats } from "./massageStats";
 export { default as filterVersionGroup } from "./filterVersionGroup";
 export { default as useVersionFilter } from "./useVersionFilter";
+export { default as useFetch } from "./useFetch";

@@ -70,10 +70,10 @@ const PokeDetails = ({ result, speciesData, addToTeam }) => {
               <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
             </Table>
           </StatTable>
-          <AblitiyTable abilities={abilities} />
+          {/* <AblitiyTable abilities={abilities} /> */}
         </TopRow>
-        <MovesAccordian />
-        <AboutAccordian species={speciesData} />
+        {/* <MovesAccordian /> */}
+        {/* <AboutAccordian species={speciesData} /> */}
       </InfoCard>
 
       <button

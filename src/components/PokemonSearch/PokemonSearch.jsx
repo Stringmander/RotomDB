@@ -1,30 +1,44 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { IconButton, TextField, InputAdornment } from "@material-ui/core";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import { queryApi } from "../../util";
+import { useFetch } from "../../util";
 
 const StyledForm = styled.form``;
 
-function PokemonSearch({ result, setResult }) {
+function PokemonSearch({ result, setResult, setUrl }) {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const url = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
 
   const handleChange = (e) => {
     e.preventDefault();
     setSearchTerm(e.target.value.toLowerCase());
   };
 
-  const handleQuery = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
-    const data = endpoint !== "" ? await queryApi(endpoint) : result;
-    // console.log(data);
-    setResult(data);
+    setUrl(url);
   };
+
+  // const testQuery = useCallback((e) => {
+  //   e.preventDefault()
+  // const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
+  // const { isLoading, serverError, apiData} = useFetch(endpoint)
+  // }, [])
+
+  // const handleQuery = async (e) => {
+  //   e.preventDefault();
+  //   const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
+  //   const data = endpoint !== "" ? await queryApi(endpoint) : result;
+  //   // console.log(data);
+  //   setResult(data);
+  // };
 
   return (
     <div className="PokemonSearch">
-      <StyledForm autoComplete="off" onSubmit={handleQuery}>
+      <StyledForm autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           id="outlined-basic"
           label="Pokemon"
