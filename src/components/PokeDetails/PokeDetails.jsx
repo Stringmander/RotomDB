@@ -15,12 +15,11 @@ import {
   LabelCell,
   StatTableCell,
 } from "./PokeDetails.styles";
-import { capitalCase, massageStats, queryApi } from "../../util";
+import { capitalCase, massageStats } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import { ExpandMore } from "@material-ui/icons";
-import { useState, useEffect } from "react";
 import MovesTable from "../MovesTable";
 import AboutAccordian from "../AboutAccordian";
 
@@ -44,7 +43,7 @@ const PokeDetails = ({ result, speciesData, addToTeam }) => {
 
   const MovesAccordian = () => {
     return (
-      <Accordion>
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
           aria-controls="moves-panel-content"
@@ -72,7 +71,8 @@ const PokeDetails = ({ result, speciesData, addToTeam }) => {
           </StatTable>
           {/* <AblitiyTable abilities={abilities} /> */}
         </TopRow>
-        {/* <MovesAccordian /> */}
+        {/* <MovesTable moves={moves} pokeTypes={types} /> */}
+        <MovesAccordian />
         {/* <AboutAccordian species={speciesData} /> */}
       </InfoCard>
 

@@ -8,3 +8,4 @@ export { default as massageStats } from "./massageStats";
 export { default as filterVersionGroup } from "./filterVersionGroup";
 export { default as useVersionFilter } from "./useVersionFilter";
 export { default as useFetch } from "./useFetch";
+export { default as useMappedFetch } from "./useMappedFetch";

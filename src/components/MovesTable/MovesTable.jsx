@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { LanguageContext } from "../../context";
-import { capitalCase, filterLanguage, mapPokeTypeName } from "../../util";
-import mappedQuery from "../../util/mappedQuery";
+import { capitalCase, mapPokeTypeName, useMappedFetch } from "../../util";
 import useVersionGroupFilter from "../../util/useVersionGroupFilter";
 import { TypeCell } from "./MovesTable.styles";
 
 const MovesTable = ({ moves, pokeTypes }) => {
-  const [movesData, setMovesData] = useState([]);
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
   const lang = useContext(LanguageContext);
 
@@ -21,41 +19,31 @@ const MovesTable = ({ moves, pokeTypes }) => {
 
   const filteredMoves = useVersionGroupFilter(moves);
 
-  const TableRows = () => {
-    return movesData.map(
-      ({ names, type, damage_class, power, accuracy, pp }, i) => {
-        const name = filterLanguage(names, "name", lang);
-        const moveType = type.name;
-        const moveClass = damage_class.name;
+  const { isLoading, apiData, serverError } = useMappedFetch(
+    filteredMoves,
+    "move"
+  );
 
-        return (
-          <tr key={`${name}_${i}`}>
-            <td style={determineSTAB(type, damage_class)}>
-              {capitalCase(name)}
-            </td>
-            <TypeCell type={moveType}>{capitalCase(type.name)}</TypeCell>
-            <td>{capitalCase(moveClass)}</td>
-            <td>{power ? power : "—"}</td>
-            <td>{accuracy ? `${accuracy}%` : "—"}</td>
-            <td>{pp}</td>
-          </tr>
-        );
-      }
-    );
-  };
+  const TableRows = ({ lang }) =>
+    apiData.map(({ names, type, damage_class, power, accuracy, pp }, i) => {
+      const moveName = names.find(({ language }) => language.name === lang.name)
+        .name;
+      const moveType = type.name;
+      const moveClass = damage_class.name;
 
-  const fetchedMoves = mappedQuery(filteredMoves, "move");
-  // console.log(fetchedMoves);
-  // setMovesData(fetchedMoves);
-  // console.log(movesData);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const fetchedMoves = await mappedQuery(filteredMoves, "move");
-  //     setMovesData(fetchedMoves);
-  //     console.log(movesData);
-  //   })();
-  // }, []);
+      return (
+        <tr key={`${moveName}_${i}`}>
+          <td style={determineSTAB(type, damage_class)}>
+            {capitalCase(moveName)}
+          </td>
+          <TypeCell type={moveType}>{capitalCase(type.name)}</TypeCell>
+          <td>{capitalCase(moveClass)}</td>
+          <td>{power ? power : "—"}</td>
+          <td>{accuracy ? `${accuracy}%` : "—"}</td>
+          <td>{pp}</td>
+        </tr>
+      );
+    });
 
   return (
     <table>
@@ -69,7 +57,27 @@ const MovesTable = ({ moves, pokeTypes }) => {
           <th>PP</th>
         </tr>
       </thead>
-      <tbody>{movesData !== [] ? <TableRows /> : null}</tbody>
+      <tbody>
+        {isLoading && (
+          <tr>
+            <td>Loading...</td>
+          </tr>
+        )}
+        {!isLoading && serverError ? (
+          (console.log(serverError),
+          (
+            <tr>
+              <td>Error in fetching data</td>
+            </tr>
+          ))
+        ) : apiData !== null ? (
+          <TableRows lang={lang} />
+        ) : (
+          <tr>
+            <td>It's a wild MissingNo.!</td>
+          </tr>
+        )}
+      </tbody>
     </table>
   );
 };

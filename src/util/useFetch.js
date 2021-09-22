@@ -21,7 +21,7 @@ const useFetch = (url) => {
       }
     };
 
-    return url === "" ? null : fetchData(url);
+    return url === "" ? null : fetchData();
   }, [url]);
 
   return { isLoading, apiData, serverError };
