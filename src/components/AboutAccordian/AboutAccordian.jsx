@@ -6,15 +6,10 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import EvolutionTable from "../EvolutionTable/EvolutionTable";
-import useVersionFilter from "../../util/useVersionFilter";
-import { capitalCase } from "../../util";
+import { capitalCase, useContextFilter } from "../../util";
 
 const AboutAccordian = ({ species }) => {
-  const flavorTextArr = species.flavor_text_entries
-    ? species.flavor_text_entries
-    : [];
-
-  const filteredFlavorText = useVersionFilter(flavorTextArr);
+  const filteredFlavorText = useContextFilter(species.flavor_text_entries);
 
   return (
     <Accordion>
@@ -27,7 +22,7 @@ const AboutAccordian = ({ species }) => {
       </AccordionSummary>
       <AccordionDetails>
         <EvolutionTable speciesData={species} />
-        {flavorTextArr !== [] ? (
+        {
           <div>
             {filteredFlavorText.map((element) => {
               return (
@@ -38,7 +33,7 @@ const AboutAccordian = ({ species }) => {
               );
             })}
           </div>
-        ) : null}
+        }
       </AccordionDetails>
     </Accordion>
   );

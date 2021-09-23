@@ -77,7 +77,9 @@ function App() {
         (console.log(serverError), (<span>Error in fetching data</span>))
       ) : apiData !== null ? (
         <PokeDetails result={apiData} />
-      ) : null}
+      ) : (
+        <></>
+      )}
       {/* <PokeDetails
         result={result}
         speciesData={speciesData}

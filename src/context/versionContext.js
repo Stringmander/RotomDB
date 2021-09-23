@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-const versionGroups = {
+export const versionGroups = {
   "red-blue": {
     name: "red-blue",
     version: ["red", "blue"],
@@ -111,4 +111,4 @@ export const VersionGroupProvider = ({ children }) => {
       {children}
     </VersionGroupContext.Provider>
   );
-}
+};

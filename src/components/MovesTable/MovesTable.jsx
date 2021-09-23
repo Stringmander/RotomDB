@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../context";
-import { capitalCase, mapPokeTypeName, useMappedFetch } from "../../util";
-import useVersionGroupFilter from "../../util/useVersionGroupFilter";
+import {
+  capitalCase,
+  mapPokeTypeName,
+  useContextFilter,
+  useMappedFetch,
+} from "../../util";
 import { TypeCell } from "./MovesTable.styles";
 
 const MovesTable = ({ moves, pokeTypes }) => {
@@ -17,7 +21,7 @@ const MovesTable = ({ moves, pokeTypes }) => {
     return StabTextStyle;
   };
 
-  const filteredMoves = useVersionGroupFilter(moves);
+  const filteredMoves = useContextFilter(moves);
 
   const { isLoading, apiData, serverError } = useMappedFetch(
     filteredMoves,
@@ -73,9 +77,7 @@ const MovesTable = ({ moves, pokeTypes }) => {
         ) : apiData !== null ? (
           <TableRows lang={lang} />
         ) : (
-          <tr>
-            <td>It's a wild MissingNo.!</td>
-          </tr>
+          <></>
         )}
       </tbody>
     </table>
