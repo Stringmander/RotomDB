@@ -22,7 +22,7 @@ const useFetch = (url) => {
     };
 
     return url === "" ? null : fetchData();
-  }, [url]);
+  }, [url, serverError]);
 
   return { isLoading, apiData, serverError };
 };

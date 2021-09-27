@@ -13,10 +13,9 @@ import {
   LanguageContextProvider,
   VersionGroupProvider,
 } from "./context";
-import { queryApi, useFetch } from "./util";
+import { useFetch } from "./util";
 
 function App() {
-  const [result, setResult] = useState({});
   const [url, setUrl] = useState("");
   const [team, setTeam] = useState([]);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -49,7 +48,6 @@ function App() {
   };
 
   const handleSetResult = (res) => {
-    setResult(res);
     setShift(!shift);
   };
 

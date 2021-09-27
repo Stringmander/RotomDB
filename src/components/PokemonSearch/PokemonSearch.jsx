@@ -1,13 +1,11 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { IconButton, TextField, InputAdornment } from "@material-ui/core";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
-import { queryApi } from "../../util";
-import { useFetch } from "../../util";
 
 const StyledForm = styled.form``;
 
-function PokemonSearch({ result, setResult, setUrl }) {
+function PokemonSearch({ setUrl }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const url = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
@@ -21,20 +19,6 @@ function PokemonSearch({ result, setResult, setUrl }) {
     e.preventDefault();
     setUrl(url);
   };
-
-  // const testQuery = useCallback((e) => {
-  //   e.preventDefault()
-  // const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
-  // const { isLoading, serverError, apiData} = useFetch(endpoint)
-  // }, [])
-
-  // const handleQuery = async (e) => {
-  //   e.preventDefault();
-  //   const endpoint = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
-  //   const data = endpoint !== "" ? await queryApi(endpoint) : result;
-  //   // console.log(data);
-  //   setResult(data);
-  // };
 
   return (
     <div className="PokemonSearch">

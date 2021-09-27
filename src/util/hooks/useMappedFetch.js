@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 const useMappedFetch = (arr, key) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiData, setApiData] = useState(null);
   const [serverError, setServerError] = useState(null);
 
-  useEffect(() => {
+  useMemo(() => {
     const urlArr = arr.map((element) => element[key].url);
     setIsLoading(true);
 
@@ -26,7 +26,7 @@ const useMappedFetch = (arr, key) => {
         });
 
     return runAsyncFunctions();
-  }, []);
+  }, [arr, key]);
 
   return { isLoading, apiData, serverError };
 };

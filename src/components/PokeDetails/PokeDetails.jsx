@@ -1,12 +1,4 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Table,
-  TableBody,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Table, TableBody, TableRow } from "@material-ui/core";
 import {
   TopRow,
   InfoCard,
@@ -19,9 +11,8 @@ import { capitalCase, massageStats } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
-import { ExpandMore } from "@material-ui/icons";
-import MovesTable from "../MovesTable";
 import AboutAccordian from "../AboutAccordian";
+import MovesAccordian from "../MovesAccordian/MovesAccordian";
 
 const PokeDetails = ({ result, speciesData, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -41,23 +32,6 @@ const PokeDetails = ({ result, speciesData, addToTeam }) => {
     });
   };
 
-  const MovesAccordian = () => {
-    return (
-      <Accordion TransitionProps={{ unmountOnExit: true }}>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="moves-panel-content"
-          id="moves-panel-header"
-        >
-          <Typography>Moves</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <MovesTable moves={moves} pokeTypes={types} />
-        </AccordionDetails>
-      </Accordion>
-    );
-  };
-
   return id ? (
     <div className="PokeDetails">
       <InfoCard>
@@ -72,7 +46,7 @@ const PokeDetails = ({ result, speciesData, addToTeam }) => {
           {/* <AblitiyTable abilities={abilities} /> */}
         </TopRow>
         {/* <MovesTable moves={moves} pokeTypes={types} /> */}
-        <MovesAccordian />
+        <MovesAccordian moves={moves} types={types} />
         {/* <AboutAccordian species={speciesData} /> */}
       </InfoCard>
 
