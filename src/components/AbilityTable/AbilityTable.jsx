@@ -5,40 +5,57 @@ import {
   TableRow,
   TableCell,
 } from "@material-ui/core";
-import { useEffect, useState } from "react";
-import { queryApi, capitalCase } from "../../util";
+import { useContext } from "react";
+import { LanguageContext } from "../../context";
+import { capitalCase, useMappedFetch } from "../../util";
 
 const AblitiyTable = ({ abilities }) => {
-  const [abilityData, setAbilityData] = useState([]);
+  const lang = useContext(LanguageContext);
 
-  // useEffect(() => {
-  //   const fetchAblities = async (abilities) => {
-  //     const abilityEndpoints = abilities.map(({ ability }) => ability.url);
-  //     const abilityPromises = [];
+  const { isLoading, apiData, serverError } = useMappedFetch(
+    abilities,
+    "ability"
+  );
 
-  //     abilityEndpoints.map((endpoint) => {
-  //       return abilityPromises.push(queryApi(endpoint));
-  //     });
-  //     return Promise.all(abilityPromises).then((res) => setAbilityData(res));
-  //   };
+  const AbilityRows = ({ lang }) =>
+    apiData.map((ability, i) => {
+      const effectText = ability.effect_entries.find(
+        ({ language }) => language.name === lang.name
+      ).effect;
 
-  //   fetchAblities(abilities);
-  // }, [abilities]);
+      console.log(effectText);
 
-  // const abilityRows = abilityData.map((ability, i) => {
-  //   const effectText = filterLanguage(ability.effect_entries, "effect", "en");
-
-  //   return (
-  //     <TableRow key={ability.name + i}>
-  //       <TableCell>{capitalCase(ability.name)}</TableCell>
-  //       <TableCell>{effectText}</TableCell>
-  //     </TableRow>
-  //   );
-  // });
+      return (
+        <TableRow key={ability.name + i}>
+          <TableCell>{capitalCase(ability.name)}</TableCell>
+          <TableCell>{effectText}</TableCell>
+        </TableRow>
+      );
+    });
 
   return (
     <TableContainer>
-      <Table>{/* <TableBody>{abilityRows}</TableBody> */}</Table>
+      <Table>
+        <TableBody>
+          {isLoading && (
+            <tr>
+              <td>Loading...</td>
+            </tr>
+          )}
+          {!isLoading && serverError ? (
+            (console.log(serverError),
+            (
+              <tr>
+                <td>Error in fetching data</td>
+              </tr>
+            ))
+          ) : apiData !== null ? (
+            <AbilityRows lang={lang} />
+          ) : (
+            <></>
+          )}
+        </TableBody>
+      </Table>
     </TableContainer>
   );
 };
