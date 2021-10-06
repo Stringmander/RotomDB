@@ -21,7 +21,6 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const darkModeContext = useContext(DarkModeContext);
   const [shift, setShift] = useState(true);
-  const [speciesData, setSpeciesData] = useState({});
 
   const { isLoading, serverError, apiData } = useFetch(url);
 
@@ -51,16 +50,6 @@ function App() {
     setShift(!shift);
   };
 
-  // useEffect(() => {
-  //   const test = async () => {
-  //     const speciesEndpoint = result.species ? result.species.url : "";
-  //     const speciesRes = await queryApi(speciesEndpoint);
-  //     setSpeciesData(speciesRes);
-  //   };
-
-  //   test();
-  // }, [result]);
-
   return (
     <AppWrapper className="AppWrapper">
       <Switch
@@ -78,11 +67,6 @@ function App() {
       ) : (
         <></>
       )}
-      {/* <PokeDetails
-        result={result}
-        speciesData={speciesData}
-        addToTeam={handleAddToTeam}
-      /> */}
     </AppWrapper>
   );
 }

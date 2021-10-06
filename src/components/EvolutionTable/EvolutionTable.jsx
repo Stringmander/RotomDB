@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { EvoTable, EvoCard, EvoArrow } from "./EvolutionTable.styles";
 import { capitalCase, queryApi } from "../../util";
 
-const EvolutionTable = ({ speciesData }) => {
+const EvolutionTable = ({ species }) => {
   const [evoChain, setEvoChain] = useState({});
-  const { evolution_chain } = speciesData;
+  const { evolution_chain } = species;
 
   let massagedEvoChain = [];
 
@@ -18,9 +18,9 @@ const EvolutionTable = ({ speciesData }) => {
         } else {
           if (obj.species) {
             const URLParameters = obj.species.url.split("/");
-            const hopefullyID = URLParameters[URLParameters.length - 2];
+            const id = URLParameters[URLParameters.length - 2];
             massagedEvoChain.push({
-              id: hopefullyID,
+              id: id,
               name: obj.species.name,
             });
           }

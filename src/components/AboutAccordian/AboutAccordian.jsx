@@ -21,7 +21,7 @@ const AboutAccordian = ({ species }) => {
         <Typography>About</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <EvolutionTable speciesData={species} />
+        <EvolutionTable species={species} />
         {
           <div>
             {filteredFlavorText.map((element) => {

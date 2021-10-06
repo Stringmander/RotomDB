@@ -23,8 +23,6 @@ const AblitiyTable = ({ abilities }) => {
         ({ language }) => language.name === lang.name
       ).effect;
 
-      console.log(effectText);
-
       return (
         <TableRow key={ability.name + i}>
           <TableCell>{capitalCase(ability.name)}</TableCell>
