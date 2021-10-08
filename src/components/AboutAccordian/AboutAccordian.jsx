@@ -8,8 +8,13 @@ import { ExpandMore } from "@material-ui/icons";
 import EvolutionTable from "../EvolutionTable/EvolutionTable";
 import { capitalCase, useContextFilter } from "../../util";
 
-const AboutAccordian = ({ species }) => {
-  const filteredFlavorText = useContextFilter(species.flavor_text_entries);
+const AboutAccordian = ({ speciesRes }) => {
+  const { isLoading, serverError, apiData } = speciesRes;
+
+  const flavorTextEntries = apiData === null ? [] : apiData.flavor_text_entries;
+
+  const flavorText = useContextFilter(flavorTextEntries);
+  console.log(flavorText);
 
   return (
     <Accordion>
@@ -21,10 +26,13 @@ const AboutAccordian = ({ species }) => {
         <Typography>About</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <EvolutionTable species={species} />
-        {
+        {isLoading && <span>Loading...</span>}
+        {!isLoading && serverError ? (
+          (console.log(serverError), (<span>Error in fetching data</span>))
+        ) : apiData !== null ? (
           <div>
-            {filteredFlavorText.map((element) => {
+            <EvolutionTable species={apiData} />
+            {flavorText.map((element) => {
               return (
                 <div key={`${element.version.name}-${element.language.name}`}>
                   <h3>Pokémon {capitalCase(element.version.name)}</h3>
@@ -33,7 +41,9 @@ const AboutAccordian = ({ species }) => {
               );
             })}
           </div>
-        }
+        ) : (
+          <></>
+        )}
       </AccordionDetails>
     </Accordion>
   );

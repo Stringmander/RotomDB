@@ -17,7 +17,7 @@ import MovesAccordian from "../MovesAccordian/MovesAccordian";
 const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
 
-  const { isLoading, serverError, apiData } = useFetch(species.url);
+  const speciesRes = useFetch(species.url);
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -48,14 +48,15 @@ const PokeDetails = ({ result, addToTeam }) => {
           <AblitiyTable abilities={abilities} />
         </TopRow>
         <MovesAccordian moves={moves} types={types} />
-        {isLoading && <span>Loading...</span>}
+        <AboutAccordian speciesRes={speciesRes} />
+        {/* {isLoading && <span>Loading...</span>}
         {!isLoading && serverError ? (
           (console.log(serverError), (<span>Error in fetching data</span>))
         ) : apiData !== null ? (
-          <AboutAccordian speciesUrl={apiData} />
+          <AboutAccordian speciesData={speciesData} />
         ) : (
           <></>
-        )}
+        )} */}
       </InfoCard>
 
       <button

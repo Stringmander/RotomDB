@@ -1,19 +1,25 @@
 import { React } from "react";
 
 import AboutAccordian from ".";
-import { mockSpeciesResult } from "../../stories";
+import { mockBulbasaur } from "../../stories";
+import { useFetch } from "../../util";
 
 export default {
   title: "Design System/About Accordian",
   component: AboutAccordian,
   argTypes: {
-    species: { controls: "object" },
+    speciesRes: { controls: "object" },
   },
 };
 
-const AboutAccordianStory = (args) => <AboutAccordian {...args} />;
+export const Primary = () => {
+  const speciesRes = useFetch(mockBulbasaur.species.url);
 
-export const Primary = AboutAccordianStory.bind({});
-Primary.args = {
-  species: mockSpeciesResult,
+  return <AboutAccordian speciesRes={speciesRes} />;
 };
+
+// export const Secondary = () => {
+//   const speciesRes = useFetch("error");
+
+//   return <AboutAccordian speciesRes={speciesRes} />;
+// };
