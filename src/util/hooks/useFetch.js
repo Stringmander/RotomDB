@@ -6,7 +6,6 @@ const useFetch = (url) => {
   const [serverError, setServerError] = useState(null);
 
   useEffect(() => {
-    serverError && setServerError(null);
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -14,15 +13,17 @@ const useFetch = (url) => {
         const data = await resp.json();
 
         setApiData(data);
+        setServerError(null);
         setIsLoading(false);
       } catch (error) {
         setServerError(error);
+        setApiData(null);
         setIsLoading(false);
       }
     };
 
     return url === "" ? null : fetchData();
-  }, [url, serverError]);
+  }, [url]);
 
   return { isLoading, apiData, serverError };
 };

@@ -14,7 +14,6 @@ const AboutAccordian = ({ speciesRes }) => {
   const flavorTextEntries = apiData === null ? [] : apiData.flavor_text_entries;
 
   const flavorText = useContextFilter(flavorTextEntries);
-  console.log(flavorText);
 
   return (
     <Accordion>
@@ -28,7 +27,7 @@ const AboutAccordian = ({ speciesRes }) => {
       <AccordionDetails>
         {isLoading && <span>Loading...</span>}
         {!isLoading && serverError ? (
-          (console.log(serverError), (<span>Error in fetching data</span>))
+          <span>Error in fetching data</span>
         ) : apiData !== null ? (
           <div>
             <EvolutionTable species={apiData} />

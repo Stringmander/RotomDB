@@ -61,7 +61,7 @@ function App() {
       <PokemonSearch setResult={handleSetResult} setUrl={setUrl} />
       {isLoading && <span>Loading...</span>}
       {!isLoading && serverError ? (
-        (console.log(serverError), (<span>Error in fetching data</span>))
+        <span>Error in fetching data</span>
       ) : apiData !== null ? (
         <PokeDetails result={apiData} />
       ) : (

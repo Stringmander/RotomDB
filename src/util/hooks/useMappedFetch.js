@@ -18,10 +18,12 @@ const useMappedFetch = (arr, key) => {
       )
         .then((values) => {
           setApiData(values);
+          setServerError(null);
           setIsLoading(false);
         })
         .catch((error) => {
           setServerError(error);
+          setApiData(null);
           setIsLoading(false);
         });
 

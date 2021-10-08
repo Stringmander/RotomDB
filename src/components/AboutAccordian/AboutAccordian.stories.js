@@ -18,8 +18,8 @@ export const Primary = () => {
   return <AboutAccordian speciesRes={speciesRes} />;
 };
 
-// export const Secondary = () => {
-//   const speciesRes = useFetch("error");
+export const Secondary = () => {
+  const speciesRes = useFetch("erroneous url");
 
-//   return <AboutAccordian speciesRes={speciesRes} />;
-// };
+  return <AboutAccordian speciesRes={speciesRes} />;
+};

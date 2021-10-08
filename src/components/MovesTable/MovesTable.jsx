@@ -68,12 +68,9 @@ const MovesTable = ({ moves, pokeTypes }) => {
           </tr>
         )}
         {!isLoading && serverError ? (
-          (console.log(serverError),
-          (
-            <tr>
-              <td>Error in fetching data</td>
-            </tr>
-          ))
+          <tr>
+            <td>Error in fetching data</td>
+          </tr>
         ) : apiData !== null ? (
           <TableRows lang={lang} />
         ) : (
