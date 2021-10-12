@@ -5,7 +5,7 @@ function PokeTypeBadge({ type }) {
   return (
     <BadgeBg type={type}>
       <img src={`/icons/${type}.svg`} alt="pokemon" />
-      <BadgeTypography variant="h5">{capitalCase(type)}</BadgeTypography>
+      <BadgeTypography>{capitalCase(type)}</BadgeTypography>
     </BadgeBg>
   );
 }

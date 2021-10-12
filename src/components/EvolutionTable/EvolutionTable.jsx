@@ -1,26 +1,30 @@
 import { Typography } from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 
 import { EvoTable, EvoCard, EvoArrow } from "./EvolutionTable.styles";
-import { capitalCase, queryApi } from "../../util";
+import { capitalCase, useFetch } from "../../util";
 
-const EvolutionTable = ({ speciesData }) => {
-  const [evoChain, setEvoChain] = useState({});
-  const { evolution_chain } = speciesData;
+const EvolutionTable = ({ evoChainUrl }) => {
+  const [evoChain, setEvoChain] = useState([]);
 
-  let massagedEvoChain = [];
+  const { isLoading, serverError, apiData } = useFetch(evoChainUrl);
 
-  const massageEvoChain = async (obj) => {
-    const massage = async (obj) => {
-      for (const property in obj) {
-        if (typeof obj[property] == "object" && obj[property] !== null) {
-          massageEvoChain(obj[property]);
+  useMemo(() => {
+    const evoChainObj = apiData === null ? {} : apiData.chain;
+
+    let massagedEvoChain = [];
+
+    const massageEvoChainObj = (obj) => {
+      for (const prop in obj) {
+        if (typeof obj[prop] == "object" && obj[prop] !== null) {
+          massageEvoChainObj(obj[prop]);
         } else {
+          if (!obj.hasOwnProperty(prop)) continue;
           if (obj.species) {
             const URLParameters = obj.species.url.split("/");
-            const hopefullyID = URLParameters[URLParameters.length - 2];
+            const id = URLParameters[URLParameters.length - 2];
             massagedEvoChain.push({
-              id: hopefullyID,
+              id: id,
               name: obj.species.name,
             });
           }
@@ -28,12 +32,13 @@ const EvolutionTable = ({ speciesData }) => {
       }
     };
 
-    await massage(obj);
-  };
+    massageEvoChainObj(evoChainObj);
+    massagedEvoChain.reverse();
 
-  massageEvoChain(evoChain);
+    setEvoChain(massagedEvoChain);
+  }, [apiData]);
 
-  const mappedEvoChain = massagedEvoChain.reverse().map(({ id, name }, i) => (
+  const mapEvoChain = evoChain.map(({ id, name }, i) => (
     <div key={name + i} style={{ display: "flex" }}>
       <EvoCard>
         <img
@@ -45,7 +50,7 @@ const EvolutionTable = ({ speciesData }) => {
       <EvoArrow
         className="EvoTable"
         style={
-          i === massagedEvoChain.length - 1
+          i === evoChain.length - 1
             ? { display: "none" }
             : { display: "inline-block" }
         }
@@ -53,18 +58,18 @@ const EvolutionTable = ({ speciesData }) => {
     </div>
   ));
 
-  useEffect(() => {
-    const fetchEvolutionChain = async () => {
-      const evoChainEndpoint = evolution_chain ? evolution_chain.url : "";
-      const evoChainRes = await queryApi(evoChainEndpoint);
-      setEvoChain(evoChainRes);
-    };
-    fetchEvolutionChain();
-  }, [evolution_chain]);
-
-  return evoChain !== [] && massagedEvoChain.length > 1 ? (
-    <EvoTable className="EvoTable">{mappedEvoChain}</EvoTable>
-  ) : null;
+  return (
+    <EvoTable>
+      {isLoading && <span>Loading...</span>}
+      {!isLoading && serverError ? (
+        <span>Error in fetching data</span>
+      ) : apiData !== null ? (
+        mapEvoChain
+      ) : (
+        <></>
+      )}
+    </EvoTable>
+  );
 };
 
 export default EvolutionTable;

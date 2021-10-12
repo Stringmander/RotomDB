@@ -5,19 +5,24 @@ import { Switch, CssBaseline } from "@material-ui/core";
 import PokemonSearch from "./components/PokemonSearch";
 import PokeDetails from "./components/PokeDetails";
 import PokemonTeam from "./components/PokemonTeam";
-import PokemonBG from './components/PokeBG'
-
-import { DarkModeContext } from "./context/darkModeContext";
+import PokemonBG from "./components/PokeBG";
 
 import { AppWrapper } from "./app.styles";
+import {
+  DarkModeContext,
+  LanguageContextProvider,
+  VersionGroupProvider,
+} from "./context";
+import { useFetch } from "./util";
 
 function App() {
-  const [result, setResult] = useState({});
+  const [url, setUrl] = useState("");
   const [team, setTeam] = useState([]);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const darkModeContext = useContext(DarkModeContext);
   const [shift, setShift] = useState(true);
 
+  const { isLoading, serverError, apiData } = useFetch(url);
 
   useEffect(() => {
     const cachedTeam = localStorage.getItem("team");
@@ -42,9 +47,8 @@ function App() {
   };
 
   const handleSetResult = (res) => {
-    setResult(res);
     setShift(!shift);
-  }
+  };
 
   return (
     <AppWrapper className="AppWrapper">
@@ -52,10 +56,17 @@ function App() {
         checked={prefersDarkMode === "dark" ?? "light"}
         onChange={darkModeContext.toggleDarkMode}
       />
-      <PokemonBG shift={shift} types={result.types}/>
+      {/* <PokemonBG shift={shift} types={result.types} /> */}
       <PokemonTeam team={team} setResult={handleSetResult} />
-      <PokemonSearch setResult={handleSetResult} />
-      <PokeDetails result={result} addToTeam={handleAddToTeam} />
+      <PokemonSearch setResult={handleSetResult} setUrl={setUrl} />
+      {isLoading && <span>Loading...</span>}
+      {!isLoading && serverError ? (
+        <span>Error in fetching data</span>
+      ) : apiData !== null ? (
+        <PokeDetails result={apiData} />
+      ) : (
+        <></>
+      )}
     </AppWrapper>
   );
 }
@@ -86,7 +97,11 @@ export default function DarkModeApp() {
     <DarkModeContext.Provider value={currentMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <LanguageContextProvider>
+          <VersionGroupProvider>
+            <App />
+          </VersionGroupProvider>
+        </LanguageContextProvider>
       </ThemeProvider>
     </DarkModeContext.Provider>
   );

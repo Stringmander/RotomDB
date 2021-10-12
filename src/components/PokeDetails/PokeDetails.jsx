@@ -1,12 +1,4 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Table,
-  TableBody,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Table, TableBody, TableRow } from "@material-ui/core";
 import {
   TopRow,
   InfoCard,
@@ -15,18 +7,21 @@ import {
   LabelCell,
   StatTableCell,
 } from "./PokeDetails.styles";
-import { capitalCase, massageStats, queryApi } from "../../util";
+import { capitalCase, massageStats, useFetch } from "../../util";
 import NameCard from "../NameCard";
 import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
-import { ExpandMore } from "@material-ui/icons";
-import { useState, useEffect } from "react";
-import EvolutionTable from "../EvolutionTable/EvolutionTable";
+import AboutAccordian from "../AboutAccordian";
+import MovesAccordian from "../MovesAccordian/MovesAccordian";
+import EvolutionTable from "../EvolutionTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
-  const { id, name, types, stats, abilities, species } = result;
+  const { id, name, types, stats, abilities, species, moves } = result;
 
-  const [speciesData, setSpeciesData] = useState({});
+  const speciesRes = useFetch(species.url);
+
+  const evoChainUrl =
+    speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -43,32 +38,6 @@ const PokeDetails = ({ result, addToTeam }) => {
     });
   };
 
-  const AboutAccordian = () => {
-    return (
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="about-panel-content"
-          id="about-panel-header"
-        >
-          <Typography>About</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <EvolutionTable speciesData={speciesData} />
-        </AccordionDetails>
-      </Accordion>
-    );
-  };
-
-  useEffect(() => {
-    const fetchAdditionalData = async () => {
-      const speciesEndpoint = species ? species.url : "";
-      const speciesRes = await queryApi(speciesEndpoint);
-      setSpeciesData(speciesRes);
-    };
-    fetchAdditionalData();
-  }, [species]);
-
   return id ? (
     <div className="PokeDetails">
       <InfoCard>
@@ -80,9 +49,13 @@ const PokeDetails = ({ result, addToTeam }) => {
               <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
             </Table>
           </StatTable>
-          <AblitiyTable abilities={abilities} />
+          <div>
+            <EvolutionTable evoChainUrl={evoChainUrl} />
+            <AblitiyTable abilities={abilities} />
+          </div>
         </TopRow>
-        <AboutAccordian />
+        <MovesAccordian moves={moves} types={types} />
+        <AboutAccordian speciesRes={speciesRes} />
       </InfoCard>
 
       <button

@@ -1,4 +1,7 @@
-export default function mapPokeTypeNames(types) {
-  const pokeTypes = types.map(({ type }) => type.name);
+export default function massagedPokeTypeNames(types) {
+  const pokeTypes = types.map(({ slot, type }, i) => {
+    slot = slot + i;
+    return type.name;
+  });
   return pokeTypes;
 }
