@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import PokemonSearch from './PokemonSearch';
+import PokemonSearch from "./PokemonSearch";
 
 export default {
-   title: 'Features/PokeSearch',
-   component: PokemonSearch
- };
- 
- const template = (args) => <PokemonSearch {...args} />;
- 
- export const Primary = template.bind({});
+  title: "Features/PokeSearch",
+  component: PokemonSearch,
+};
 
- Primary.args = {
-     setResult: ()=>alert('setResult called')
- };
+const template = (args) => <PokemonSearch {...args} />;
+
+export const Primary = template.bind({});
+
+Primary.args = {
+  setUrl: () => alert("setUrl called"),
+};
