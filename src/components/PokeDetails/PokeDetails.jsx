@@ -13,11 +13,15 @@ import StatGraph from "../StatGraph";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import AboutAccordian from "../AboutAccordian";
 import MovesAccordian from "../MovesAccordian/MovesAccordian";
+import EvolutionTable from "../EvolutionTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
 
   const speciesRes = useFetch(species.url);
+
+  const evoChainUrl =
+    speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
 
   const mapStatTableRows = (stats) => {
     const massagedStats = massageStats(stats);
@@ -45,18 +49,13 @@ const PokeDetails = ({ result, addToTeam }) => {
               <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
             </Table>
           </StatTable>
-          <AblitiyTable abilities={abilities} />
+          <div>
+            <EvolutionTable evoChainUrl={evoChainUrl} />
+            <AblitiyTable abilities={abilities} />
+          </div>
         </TopRow>
         <MovesAccordian moves={moves} types={types} />
         <AboutAccordian speciesRes={speciesRes} />
-        {/* {isLoading && <span>Loading...</span>}
-        {!isLoading && serverError ? (
-          (console.log(serverError), (<span>Error in fetching data</span>))
-        ) : apiData !== null ? (
-          <AboutAccordian speciesData={speciesData} />
-        ) : (
-          <></>
-        )} */}
       </InfoCard>
 
       <button

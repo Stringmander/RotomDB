@@ -5,7 +5,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
-import EvolutionTable from "../EvolutionTable/EvolutionTable";
 import { capitalCase, useContextFilter } from "../../util";
 
 const AboutAccordian = ({ speciesRes }) => {
@@ -30,7 +29,6 @@ const AboutAccordian = ({ speciesRes }) => {
           <span>Error in fetching data</span>
         ) : apiData !== null ? (
           <div>
-            <EvolutionTable species={apiData} />
             {flavorText.map((element) => {
               return (
                 <div key={`${element.version.name}-${element.language.name}`}>

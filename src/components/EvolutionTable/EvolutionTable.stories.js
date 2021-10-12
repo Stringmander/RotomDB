@@ -7,7 +7,7 @@ export default {
   title: "Features/EvolutionTable",
   component: EvolutionTable,
   argTypes: {
-    speciesData: { controls: "object" },
+    evoChainUrl: { controls: "text" },
   },
 };
 
@@ -15,5 +15,5 @@ const EvolutionTableStory = (args) => <EvolutionTable {...args} />;
 
 export const Primary = EvolutionTableStory.bind({});
 Primary.args = {
-  speciesData: mockSpeciesResult,
+  evoChainUrl: mockSpeciesResult.evolution_chain.url,
 };
