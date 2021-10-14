@@ -1,10 +1,22 @@
-import styled from "styled-components";
-import { Card, TableContainer, TableCell } from "@material-ui/core";
+// import styled from "styled-components";
+import {
+  Card,
+  TableContainer,
+  TableCell,
+  createTheme,
+  styled,
+} from "@material-ui/core";
 
-export const TopRow = styled.div`
-  display: flex;
-  width: 100%;
-`;
+const theme = createTheme({
+  components: {
+    variants: [],
+  },
+});
+
+export const TopRow = styled("div")({
+  display: "flex",
+  width: "100%",
+});
 
 export const InfoCard = styled(Card)`
   margin: 0 0.3rem;
@@ -24,16 +36,6 @@ export const ArtworkCard = styled(Card)`
   margin: 0 0.3rem;
   > img {
     width: 100%;
-  }
-`;
-
-export const InfoCardBottomRow = styled.div`
-  width: auto;
-  height: 16rem;
-  display: flex;
-  > .StatGraph {
-    height: 100%;
-    margin-right: 3rem;
   }
 `;
 

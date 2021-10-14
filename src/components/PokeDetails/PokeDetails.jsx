@@ -1,8 +1,7 @@
-import { Table, TableBody, TableRow } from "@material-ui/core";
+import { Paper, Table, TableBody, TableRow } from "@material-ui/core";
 import {
   TopRow,
   InfoCard,
-  // InfoCardBottomRow,
   StatTable,
   LabelCell,
   StatTableCell,
@@ -39,7 +38,7 @@ const PokeDetails = ({ result, addToTeam }) => {
   };
 
   return id ? (
-    <div className="PokeDetails">
+    <Paper elevation={0} className="PokeDetails">
       <InfoCard>
         <NameCard id={id} name={name} types={types} />
         <TopRow>
@@ -66,7 +65,7 @@ const PokeDetails = ({ result, addToTeam }) => {
         {" "}
         add to team{" "}
       </button>
-    </div>
+    </Paper>
   ) : null;
 };
 

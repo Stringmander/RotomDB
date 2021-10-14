@@ -25,9 +25,11 @@ function PokemonSearch({ setUrl }) {
       <StyledForm autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           id="outlined-basic"
-          label="Pokemon"
+          label="Search Pokémon"
           variant="outlined"
           onChange={handleChange}
+          margin="normal"
+          fullWidth
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
