@@ -1,80 +1,82 @@
-import styled from "styled-components";
-import Card from "@material-ui/core/Card";
-import { Typography } from "@material-ui/core";
+import { createTheme, styled, responsiveFontSizes } from "@material-ui/core";
 import { typeColor } from "../../themes";
 
-export const NameCard = styled(Card)`
-  && {
-    width: 100%;
-    height: 3rem;
-    display: flex;
-    background-color: black;
-  }
-`;
+export let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
-export const SpriteIdBg = styled.div`
-  position: relative;
-  z-index: 0;
-  width: 40%;
-  clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
-  ${({ accent }) => {
-    const css =
-      accent.length > 1
-        ? `
-      animation: 3s ease-in infinite alternate typeColors;
+// {
+//   components: {
+//     MuiTypography: {
+//       variants: [
+//         {
+//           props: { variant: "pokemonName" },
+//           style: {
+//             margin: "5px",
+//           },
+//         },
+//       ],
+//     },
+//   },
+// }
+
+export const NameCard = styled("div")({
+  width: "100%",
+  height: "3rem",
+  display: "flex",
+  backgroundColor: "black",
+});
+
+export const SpriteIdBg = styled("div")(({ accent }) => {
+  const style = {
+    position: "relative",
+    zIndex: "0",
+    width: "30%",
+    clipPath: "polygon(0 0, 100% 0, 80% 100%, 0 100%)",
+  };
+
+  const styleWithAccent =
+    accent.length > 1
+      ? Object.assign(style, {
+          animation: `
+    animation: 3s ease-in infinite alternate typeColors;
       
-      animation-name: typeColors;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
+    animation-name: typeColors;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 
-      @keyframes typeColors {
-        from {
-          background-color: ${typeColor[accent[0]]};
-        }
-        to {
-          background-color: ${typeColor[accent[1]]};
-        }
+    @keyframes typeColors {
+      from {
+        background-color: ${typeColor[accent[0]]};
       }
-    `
-        : `
-      background-color: ${typeColor[accent[0]]}
-    `;
-    return css;
-  }}
-`;
-
-export const SpriteImgContainer = styled.span`
-  && {
-    position: absolute;
-    height: 3rem;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    > img {
-      /* position: relative;
-      top: -34px; */
-      max-height: 80px;
-      max-width: 80px;
-      ${({ id }) => {
-        if (id < 650) {
-          return "padding: 1rem;";
-        }
-      }}
+      to {
+        background-color: ${typeColor[accent[1]]};
+      }
     }
-  }
-`;
+    `,
+        })
+      : Object.assign(style, { backgroundColor: `${typeColor[accent[0]]}` });
 
-export const IdTypography = styled(Typography)`
-  && {
-    color: white;
-  }
-`;
+  return styleWithAccent;
+});
 
-export const NameTypography = styled(IdTypography)`
-  && {
-    margin: auto 0;
-  }
-`;
+export const SpriteContainer = styled("span")({
+  position: "absolute",
+  height: "3rem",
+  zIndex: "1",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+export const NameContainer = styled("span")({
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",
+});
+
+export const Sprite = styled("img")(({ id }) => ({
+  maxHeight: "80px",
+  maxWidth: "80px",
+  padding: `${id < 650 ? "1rem" : "0"}`,
+}));

@@ -8,9 +8,7 @@ import {
 } from "@material-ui/core";
 
 const theme = createTheme({
-  components: {
-    variants: [],
-  },
+  components: {},
 });
 
 export const TopRow = styled("div")({

@@ -1,13 +1,14 @@
 import {
+  theme,
   NameCard,
   SpriteIdBg,
-  SpriteImgContainer,
-  IdTypography,
-  NameTypography,
+  SpriteContainer,
+  Sprite,
+  NameContainer,
 } from "./NameCard.styles";
 import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
-
-const TypographyVariant = "h5";
+import { ThemeProvider } from "styled-components";
+import { Typography } from "@material-ui/core";
 
 const PokeNameCard = ({ id, name, types }) => {
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -15,18 +16,26 @@ const PokeNameCard = ({ id, name, types }) => {
   const displayId = formatPokeId(id);
   const capitilizedName = capitalCase(name);
   const pokeTypes = types ? mapPokeTypeName(types) : [];
+  const textColor = "common.white";
+  const typographyVariant = "h5";
 
   return (
-    <NameCard className="NameCard">
-      <SpriteIdBg accent={pokeTypes} />
-      <SpriteImgContainer id={id}>
-        <img src={id < 650 ? animatedSrc : src} alt="pokemon" />
-        <IdTypography variant={TypographyVariant}>No. {displayId}</IdTypography>
-      </SpriteImgContainer>
-      <NameTypography variant={TypographyVariant}>
-        {capitilizedName}
-      </NameTypography>
-    </NameCard>
+    <ThemeProvider theme={theme}>
+      <NameCard className="NameCard">
+        <SpriteIdBg accent={pokeTypes} />
+        <SpriteContainer id={id}>
+          <Sprite id={id} src={id < 650 ? animatedSrc : src} alt="pokemon" />
+          <Typography variant={typographyVariant} color={textColor}>
+            No. {displayId}
+          </Typography>
+        </SpriteContainer>
+        <NameContainer>
+          <Typography variant={typographyVariant} color={textColor}>
+            {capitilizedName}
+          </Typography>
+        </NameContainer>
+      </NameCard>
+    </ThemeProvider>
   );
 };
 
