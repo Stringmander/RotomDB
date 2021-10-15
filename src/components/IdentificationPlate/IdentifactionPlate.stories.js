@@ -1,11 +1,10 @@
 import React from "react";
 import { pokeTypeArg } from "../../stories";
-
-import NameCard from "./NameCard";
+import IdentifactionPlate from "./IdentificationPlate";
 
 export default {
-  title: "Design System/NameCard",
-  component: NameCard,
+  title: "Design System/Identifaction Plate",
+  component: IdentifactionPlate,
   argTypes: {
     id: { control: "number" },
     name: { control: "text" },
@@ -15,7 +14,7 @@ export default {
 };
 
 export const SingleTypePokemon = ({ id, name, typeX }) => {
-  return <NameCard id={id} name={name} types={[typeX]} />;
+  return <IdentifactionPlate id={id} name={name} types={[typeX]} />;
 };
 
 SingleTypePokemon.argTypes = {
@@ -35,7 +34,7 @@ SingleTypePokemon.args = {
 export const DualTypePokemon = ({ id, name, typeX, typeY }) => {
   const types = [typeX, typeY];
 
-  return <NameCard id={id} name={name} types={types} />;
+  return <IdentifactionPlate id={id} name={name} types={types} />;
 };
 
 DualTypePokemon.args = {

@@ -1,15 +1,5 @@
 // import styled from "styled-components";
-import {
-  Card,
-  TableContainer,
-  TableCell,
-  createTheme,
-  styled,
-} from "@material-ui/core";
-
-const theme = createTheme({
-  components: {},
-});
+import { Card, TableContainer, TableCell, styled } from "@material-ui/core";
 
 export const TopRow = styled("div")({
   display: "flex",
