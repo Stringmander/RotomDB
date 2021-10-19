@@ -1,4 +1,4 @@
-import { styled } from "@material-ui/core";
+import { styled } from "@mui/material";
 import { typeColors } from "../../themes";
 
 // export const theme = createTheme({
