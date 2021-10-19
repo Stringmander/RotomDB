@@ -1,3 +1,6 @@
+import { IconButton, Typography } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
 import {
   Background,
   SpriteIdBg,
@@ -8,9 +11,6 @@ import {
   TypeIconsContainer,
   NameIconsAndButtonContainer,
 } from "./IdentifactionPlate.styles";
-import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
-import { IconButton, Typography } from "@material-ui/core";
-import { AddCircle } from "@material-ui/icons";
 
 const IdentifactionPlate = ({ id, name, types }) => {
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -56,7 +56,7 @@ const IdentifactionPlate = ({ id, name, types }) => {
           <PokemonTypeIcons />
         </NameAndIconsContainer>
         <IconButton size="large" color="inherit" aria-label="Add to team">
-          <AddCircle fontSize="large" />
+          <AddCircleIcon fontSize="large" />
         </IconButton>
       </NameIconsAndButtonContainer>
     </Background>
