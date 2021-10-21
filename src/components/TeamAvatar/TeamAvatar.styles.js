@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import Card from "@material-ui/core/Card";
-import { Typography } from "@material-ui/core";
+import { Typography, Card } from "@mui/material";
 import { typeColor } from "../../themes";
 
 export const NameCard = styled(Card)`
@@ -29,7 +28,7 @@ export const NameCard = styled(Card)`
           `
           : `
             background-color: ${typeColor[accent[0]]};
-          `
+          `;
       return css;
     }}
 

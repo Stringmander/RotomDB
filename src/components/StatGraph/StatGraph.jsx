@@ -1,16 +1,5 @@
 import { Radar } from "react-chartjs-2";
-import styled from "styled-components";
 import { capitalCase, getPokeColor } from "../../util";
-
-const StatGraphWrapper = styled.div`
-  > canvas {
-    width: inherit !important;
-    height: inherit !important;
-    max-width: 30rem;
-    max-height: 30rem;
-    font-size: inherit;
-  }
-`;
 
 const getPokeGraphData = (pokemonStats) => {
   const pokeLabels = pokemonStats.map((stat) => {
@@ -93,13 +82,7 @@ function StatGraph({ stats, types }) {
 
   //---------------------------------------------------RADAR CHART OPTIONS END-----------------------------------------------------------------
 
-  return (
-    stats && (
-      <StatGraphWrapper className="StatGraph">
-        <Radar data={data} options={options} />
-      </StatGraphWrapper>
-    )
-  );
+  return stats && <Radar data={data} options={options} />;
 }
 
 export default StatGraph;

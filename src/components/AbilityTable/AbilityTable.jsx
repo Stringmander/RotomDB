@@ -4,7 +4,7 @@ import {
   TableContainer,
   TableRow,
   TableCell,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useContext } from "react";
 import { LanguageContext } from "../../context";
 import { capitalCase, useMappedFetch } from "../../util";

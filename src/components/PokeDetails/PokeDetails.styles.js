@@ -1,12 +1,13 @@
 // import styled from "styled-components";
-import { Card, TableContainer, TableCell, styled } from "@material-ui/core";
+import { Paper, TableContainer, TableCell } from "@mui/material";
+import styled from "styled-components";
 
-export const TopRow = styled("div")({
-  display: "flex",
-  width: "100%",
-});
+export const TopRow = styled.div`
+  display: "flex";
+  width: "100%";
+`;
 
-export const InfoCard = styled(Card)`
+export const InfoCard = styled(Paper)`
   margin: 0 0.3rem;
   width: 100%;
 
@@ -17,7 +18,7 @@ export const InfoCard = styled(Card)`
   }
 `;
 
-export const ArtworkCard = styled(Card)`
+export const ArtworkCard = styled(Paper)`
   width: 25rem;
   height: max-content;
   padding: 5px;

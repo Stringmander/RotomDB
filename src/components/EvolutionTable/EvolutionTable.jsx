@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useState, useMemo } from "react";
 
 import { EvoTable, EvoCard, EvoArrow } from "./EvolutionTable.styles";

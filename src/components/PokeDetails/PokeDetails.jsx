@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableRow } from "@material-ui/core";
+import { Paper, Table, TableBody, TableRow } from "@mui/material";
 import {
   TopRow,
   InfoCard,

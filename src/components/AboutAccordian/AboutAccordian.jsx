@@ -3,8 +3,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
-} from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { capitalCase, useContextFilter } from "../../util";
 
 const AboutAccordian = ({ speciesRes }) => {
@@ -17,7 +17,7 @@ const AboutAccordian = ({ speciesRes }) => {
   return (
     <Accordion>
       <AccordionSummary
-        expandIcon={<ExpandMore />}
+        expandIcon={<ExpandMoreIcon />}
         aria-controls="about-panel-content"
         id="about-panel-header"
       >

@@ -3,15 +3,15 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
-} from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MovesTable from "../MovesTable";
 
 const MovesAccordian = ({ moves, types }) => {
   return (
     <Accordion>
       <AccordionSummary
-        expandIcon={<ExpandMore />}
+        expandIcon={<ExpandMoreIcon />}
         aria-controls="moves-panel-content"
         id="moves-panel-header"
       >

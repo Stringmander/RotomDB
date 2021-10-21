@@ -16,7 +16,7 @@ import {
   PokemonTypeIcon,
   TypeIconsContainer,
   NameIconsAndButtonContainer,
-} from "./IdentifactionPlate.styles";
+} from ".";
 import { theme } from ".";
 
 const IdentifactionPlate = ({ id, name, types }) => {

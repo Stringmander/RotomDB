@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IconButton, TextField, InputAdornment } from "@material-ui/core";
-import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
+import { IconButton, TextField, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const StyledForm = styled.form``;
 
@@ -34,7 +34,7 @@ function PokemonSearch({ setUrl }) {
             startAdornment: (
               <InputAdornment position="start">
                 <IconButton type="submit">
-                  <SearchRoundedIcon />
+                  <SearchIcon />
                 </IconButton>
               </InputAdornment>
             ),

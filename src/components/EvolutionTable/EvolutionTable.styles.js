@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { DoubleArrow } from "@material-ui/icons";
-import { Card } from "@material-ui/core";
+import { Card } from "@mui/material";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 export const EvoTable = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const EvoCard = styled(Card)`
   }
 `;
 
-export const EvoArrow = styled(DoubleArrow)`
+export const EvoArrow = styled(DoubleArrowIcon)`
   && {
     font-size: 3rem;
     margin: auto 5px;
