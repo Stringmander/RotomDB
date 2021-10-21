@@ -1,17 +1,18 @@
-import { styled } from "@mui/material";
+import { createTheme, styled } from "@mui/material";
 import { typeColors } from "../../themes";
 
-// export const theme = createTheme({
-//   components: {
-//     MuiTypography: {
-//       styleOverrides: {
-//         root: {
-//           padding: ".2rem 0 0 0",
-//         },
-//       },
-//     },
-//   },
-// });
+export const theme = createTheme({
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          padding: ".3rem 0 0 0",
+          color: "white",
+        },
+      },
+    },
+  },
+});
 
 export const Background = styled("div")({
   width: "100%",
@@ -20,11 +21,16 @@ export const Background = styled("div")({
   backgroundColor: "black",
 });
 
-export const SpriteIdBg = styled("div")(({ pokemontypes }) => {
+export const SpriteIdBg = styled("div")(({ pokemontypes, theme }) => {
   const style = {
     position: "relative",
     zIndex: "0",
-    width: "20%",
+    [theme.breakpoints.down("sm")]: {
+      width: "55%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "30%",
+    },
     clipPath: "polygon(0 0, 100% 0, 80% 100%, 0 100%)",
   };
 
