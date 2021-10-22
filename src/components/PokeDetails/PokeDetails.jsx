@@ -1,17 +1,13 @@
-import { Paper, Table, TableBody, TableRow } from "@mui/material";
-import {
-  StatTable,
-  LabelCell,
-  StatTableCell,
-  PrimaryInfoWrapper,
-} from "./PokeDetails.styles";
-import { capitalCase, massageStats, useFetch } from "../../util";
+import { Paper } from "@mui/material";
+import { PrimaryInfoWrapper } from "./PokeDetails.styles";
+import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import AboutAccordian from "../AboutAccordian";
 import MovesAccordian from "../MovesAccordian/MovesAccordian";
 import EvolutionTable from "../EvolutionTable";
 import IdentificationPlate from "../IdentificationPlate";
 import StatRadarChart from "../StatRadarChart";
+import StatTable from "../StatTable";
 
 const PokeDetails = ({ result, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -21,31 +17,12 @@ const PokeDetails = ({ result, addToTeam }) => {
   const evoChainUrl =
     speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
 
-  const mapStatTableRows = (stats) => {
-    const massagedStats = massageStats(stats);
-    const keys = Object.keys(massagedStats);
-    const values = Object.values(massagedStats);
-
-    return keys.map((label, baseStat) => {
-      return (
-        <TableRow className="Row" key={label}>
-          <StatTableCell align="left">{values[baseStat]}</StatTableCell>
-          <LabelCell align="left">{capitalCase(label)}</LabelCell>
-        </TableRow>
-      );
-    });
-  };
-
   return id ? (
     <Paper className="PokeDetails">
       <IdentificationPlate id={id} name={name} types={types} />
       <PrimaryInfoWrapper>
         <StatRadarChart stats={stats} types={types} />
-        {/* <StatTable>
-          <Table className="Table" size="small">
-            <TableBody className="Body">{mapStatTableRows(stats)}</TableBody>
-          </Table>
-        </StatTable> */}
+        <StatTable stats={stats} />
         <div>
           <EvolutionTable evoChainUrl={evoChainUrl} />
           <AblitiyTable abilities={abilities} />
