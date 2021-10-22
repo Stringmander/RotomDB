@@ -15,9 +15,9 @@ export const NameCard = styled(Card)`
       const css =
         accent.length > 1
           ? `
-            animation: 3s ease-in infinite alternate typeColors;
+            animation: 3s ease-in infinite alternate pokemonTypeColors;
             
-            @keyframes typeColors {
+            @keyframes pokemonTypeColors {
               from {
                 background-color: ${typeColor[accent[0]]};
               }
@@ -68,14 +68,14 @@ export const SpriteIdBg = styled.div`
     const css =
       accent.length > 1
         ? `
-      animation: 3s ease-in infinite alternate typeColors;
+      animation: 3s ease-in infinite alternate pokemonTypeColors;
       
-      animation-name: typeColors;
+      animation-name: pokemonTypeColors;
       animation-duration: 5s;
       animation-iteration-count: infinite;
       animation-direction: alternate;
 
-      @keyframes typeColors {
+      @keyframes pokemonTypeColors {
         from {
           background-color: ${typeColor[accent[0]]};
         }

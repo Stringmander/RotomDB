@@ -1,5 +1,5 @@
 import { createTheme, styled } from "@mui/material";
-import { typeColors } from "../../themes";
+import { pokemonTypeColors } from "../../themes";
 
 export const theme = createTheme({
   components: {
@@ -38,25 +38,25 @@ export const SpriteIdBg = styled("div")(({ pokemontypes, theme }) => {
     pokemontypes.length > 1
       ? Object.assign(style, {
           animation: `
-    animation: 3s ease-in infinite alternate typeColors;
+    animation: 3s ease-in infinite alternate pokemonTypeColors;
       
-    animation-name: typeColors;
+    animation-name: pokemonTypeColors;
     animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 
-    @keyframes typeColors {
+    @keyframes pokemonTypeColors {
       from {
-        background-color: ${typeColors[pokemontypes[0]].hex};
+        background-color: ${pokemonTypeColors[pokemontypes[0]].hex};
       }
       to {
-        background-color: ${typeColors[pokemontypes[1]].hex};
+        background-color: ${pokemonTypeColors[pokemontypes[1]].hex};
       }
     }
     `,
         })
       : Object.assign(style, {
-          backgroundColor: `${typeColors[pokemontypes[0]].hex}`,
+          backgroundColor: `${pokemonTypeColors[pokemontypes[0]].hex}`,
         });
 
   return styleWithAccent;
@@ -98,5 +98,5 @@ export const TypeIconsContainer = styled("div")({
 export const PokemonTypeIcon = styled("img")(({ pokemontype }) => ({
   height: "2rem",
   margin: "5px",
-  filter: `${typeColors[pokemontype].filter}`,
+  filter: `${pokemonTypeColors[pokemontype].filter}`,
 }));

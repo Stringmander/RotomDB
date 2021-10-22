@@ -37,9 +37,9 @@ export const PokemonBGMidground = Styled.div`
       const css =
         accent.length > 1
           ? `
-            animation: 6s ease-in infinite alternate typeColors;
+            animation: 6s ease-in infinite alternate pokemonTypeColors;
             
-            @keyframes typeColors {
+            @keyframes pokemonTypeColors {
               from {
                 background-color: ${typeColor[accent[0]]};
               }
@@ -69,9 +69,9 @@ export const PokemonBGForeground = Styled.div`
       const css =
         accent.length > 1
           ? `
-            animation: 6s ease-in infinite alternate typeColors;
+            animation: 6s ease-in infinite alternate pokemonTypeColors;
             
-            @keyframes typeColors {
+            @keyframes pokemonTypeColors {
               from {
                 background-color: ${typeColor[accent[0]]};
               }
