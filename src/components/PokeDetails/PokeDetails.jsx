@@ -1,5 +1,8 @@
-import { Paper } from "@mui/material";
-import { PrimaryInfoWrapper } from "./PokeDetails.styles";
+import {
+  EvolutionAndAbilitiesWrapper,
+  PokemonDetailsPaper,
+  PrimaryInfoWrapper,
+} from ".";
 import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import AboutAccordian from "../AboutAccordian";
@@ -18,19 +21,19 @@ const PokeDetails = ({ result, addToTeam }) => {
     speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
 
   return id ? (
-    <Paper className="PokeDetails">
+    <PokemonDetailsPaper className="PokeDetails">
       <IdentificationPlate id={id} name={name} types={types} />
       <PrimaryInfoWrapper>
         <StatRadarChart stats={stats} types={types} />
         <StatTable stats={stats} />
-        <div>
+        <EvolutionAndAbilitiesWrapper>
           <EvolutionTable evoChainUrl={evoChainUrl} />
           <AblitiyTable abilities={abilities} />
-        </div>
+        </EvolutionAndAbilitiesWrapper>
       </PrimaryInfoWrapper>
       <MovesAccordian moves={moves} types={types} />
       <AboutAccordian speciesRes={speciesRes} />
-    </Paper>
+    </PokemonDetailsPaper>
   ) : null;
 };
 

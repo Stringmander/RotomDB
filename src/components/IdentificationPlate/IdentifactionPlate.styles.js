@@ -1,17 +1,9 @@
-import { createTheme, styled } from "@mui/material";
+import { createTheme, styled, Typography } from "@mui/material";
 import { pokemonTypeColors } from "../../themes";
 
-export const theme = createTheme({
-  components: {
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          padding: ".3rem 0 0 0",
-          color: "white",
-        },
-      },
-    },
-  },
+export const IdentificationPlateTypography = styled(Typography)({
+  padding: ".3rem 0 0 0",
+  color: "white",
 });
 
 export const Background = styled("div")({

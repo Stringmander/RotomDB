@@ -1,5 +1,6 @@
-import { TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { capitalCase, massageStats } from "../../util";
+import { StatTableContainer } from ".";
 
 const StatTable = ({ stats }) => {
   const massagedStats = massageStats(stats);
@@ -7,18 +8,20 @@ const StatTable = ({ stats }) => {
   const values = Object.values(massagedStats);
 
   return (
-    <TableContainer>
-      <TableBody>
-        {keys.map((label, baseStat) => {
-          return (
-            <TableRow className="Row" key={label}>
-              <TableCell align="left">{values[baseStat]}</TableCell>
-              <TableCell align="left">{capitalCase(label)}</TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </TableContainer>
+    <StatTableContainer>
+      <Table>
+        <TableBody>
+          {keys.map((label, baseStat) => {
+            return (
+              <TableRow className="Row" key={label}>
+                <TableCell align="left">{capitalCase(label)}</TableCell>
+                <TableCell align="left">{values[baseStat]}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </StatTableContainer>
   );
 };
 

@@ -66,13 +66,14 @@ const StatRadarChart = ({ stats, types }) => {
           },
         },
         responsive: true,
+        aspectRatio: 1.5 / 1,
       },
     });
 
     return () => {
       Radar.destroy();
     };
-  }, [statLabels, statData]);
+  }, [statLabels, statData, types]);
 
   return (
     <ChartWrapper>

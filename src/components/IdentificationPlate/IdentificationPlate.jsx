@@ -1,7 +1,6 @@
 import {
   IconButton,
   ThemeProvider,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -16,8 +15,8 @@ import {
   PokemonTypeIcon,
   TypeIconsContainer,
   NameIconsAndButtonContainer,
+  IdentificationPlateTypography,
 } from ".";
-import { theme } from ".";
 
 const IdentifactionPlate = ({ id, name, types }) => {
   const defaultTheme = useTheme();
@@ -48,26 +47,26 @@ const IdentifactionPlate = ({ id, name, types }) => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Background>
-        <SpriteIdBg pokemontypes={pokemonTypes} />
-        <SpriteAndIdContainer id={id}>
-          <Sprite id={id} src={id < 650 ? animatedSrc : src} alt="pokemon" />
-          <Typography variant={typographyVariant}>No. {displayId}</Typography>
-        </SpriteAndIdContainer>
-        <NameIconsAndButtonContainer>
-          <NameAndIconsContainer>
-            <Typography variant={typographyVariant}>
-              {capitilizedName}
-            </Typography>
-            {matches && <PokemonTypeIcons />}
-          </NameAndIconsContainer>
-          <IconButton size="large" color="inherit" aria-label="Add to team">
-            <AddCircleIcon fontSize="large" />
-          </IconButton>
-        </NameIconsAndButtonContainer>
-      </Background>
-    </ThemeProvider>
+    <Background>
+      <SpriteIdBg pokemontypes={pokemonTypes} />
+      <SpriteAndIdContainer id={id}>
+        <Sprite id={id} src={id < 650 ? animatedSrc : src} alt="pokemon" />
+        <IdentificationPlateTypography variant={typographyVariant}>
+          No. {displayId}
+        </IdentificationPlateTypography>
+      </SpriteAndIdContainer>
+      <NameIconsAndButtonContainer>
+        <NameAndIconsContainer>
+          <IdentificationPlateTypography variant={typographyVariant}>
+            {capitilizedName}
+          </IdentificationPlateTypography>
+          {matches && <PokemonTypeIcons />}
+        </NameAndIconsContainer>
+        <IconButton size="large" color="inherit" aria-label="Add to team">
+          <AddCircleIcon fontSize="large" />
+        </IconButton>
+      </NameIconsAndButtonContainer>
+    </Background>
   );
 };
 
