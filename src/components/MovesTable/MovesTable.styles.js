@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
+import { pokemonTypeColors } from "../../themes";
 
-import { typeColor } from "../../themes";
-
-export const TypeCell = styled.td`
-  color: white;
-  background-color: ${({ type }) => typeColor[type]};
-`;
+export const TypeCell = styled("td")(({ type }) => ({
+  color: "white",
+  backgroundColor: pokemonTypeColors[type].hex,
+}));

@@ -1,9 +1,6 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { IconButton, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
-const StyledForm = styled.form``;
 
 function PokemonSearch({ setUrl }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,27 +18,25 @@ function PokemonSearch({ setUrl }) {
   };
 
   return (
-    <div className="PokemonSearch">
-      <StyledForm autoComplete="off" onSubmit={handleSubmit}>
-        <TextField
-          id="outlined-basic"
-          label="Search Pokémon"
-          variant="outlined"
-          onChange={handleChange}
-          margin="normal"
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <IconButton type="submit">
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </StyledForm>
-    </div>
+    <form autoComplete="off" onSubmit={handleSubmit}>
+      <TextField
+        id="outlined-basic"
+        label="Search Pokémon"
+        variant="outlined"
+        onChange={handleChange}
+        margin="normal"
+        fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton type="submit">
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+    </form>
   );
 }
 
