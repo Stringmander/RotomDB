@@ -12,7 +12,7 @@ import IdentificationPlate from "../IdentificationPlate";
 import StatRadarChart from "../StatRadarChart";
 import StatTable from "../StatTable";
 
-const PokeDetails = ({ result, addToTeam }) => {
+const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
 
   const speciesRes = useFetch(species.url);
@@ -27,7 +27,7 @@ const PokeDetails = ({ result, addToTeam }) => {
         <StatRadarChart stats={stats} types={types} />
         <StatTable stats={stats} />
         <EvolutionAndAbilitiesWrapper>
-          <EvolutionTable evoChainUrl={evoChainUrl} />
+          <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
           <AblitiyTable abilities={abilities} />
         </EvolutionAndAbilitiesWrapper>
       </PrimaryInfoWrapper>

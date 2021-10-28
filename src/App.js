@@ -56,7 +56,7 @@ function App() {
               {!isLoading && serverError ? (
                 <span>Error in fetching data</span>
               ) : apiData !== null ? (
-                <PokeDetails result={apiData} />
+                <PokeDetails result={apiData} setUrl={setUrl} />
               ) : (
                 <></>
               )}

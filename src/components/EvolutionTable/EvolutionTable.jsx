@@ -1,13 +1,22 @@
-import { Typography } from "@mui/material";
 import { useState, useMemo } from "react";
-
-import { EvoTable, EvoCard, EvoArrow } from "./EvolutionTable.styles";
 import { capitalCase, useFetch } from "../../util";
+import {
+  EvoTableWrapper,
+  EvoCardWrapper,
+  EvoTableArrow,
+  EvoTableCard,
+  EvoTableTypogragphy,
+} from ".";
 
-const EvolutionTable = ({ evoChainUrl }) => {
+const EvolutionTable = ({ evoChainUrl, setUrl }) => {
   const [evoChain, setEvoChain] = useState([]);
 
   const { isLoading, serverError, apiData } = useFetch(evoChainUrl);
+
+  const handleClick = (e, id) => {
+    e.preventDefault();
+    setUrl(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  };
 
   useMemo(() => {
     const evoChainObj = apiData === null ? {} : apiData.chain;
@@ -38,37 +47,48 @@ const EvolutionTable = ({ evoChainUrl }) => {
     setEvoChain(massagedEvoChain);
   }, [apiData]);
 
-  const mapEvoChain = evoChain.map(({ id, name }, i) => (
-    <div key={name + i} style={{ display: "flex" }}>
-      <EvoCard>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-          alt="pokemon"
-        />
-        <Typography align="center">{capitalCase(name)}</Typography>
-      </EvoCard>
-      <EvoArrow
-        className="EvoTable"
-        style={
-          i === evoChain.length - 1
-            ? { display: "none" }
-            : { display: "inline-block" }
-        }
-      />
-    </div>
-  ));
+  const EvoChainCards = () => {
+    return evoChain.map(({ id, name }, i) => {
+      return (
+        <EvoCardWrapper key={name + id}>
+          <EvoTableCard
+            onClick={(e) => {
+              handleClick(e, evoChain[i].id);
+            }}
+          >
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+              alt="pokemon"
+            />
+            <EvoTableTypogragphy align="center">
+              {capitalCase(name)}
+            </EvoTableTypogragphy>
+          </EvoTableCard>
+          <EvoTableArrow
+            style={
+              i === evoChain.length - 1
+                ? { display: "none" }
+                : { display: "block" }
+            }
+          />
+        </EvoCardWrapper>
+      );
+    });
+  };
 
   return (
-    <EvoTable>
+    <>
       {isLoading && <span>Loading...</span>}
       {!isLoading && serverError ? (
         <span>Error in fetching data</span>
       ) : apiData !== null ? (
-        mapEvoChain
+        <EvoTableWrapper>
+          <EvoChainCards />
+        </EvoTableWrapper>
       ) : (
         <></>
       )}
-    </EvoTable>
+    </>
   );
 };
 
