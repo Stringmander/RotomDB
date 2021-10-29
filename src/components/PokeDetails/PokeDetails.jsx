@@ -2,6 +2,7 @@ import {
   EvolutionAndAbilitiesWrapper,
   PokemonDetailsPaper,
   PrimaryInfoWrapper,
+  StatWrapper,
 } from ".";
 import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
@@ -14,7 +15,6 @@ import StatTable from "../StatTable";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
-
   const speciesRes = useFetch(species.url);
 
   const evoChainUrl =
@@ -24,8 +24,10 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
     <PokemonDetailsPaper className="PokeDetails">
       <IdentificationPlate id={id} name={name} types={types} />
       <PrimaryInfoWrapper>
-        <StatRadarChart stats={stats} types={types} />
-        <StatTable stats={stats} />
+        <StatWrapper>
+          <StatRadarChart stats={stats} types={types} />
+          <StatTable stats={stats} />
+        </StatWrapper>
         <EvolutionAndAbilitiesWrapper>
           <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
           <AblitiyTable abilities={abilities} />

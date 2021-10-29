@@ -1,9 +1,4 @@
-import {
-  IconButton,
-  ThemeProvider,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { useMediaQuery, useTheme, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
 import {
@@ -19,8 +14,8 @@ import {
 } from ".";
 
 const IdentifactionPlate = ({ id, name, types }) => {
-  const defaultTheme = useTheme();
-  const matches = useMediaQuery(defaultTheme.breakpoints.up("sm"));
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   const animatedSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`;
   const displayId = formatPokeId(id);

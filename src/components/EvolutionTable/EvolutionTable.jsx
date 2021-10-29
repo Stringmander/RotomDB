@@ -2,10 +2,11 @@ import { useState, useMemo } from "react";
 import { capitalCase, useFetch } from "../../util";
 import {
   EvoTableWrapper,
-  EvoCardWrapper,
+  EvoStepWrapper,
   EvoTableArrow,
-  EvoTableCard,
   EvoTableTypogragphy,
+  EvoTablePaper,
+  EvoTableSprite,
 } from ".";
 
 const EvolutionTable = ({ evoChainUrl, setUrl }) => {
@@ -47,31 +48,37 @@ const EvolutionTable = ({ evoChainUrl, setUrl }) => {
     setEvoChain(massagedEvoChain);
   }, [apiData]);
 
+  const EvoTableCard = ({ id, name, index }) => {
+    return (
+      <EvoTablePaper
+        onClick={(e) => {
+          handleClick(e, evoChain[index].id);
+        }}
+      >
+        <EvoTableSprite
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+          alt="pokemon"
+        />
+        <EvoTableTypogragphy variant="body2" align="center">
+          {capitalCase(name)}
+        </EvoTableTypogragphy>
+      </EvoTablePaper>
+    );
+  };
+
   const EvoChainCards = () => {
     return evoChain.map(({ id, name }, i) => {
       return (
-        <EvoCardWrapper key={name + id}>
-          <EvoTableCard
-            onClick={(e) => {
-              handleClick(e, evoChain[i].id);
-            }}
-          >
-            <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-              alt="pokemon"
-            />
-            <EvoTableTypogragphy align="center">
-              {capitalCase(name)}
-            </EvoTableTypogragphy>
-          </EvoTableCard>
-          <EvoTableArrow
-            style={
-              i === evoChain.length - 1
-                ? { display: "none" }
-                : { display: "block" }
-            }
-          />
-        </EvoCardWrapper>
+        <>
+          {evoChain.length - 1 !== i ? (
+            <EvoStepWrapper key={name + id}>
+              <EvoTableCard id={id} name={name} index={i} />
+              <EvoTableArrow fontSize="large" />
+            </EvoStepWrapper>
+          ) : (
+            <EvoTableCard id={id} name={name} index={i} />
+          )}
+        </>
       );
     });
   };

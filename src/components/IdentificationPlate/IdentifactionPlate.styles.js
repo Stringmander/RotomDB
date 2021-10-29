@@ -1,4 +1,4 @@
-import { createTheme, styled, Typography } from "@mui/material";
+import { styled, Typography } from "@mui/material";
 import { pokemonTypeColors } from "../../themes";
 
 export const IdentificationPlateTypography = styled(Typography)({
@@ -84,7 +84,9 @@ export const NameAndIconsContainer = styled("div")({
 });
 
 export const TypeIconsContainer = styled("div")({
+  display: "flex",
   margin: "0 0 0 1rem",
+  alignItems: "center",
 });
 
 export const PokemonTypeIcon = styled("img")(({ pokemontype }) => ({
