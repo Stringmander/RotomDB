@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 
-export const PokemonTeamWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  height: 100%;
-  max-width: 25rem;
-  margin: 1rem;
-`;
+export const PokemonTeamWrapper = styled("div")({
+  display: "flex",
+  flexirection: "column",
+  alignItems: "start",
+  justifyContent: "center",
+  height: "100%",
+  maxWidth: "25rem",
+  margin: "1rem",
+});

@@ -7,7 +7,7 @@ export const PokemonDetailsPaper = styled(Paper)({
 export const PrimaryInfoWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   width: "100%",
-  height: "40vh",
+  height: "fit-content",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
   },

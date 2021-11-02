@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { IconButton, TextField, InputAdornment } from "@mui/material";
+import {
+  IconButton,
+  TextField,
+  InputAdornment,
+  AppBar,
+  Toolbar,
+  Slide,
+  useScrollTrigger,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 function PokemonSearch({ setUrl }) {
@@ -17,26 +25,45 @@ function PokemonSearch({ setUrl }) {
     setUrl(url);
   };
 
+  const HideOnScroll = (props) => {
+    const { children } = props;
+
+    const trigger = useScrollTrigger();
+
+    return (
+      <Slide appear={false} direction="down" in={!trigger}>
+        {children}
+      </Slide>
+    );
+  };
+
   return (
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      <TextField
-        id="outlined-basic"
-        label="Search Pokémon"
-        variant="outlined"
-        onChange={handleChange}
-        margin="normal"
-        fullWidth
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <IconButton type="submit">
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-    </form>
+    <HideOnScroll>
+      <AppBar>
+        <Toolbar>
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              id="outlined-basic"
+              label="Search Pokémon"
+              size="small"
+              variant="outlined"
+              onChange={handleChange}
+              margin="normal"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton type="submit">
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </form>
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
   );
 }
 
