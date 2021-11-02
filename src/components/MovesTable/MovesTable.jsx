@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { DataGrid } from "@mui/x-data-grid";
 import { LanguageContext } from "../../context";
 import {
   capitalCase,
@@ -6,20 +7,21 @@ import {
   useContextFilter,
   useMappedFetch,
 } from "../../util";
-import { TypeCell } from "./MovesTable.styles";
+import { MovesTableContainer, useStyles } from ".";
 
 const MovesTable = ({ moves, pokeTypes }) => {
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
   const lang = useContext(LanguageContext);
+  const classes = useStyles();
 
-  const determineSTAB = (moveType, moveClass) => {
-    const StabTextStyle = pokeTypesArr.includes(moveType.name)
-      ? moveClass.name === "physical" || moveClass.name === "special"
-        ? { fontWeight: "bold" }
-        : {}
-      : {};
-    return StabTextStyle;
-  };
+  // const determineSTAB = (moveType, moveClass) => {
+  //   const StabTextStyle = pokeTypesArr.includes(moveType.name)
+  //     ? moveClass.name === "physical" || moveClass.name === "special"
+  //       ? { fontWeight: "bold" }
+  //       : {}
+  //     : {};
+  //   return StabTextStyle;
+  // };
 
   const filteredMoves = useContextFilter(moves);
 
@@ -28,56 +30,61 @@ const MovesTable = ({ moves, pokeTypes }) => {
     "move"
   );
 
-  const TableRows = ({ lang }) =>
-    apiData.map(({ names, type, damage_class, power, accuracy, pp }, i) => {
-      const moveName = names.find(({ language }) => language.name === lang.name)
-        .name;
-      const moveType = type.name;
-      const moveClass = damage_class.name;
+  const rows =
+    apiData !== null
+      ? apiData.map((move, i) => Object.assign(move, { id: i + 1 }))
+      : [];
 
-      return (
-        <tr key={`${moveName}_${i}`}>
-          <td style={determineSTAB(type, damage_class)}>
-            {capitalCase(moveName)}
-          </td>
-          <TypeCell type={moveType}>{capitalCase(type.name)}</TypeCell>
-          <td>{capitalCase(moveClass)}</td>
-          <td>{power ? power : "—"}</td>
-          <td>{accuracy ? `${accuracy}%` : "—"}</td>
-          <td>{pp}</td>
-        </tr>
-      );
-    });
+  const columns = [
+    {
+      field: "name",
+      headerName: "Name",
+      valueGetter: (params) =>
+        capitalCase(
+          params.row.names.find(({ language }) => language.name === lang.name)
+            .name
+        ),
+      width: 200,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      valueGetter: (params) => capitalCase(params.row.type.name),
+      cellClassName: (params) => `${params.row.type.name}-type-cell`,
+      width: 125,
+    },
+    {
+      field: "damage_class",
+      headerName: "Class",
+      valueGetter: (params) => capitalCase(params.row.damage_class.name),
+      width: 125,
+    },
+    { field: "power", headerName: "Power", type: "number", align: "center" },
+    {
+      field: "accuracy",
+      headerName: "Accuracy",
+      type: "number",
+      align: "center",
+    },
+    { field: "pp", headerName: "PP", type: "number", align: "center" },
+  ];
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Move</th>
-          <th>Type</th>
-          <th>Class</th>
-          <th>Power</th>
-          <th>Acc</th>
-          <th>PP</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading && (
-          <tr>
-            <td>Loading...</td>
-          </tr>
-        )}
-        {!isLoading && serverError ? (
-          <tr>
-            <td>Error in fetching data</td>
-          </tr>
-        ) : apiData !== null ? (
-          <TableRows lang={lang} />
-        ) : (
-          <></>
-        )}
-      </tbody>
-    </table>
+    <MovesTableContainer className={classes.root}>
+      {isLoading && <span>Loading...</span>}
+      {!isLoading && serverError ? (
+        <span>Error in fetching data</span>
+      ) : rows !== [] ? (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+        />
+      ) : (
+        <></>
+      )}
+    </MovesTableContainer>
   );
 };
 

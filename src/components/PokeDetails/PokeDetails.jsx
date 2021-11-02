@@ -7,11 +7,12 @@ import {
 import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
 import AboutAccordian from "../AboutAccordian";
-import MovesAccordian from "../MovesAccordian/MovesAccordian";
+// import MovesAccordian from "../MovesAccordian/MovesAccordian";
 import EvolutionTable from "../EvolutionTable";
 import IdentificationPlate from "../IdentificationPlate";
 import StatRadarChart from "../StatRadarChart";
 import StatTable from "../StatTable";
+import MovesTable from "../MovesTable";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -33,8 +34,9 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
           <AblitiyTable abilities={abilities} />
         </EvolutionAndAbilitiesWrapper>
       </PrimaryInfoWrapper>
-      <MovesAccordian moves={moves} types={types} />
-      <AboutAccordian speciesRes={speciesRes} />
+      <MovesTable moves={moves} pokeTypes={types} />
+      {/* <MovesAccordian moves={moves} types={types} /> */}
+      {/* <AboutAccordian speciesRes={speciesRes} /> */}
     </PokemonDetailsPaper>
   ) : null;
 };

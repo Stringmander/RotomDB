@@ -1,4 +1,4 @@
-import { styled, Card, Typography, Paper } from "@mui/material";
+import { styled, Typography, Paper } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 export const EvoTableWrapper = styled("div")({

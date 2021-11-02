@@ -68,17 +68,13 @@ const EvolutionTable = ({ evoChainUrl, setUrl }) => {
 
   const EvoChainCards = () => {
     return evoChain.map(({ id, name }, i) => {
-      return (
-        <>
-          {evoChain.length - 1 !== i ? (
-            <EvoStepWrapper key={name + id}>
-              <EvoTableCard id={id} name={name} index={i} />
-              <EvoTableArrow fontSize="large" />
-            </EvoStepWrapper>
-          ) : (
-            <EvoTableCard id={id} name={name} index={i} />
-          )}
-        </>
+      return evoChain.length - 1 !== i ? (
+        <EvoStepWrapper key={name + id}>
+          <EvoTableCard id={id} name={name} index={i} />
+          <EvoTableArrow fontSize="large" />
+        </EvoStepWrapper>
+      ) : (
+        <EvoTableCard id={id} name={name} index={i} key={name + id} />
       );
     });
   };

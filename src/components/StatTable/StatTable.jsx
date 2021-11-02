@@ -33,9 +33,7 @@ const StatLabelIconInterface = {
 const StatTable = ({ stats }) => {
   const massagedStats = massageStats(stats);
   const keys = Object.keys(massagedStats);
-  console.log(keys);
   const values = Object.values(massagedStats);
-  console.log(values);
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
