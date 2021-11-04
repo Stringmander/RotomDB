@@ -1,14 +1,7 @@
 import { useState } from "react";
-import {
-  IconButton,
-  TextField,
-  InputAdornment,
-  AppBar,
-  Toolbar,
-  Slide,
-  useScrollTrigger,
-} from "@mui/material";
+import { AppBar, Toolbar, Slide, useScrollTrigger } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { Search, SearchIconWrapper, StyledInputBase } from ".";
 
 function PokemonSearch({ setUrl }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,26 +34,16 @@ function PokemonSearch({ setUrl }) {
     <HideOnScroll>
       <AppBar>
         <Toolbar>
-          <form autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-              id="outlined-basic"
-              label="Search Pokémon"
-              size="small"
-              variant="outlined"
+          <Search onSubmit={handleSubmit}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search for a Pokémon"
               onChange={handleChange}
-              margin="normal"
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <IconButton type="submit">
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              value={searchTerm}
             />
-          </form>
+          </Search>
         </Toolbar>
       </AppBar>
     </HideOnScroll>

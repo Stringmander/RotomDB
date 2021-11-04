@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
     "path": "^0.12.7",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -68,7 +69,6 @@
     "@storybook/node-logger": "^6.3.6",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.6",
-    "babel-plugin-styled-components": "^1.13.2",
     "chromatic": "^5.9.2"
   }
 }
