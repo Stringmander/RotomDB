@@ -8,30 +8,22 @@ function PokemonSearch({ setUrl }) {
 
   const url = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
 
+  const trigger = useScrollTrigger();
+
   const handleChange = (e) => {
     e.preventDefault();
     setSearchTerm(e.target.value.toLowerCase());
+    console.log("search term set");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setUrl(url);
-  };
-
-  const HideOnScroll = (props) => {
-    const { children } = props;
-
-    const trigger = useScrollTrigger();
-
-    return (
-      <Slide appear={false} direction="down" in={!trigger}>
-        {children}
-      </Slide>
-    );
+    console.log("search submitted");
   };
 
   return (
-    <HideOnScroll>
+    <Slide appear={false} direction="down" in={!trigger}>
       <AppBar>
         <Toolbar>
           <Search onSubmit={handleSubmit}>
@@ -46,7 +38,7 @@ function PokemonSearch({ setUrl }) {
           </Search>
         </Toolbar>
       </AppBar>
-    </HideOnScroll>
+    </Slide>
   );
 }
 
