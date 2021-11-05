@@ -61,8 +61,8 @@ export const useStyles = makeStyles({
   },
 });
 
-export const MovesTableContainer = styled("div")({
+export const MovesTableWrapper = styled("div")(({ theme }) => ({
+  width: "100%",
   display: "flex",
   flexDirection: "column",
-  height: "40vh",
-});
+}));

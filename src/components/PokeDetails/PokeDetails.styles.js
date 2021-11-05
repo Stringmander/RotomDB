@@ -1,20 +1,28 @@
 import { Paper, styled } from "@mui/material";
 
-export const PokemonDetailsPaper = styled(Paper)({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  marginRight: "-50%",
-  transform: "translate(-50%, -50%)",
+export const PokemonDetailsPaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   overflow: "hidden",
-});
+  [theme.breakpoints.up("sm")]: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "fit-content",
+    width: "80vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "90vw",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "96vw",
+  },
+}));
 
-export const PrimaryInfoWrapper = styled("div")(({ theme }) => ({
+export const LgRowWrapper = styled("div")(({ theme }) => ({
   display: "flex",
-  width: "100%",
-  height: "fit-content",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
   },
@@ -22,12 +30,8 @@ export const PrimaryInfoWrapper = styled("div")(({ theme }) => ({
 
 export const StatWrapper = styled("div")(({ theme }) => ({
   display: "flex",
-  width: "50%",
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
   },
 }));
 
@@ -37,7 +41,23 @@ export const EvolutionAndAbilitiesWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   paddingTop: `${theme.spacing(6)}`,
   [theme.breakpoints.up("sm")]: {
-    width: "50%",
+    // height: "50%",
     justifyContent: "space-between",
+  },
+}));
+
+export const PrimaryInfoColumn = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  [theme.breakpoints.up("sm")]: {
+    width: "55%",
+  },
+}));
+
+export const AuxiliaryInfoColumn = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  [theme.breakpoints.up("sm")]: {
+    width: "45%",
   },
 }));

@@ -5,7 +5,6 @@ export const ChartWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   flexGrow: "1",
   alignItems: "center",
-  [theme.breakpoints.down("sm")]: {
-    padding: "3rem 0",
-  },
+  padding: `0 ${theme.spacing(4)}`,
+  margin: `${theme.spacing(2)} 0`,
 }));

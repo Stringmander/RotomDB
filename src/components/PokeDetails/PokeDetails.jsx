@@ -1,18 +1,19 @@
 import {
   EvolutionAndAbilitiesWrapper,
   PokemonDetailsPaper,
-  PrimaryInfoWrapper,
+  LgRowWrapper,
   StatWrapper,
+  PrimaryInfoColumn,
+  AuxiliaryInfoColumn,
 } from ".";
 import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
-import AboutAccordian from "../AboutAccordian";
-// import MovesAccordian from "../MovesAccordian/MovesAccordian";
 import EvolutionTable from "../EvolutionTable";
 import IdentificationPlate from "../IdentificationPlate";
 import StatRadarChart from "../StatRadarChart";
 import StatTable from "../StatTable";
 import MovesTable from "../MovesTable";
+import FlavorTextTable from "../FlavorTextTable";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
@@ -24,19 +25,22 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
   return id ? (
     <PokemonDetailsPaper className="PokeDetails">
       <IdentificationPlate id={id} name={name} types={types} />
-      <PrimaryInfoWrapper>
-        <StatWrapper>
-          <StatRadarChart stats={stats} types={types} />
-          <StatTable stats={stats} />
-        </StatWrapper>
-        <EvolutionAndAbilitiesWrapper>
-          <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
-          <AblitiyTable abilities={abilities} />
-        </EvolutionAndAbilitiesWrapper>
-      </PrimaryInfoWrapper>
-      <MovesTable moves={moves} pokeTypes={types} />
-      {/* <MovesAccordian moves={moves} types={types} /> */}
-      {/* <AboutAccordian speciesRes={speciesRes} /> */}
+      <LgRowWrapper>
+        <PrimaryInfoColumn>
+          <StatWrapper>
+            <StatRadarChart stats={stats} types={types} />
+            <StatTable stats={stats} />
+          </StatWrapper>
+          <MovesTable moves={moves} pokeTypes={types} />
+        </PrimaryInfoColumn>
+        <AuxiliaryInfoColumn>
+          <EvolutionAndAbilitiesWrapper>
+            <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
+            <AblitiyTable abilities={abilities} />
+          </EvolutionAndAbilitiesWrapper>
+          <FlavorTextTable speciesRes={speciesRes} />
+        </AuxiliaryInfoColumn>
+      </LgRowWrapper>
     </PokemonDetailsPaper>
   ) : null;
 };

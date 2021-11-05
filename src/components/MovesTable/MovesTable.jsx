@@ -7,12 +7,15 @@ import {
   useContextFilter,
   useMappedFetch,
 } from "../../util";
-import { MovesTableContainer, useStyles } from ".";
+import { MovesTableWrapper, useStyles } from ".";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const MovesTable = ({ moves, pokeTypes }) => {
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
   const lang = useContext(LanguageContext);
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   // const determineSTAB = (moveType, moveClass) => {
   //   const StabTextStyle = pokeTypesArr.includes(moveType.name)
@@ -44,33 +47,45 @@ const MovesTable = ({ moves, pokeTypes }) => {
           params.row.names.find(({ language }) => language.name === lang.name)
             .name
         ),
-      width: 200,
+      width: 120,
     },
     {
       field: "type",
       headerName: "Type",
       valueGetter: (params) => capitalCase(params.row.type.name),
       cellClassName: (params) => `${params.row.type.name}-type-cell`,
-      width: 125,
     },
     {
       field: "damage_class",
       headerName: "Class",
       valueGetter: (params) => capitalCase(params.row.damage_class.name),
-      width: 125,
     },
-    { field: "power", headerName: "Power", type: "number", align: "center" },
+    {
+      field: "power",
+      headerName: "Power",
+      type: "number",
+      align: "center",
+      headerAlign: "center",
+    },
     {
       field: "accuracy",
       headerName: "Accuracy",
       type: "number",
       align: "center",
+      headerAlign: "center",
     },
-    { field: "pp", headerName: "PP", type: "number", align: "center" },
+    {
+      field: "pp",
+      headerName: "PP",
+      type: "number",
+      align: "center",
+      headerAlign: "center",
+      width: 80,
+    },
   ];
 
   return (
-    <MovesTableContainer className={classes.root}>
+    <MovesTableWrapper className={classes.root}>
       {isLoading && <span>Loading...</span>}
       {!isLoading && serverError ? (
         <span>Error in fetching data</span>
@@ -78,13 +93,14 @@ const MovesTable = ({ moves, pokeTypes }) => {
         <DataGrid
           rows={rows}
           columns={columns}
+          autoHeight={true}
           pageSize={5}
           rowsPerPageOptions={[5]}
         />
       ) : (
         <></>
       )}
-    </MovesTableContainer>
+    </MovesTableWrapper>
   );
 };
 

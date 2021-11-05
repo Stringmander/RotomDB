@@ -18,9 +18,7 @@ const IdentifactionPlate = ({ id, name, types }) => {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   const animatedSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`;
-  const displayId = formatPokeId(id);
-  const capitilizedName = capitalCase(name);
-  const pokemonTypes = types ? mapPokeTypeName(types) : [];
+  const pokemonTypes = mapPokeTypeName(types);
   const typographyVariant = "h5";
 
   const PokemonTypeIcons = () => {
@@ -47,13 +45,13 @@ const IdentifactionPlate = ({ id, name, types }) => {
       <SpriteAndIdContainer id={id}>
         <Sprite id={id} src={id < 650 ? animatedSrc : src} alt="pokemon" />
         <IdentificationPlateTypography variant={typographyVariant}>
-          No. {displayId}
+          No. {formatPokeId(id)}
         </IdentificationPlateTypography>
       </SpriteAndIdContainer>
       <NameIconsAndButtonContainer>
         <NameAndIconsContainer>
           <IdentificationPlateTypography variant={typographyVariant}>
-            {capitilizedName}
+            {capitalCase(name)}
           </IdentificationPlateTypography>
           {matches && <PokemonTypeIcons />}
         </NameAndIconsContainer>

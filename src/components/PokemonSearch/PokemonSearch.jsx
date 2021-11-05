@@ -13,13 +13,11 @@ function PokemonSearch({ setUrl }) {
   const handleChange = (e) => {
     e.preventDefault();
     setSearchTerm(e.target.value.toLowerCase());
-    console.log("search term set");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setUrl(url);
-    console.log("search submitted");
   };
 
   return (
