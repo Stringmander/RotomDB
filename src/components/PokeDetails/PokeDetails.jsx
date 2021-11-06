@@ -1,5 +1,4 @@
 import {
-  EvolutionAndAbilitiesWrapper,
   PokemonDetailsPaper,
   LgRowWrapper,
   StatWrapper,
@@ -14,10 +13,12 @@ import StatRadarChart from "../StatRadarChart";
 import StatTable from "../StatTable";
 import MovesTable from "../MovesTable";
 import FlavorTextTable from "../FlavorTextTable";
+import SexRatioStatBar from "../SexRatioStatBar";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
   const speciesRes = useFetch(species.url);
+  const { isLoading, serverError, apiData } = speciesRes;
 
   const evoChainUrl =
     speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
@@ -33,12 +34,20 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
           </StatWrapper>
           <MovesTable moves={moves} pokeTypes={types} />
         </PrimaryInfoColumn>
+        {isLoading && <span>Loading...</span>}
         <SupplementalInfoColumn>
-          <EvolutionAndAbilitiesWrapper>
-            <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
-            <AblitiyTable abilities={abilities} />
-          </EvolutionAndAbilitiesWrapper>
-          <FlavorTextTable speciesRes={speciesRes} />
+          {!isLoading && serverError ? (
+            <span>Error in fetching data</span>
+          ) : apiData !== null ? (
+            <>
+              <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
+              <SexRatioStatBar genderRate={apiData.gender_rate} />
+              <AblitiyTable abilities={abilities} />
+              <FlavorTextTable speciesRes={speciesRes} />
+            </>
+          ) : (
+            <></>
+          )}
         </SupplementalInfoColumn>
       </LgRowWrapper>
     </PokemonDetailsPaper>

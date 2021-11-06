@@ -39,6 +39,7 @@ export const PrimaryInfoColumn = styled("div")(({ theme }) => ({
 export const SupplementalInfoColumn = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
   [theme.breakpoints.up("sm")]: {
     width: "50%",
   },
