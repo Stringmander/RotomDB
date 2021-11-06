@@ -4,7 +4,7 @@ import {
   LgRowWrapper,
   StatWrapper,
   PrimaryInfoColumn,
-  AuxiliaryInfoColumn,
+  SupplementalInfoColumn,
 } from ".";
 import { useFetch } from "../../util";
 import AblitiyTable from "../AbilityTable/AbilityTable";
@@ -33,13 +33,13 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
           </StatWrapper>
           <MovesTable moves={moves} pokeTypes={types} />
         </PrimaryInfoColumn>
-        <AuxiliaryInfoColumn>
+        <SupplementalInfoColumn>
           <EvolutionAndAbilitiesWrapper>
             <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
             <AblitiyTable abilities={abilities} />
           </EvolutionAndAbilitiesWrapper>
           <FlavorTextTable speciesRes={speciesRes} />
-        </AuxiliaryInfoColumn>
+        </SupplementalInfoColumn>
       </LgRowWrapper>
     </PokemonDetailsPaper>
   ) : null;

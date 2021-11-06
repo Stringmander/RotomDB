@@ -66,7 +66,7 @@ const StatRadarChart = ({ stats, types }) => {
           },
         },
         responsive: true,
-        aspectRatio: 1.5 / 1,
+        aspectRatio: 2 / 1,
       },
     });
 

@@ -11,7 +11,7 @@ export const PokemonDetailsPaper = styled(Paper)(({ theme }) => ({
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "fit-content",
-    width: "80vw",
+    width: "75vw",
   },
   [theme.breakpoints.down("md")]: {
     width: "90vw",
@@ -28,8 +28,26 @@ export const LgRowWrapper = styled("div")(({ theme }) => ({
   },
 }));
 
+export const PrimaryInfoColumn = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  [theme.breakpoints.up("sm")]: {
+    width: "50%",
+  },
+}));
+
+export const SupplementalInfoColumn = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  [theme.breakpoints.up("sm")]: {
+    width: "50%",
+  },
+}));
+
 export const StatWrapper = styled("div")(({ theme }) => ({
   display: "flex",
+  width: "100%",
+  height: "40vh",
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
   },
@@ -43,21 +61,5 @@ export const EvolutionAndAbilitiesWrapper = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     // height: "50%",
     justifyContent: "space-between",
-  },
-}));
-
-export const PrimaryInfoColumn = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  [theme.breakpoints.up("sm")]: {
-    width: "55%",
-  },
-}));
-
-export const AuxiliaryInfoColumn = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  [theme.breakpoints.up("sm")]: {
-    width: "45%",
   },
 }));
