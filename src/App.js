@@ -7,9 +7,11 @@ import PokeDetails from "./components/PokeDetails";
 // import PokemonTeam from "./components/PokemonTeam";
 // import PokemonBG from "./components/PokeBG";
 import theme from "./themes";
+import PokeballSpinner from "./components/PokeballSpinner";
+import { AppWrapper } from "./app.styles";
 // import { AppWrapper } from "./app.styles";
 
-function App(props) {
+function App() {
   const [url, setUrl] = useState("");
   const { isLoading, serverError, apiData } = useFetch(url);
 
@@ -47,12 +49,11 @@ function App(props) {
       <VersionGroupProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {/* <AppWrapper className="AppWrapper"> */}
-          {/* <PokemonBG shift={shift} types={result.types} /> */}
-          {/* <PokemonTeam team={team} setResult={handleSetResult} /> */}
-          <PokemonSearch setUrl={setUrl} />
-          <Container>
-            {isLoading && <span>Loading...</span>}
+          <AppWrapper className="AppWrapper">
+            {/* <PokemonBG shift={shift} types={result.types} /> */}
+            {/* <PokemonTeam team={team} setResult={handleSetResult} /> */}
+            <PokemonSearch setUrl={setUrl} />
+            {isLoading && <PokeballSpinner />}
             {!isLoading && serverError ? (
               <span>Error in fetching data</span>
             ) : apiData !== null ? (
@@ -60,8 +61,7 @@ function App(props) {
             ) : (
               <></>
             )}
-          </Container>
-          {/* </AppWrapper> */}
+          </AppWrapper>
         </ThemeProvider>
       </VersionGroupProvider>
     </LanguageContextProvider>

@@ -20,7 +20,7 @@ export const SexRatioLinearProgress = styled(LinearProgress)(({ theme }) => ({
   [`&.${linearProgressClasses.determinate}`]: {
     backgroundColor: "#ff77dd",
   },
-  [`& .${linearProgressClasses.bar}`]: {
+  [`&.${linearProgressClasses.bar}`]: {
     backgroundColor: "#3355ff",
   },
 }));

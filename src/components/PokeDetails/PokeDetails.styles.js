@@ -11,7 +11,7 @@ export const PokemonDetailsPaper = styled(Paper)(({ theme }) => ({
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "fit-content",
-    width: "75vw",
+    width: "1200px",
   },
   [theme.breakpoints.down("md")]: {
     width: "90vw",
@@ -32,7 +32,7 @@ export const PrimaryInfoColumn = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   [theme.breakpoints.up("sm")]: {
-    width: "50%",
+    width: "75%",
   },
 }));
 

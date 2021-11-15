@@ -6,13 +6,13 @@ import {
   EvoTableArrow,
   EvoTableTypogragphy,
   EvoTablePaper,
-  EvoTableSprite,
 } from ".";
+import PokeballSpinner from "../PokeballSpinner";
 
-const EvolutionTable = ({ evoChainUrl, setUrl }) => {
+const EvolutionTable = ({ evolutionChainUrl, setUrl }) => {
   const [evoChain, setEvoChain] = useState([]);
 
-  const { isLoading, serverError, apiData } = useFetch(evoChainUrl);
+  const { isLoading, serverError, apiData } = useFetch(evolutionChainUrl);
 
   const handleClick = (e, id) => {
     e.preventDefault();
@@ -55,9 +55,9 @@ const EvolutionTable = ({ evoChainUrl, setUrl }) => {
           handleClick(e, evoChain[index].id);
         }}
       >
-        <EvoTableSprite
+        <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-          alt="pokemon"
+          alt={"/img/missingno-sprite.png"}
         />
         <EvoTableTypogragphy variant="body2" align="center">
           {capitalCase(name)}
@@ -81,7 +81,7 @@ const EvolutionTable = ({ evoChainUrl, setUrl }) => {
 
   return (
     <>
-      {isLoading && <span>Loading...</span>}
+      {isLoading && <PokeballSpinner />}
       {!isLoading && serverError ? (
         <span>Error in fetching data</span>
       ) : apiData !== null ? (

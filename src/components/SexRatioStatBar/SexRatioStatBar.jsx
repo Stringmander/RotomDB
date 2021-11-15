@@ -10,14 +10,12 @@ import {
 } from "./SexRatioStatBar.styles";
 
 const SexRatioStatBar = ({ genderRate }) => {
-  const femalePercentage = genderRate !== -1 ? (genderRate / 8) * 100 : null;
-  console.log(femalePercentage);
-  const malePercentage = genderRate !== -1 ? 100 - femalePercentage : null;
-  console.log(malePercentage);
   const isSexless = genderRate === -1;
+  const femalePercentage = !isSexless ? (genderRate / 8) * 100 : null;
+  const malePercentage = !isSexless ? 100 - femalePercentage : null;
 
   return isSexless ? (
-    <Typography> Sex unknown </Typography>
+    <Typography align="center"> unknown sex </Typography>
   ) : (
     <SexRatioStatBarWrapper>
       <SexRatioProgressWrapper>

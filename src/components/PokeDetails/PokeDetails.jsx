@@ -3,25 +3,20 @@ import {
   LgRowWrapper,
   StatWrapper,
   PrimaryInfoColumn,
-  SupplementalInfoColumn,
+  // SupplementalInfoColumn,
 } from ".";
 import { useFetch } from "../../util";
-import AblitiyTable from "../AbilityTable/AbilityTable";
-import EvolutionTable from "../EvolutionTable";
 import IdentificationPlate from "../IdentificationPlate";
 import StatRadarChart from "../StatRadarChart";
 import StatTable from "../StatTable";
 import MovesTable from "../MovesTable";
-import FlavorTextTable from "../FlavorTextTable";
-import SexRatioStatBar from "../SexRatioStatBar";
+import SupplementalInformationTable from "../SupplementalInformationTable";
+import PokeballSpinner from "../PokeballSpinner";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
-  const speciesRes = useFetch(species.url);
-  const { isLoading, serverError, apiData } = speciesRes;
-
-  const evoChainUrl =
-    speciesRes.apiData === null ? "" : speciesRes.apiData.evolution_chain.url;
+  const speciesResult = useFetch(species.url);
+  const { isLoading, serverError, apiData } = speciesResult;
 
   return id ? (
     <PokemonDetailsPaper className="PokeDetails">
@@ -34,21 +29,28 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
           </StatWrapper>
           <MovesTable moves={moves} pokeTypes={types} />
         </PrimaryInfoColumn>
-        {isLoading && <span>Loading...</span>}
-        <SupplementalInfoColumn>
-          {!isLoading && serverError ? (
-            <span>Error in fetching data</span>
-          ) : apiData !== null ? (
-            <>
-              <EvolutionTable evoChainUrl={evoChainUrl} setUrl={setUrl} />
-              <SexRatioStatBar genderRate={apiData.gender_rate} />
-              <AblitiyTable abilities={abilities} />
-              <FlavorTextTable speciesRes={speciesRes} />
-            </>
-          ) : (
-            <></>
-          )}
-        </SupplementalInfoColumn>
+        {isLoading && <PokeballSpinner />}
+        {!isLoading && serverError ? (
+          <span>Error in fetching data</span>
+        ) : apiData !== null ? (
+          // <>
+          //   <EvolutionTable
+          //     evoChainUrl={speciesResult.apiData.evolution_chain.url}
+          //     setUrl={setUrl}
+          //   />
+          //   <SexRatioStatBar genderRate={apiData.gender_rate} />
+          //   <AblitiyTable abilities={abilities} />
+          //   <FlavorTextTable speciesRes={speciesResult} />
+          // </>
+          <SupplementalInformationTable
+            setUrl={setUrl}
+            speciesResult={apiData}
+            id={id}
+            abilities={abilities}
+          />
+        ) : (
+          <></>
+        )}
       </LgRowWrapper>
     </PokemonDetailsPaper>
   ) : null;
