@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme, IconButton } from "@mui/material";
+import { useMediaQuery, useTheme, IconButton, Tooltip } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { capitalCase, formatPokeId, mapPokeTypeName } from "../../util";
 import {
@@ -26,13 +26,14 @@ const IdentifactionPlate = ({ id, name, types }) => {
       <TypeIconsContainer>
         {pokemonTypes.map((pokemonType) => {
           return (
-            <PokemonTypeIcon
-              key={pokemonType}
-              pokemontype={pokemonType}
-              src={`/icons/${pokemonType}.svg`}
-              aria-label={pokemonType}
-              alt="Type Icon"
-            />
+            <Tooltip key={pokemonType} title={capitalCase(pokemonType)}>
+              <PokemonTypeIcon
+                pokemontype={pokemonType}
+                src={`/icons/${pokemonType}.svg`}
+                aria-label={pokemonType}
+                alt="Type Icon"
+              />
+            </Tooltip>
           );
         })}
       </TypeIconsContainer>
