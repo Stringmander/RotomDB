@@ -12,11 +12,18 @@ import StatTable from "../StatTable";
 import MovesTable from "../MovesTable";
 import SupplementalInformationTable from "../SupplementalInformationTable";
 import PokeballSpinner from "../PokeballSpinner";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PokeDetails = ({ result, setUrl, addToTeam }) => {
   const { id, name, types, stats, abilities, species, moves } = result;
-  const speciesResult = useFetch(species.url);
-  const { isLoading, serverError, apiData } = speciesResult;
+  const [speciesUrl, setSpeciesUrl] = useState("");
+
+  useEffect(() => {
+    species ? setSpeciesUrl(species.url) : setSpeciesUrl("");
+  }, [species]);
+
+  const { isLoading, serverError, apiData } = useFetch(speciesUrl);
 
   return id ? (
     <PokemonDetailsPaper className="PokeDetails">

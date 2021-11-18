@@ -13,14 +13,17 @@ export const EvoStepWrapper = styled("div")({
   display: "flex",
 });
 
-export const EvoTablePaper = styled(Paper)({
-  width: "4vw",
+export const EvoTablePaper = styled(Paper)(({ theme }) => ({
+  width: "21vw",
   display: "flex",
   flexDirection: "column",
   borderRadius: "5px",
   overflow: "hidden",
   cursor: "pointer",
-});
+  [theme.breakpoints.up("sm")]: {
+    width: "4vw",
+  },
+}));
 
 export const EvoTableTypogragphy = styled(Typography)({
   color: "white",

@@ -3,15 +3,15 @@ import { Paper, styled } from "@mui/material";
 export const PokemonDetailsPaper = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  overflow: "hidden",
+  // overflow: "hidden",
   [theme.breakpoints.up("sm")]: {
     position: "absolute",
-    top: "50%",
     left: "50%",
+    top: "62%",
     marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "fit-content",
-    width: "1200px",
+    transform: "translate(-50%, -62%)",
+    width: 1200,
+    height: 792,
   },
   [theme.breakpoints.down("md")]: {
     width: "90vw",

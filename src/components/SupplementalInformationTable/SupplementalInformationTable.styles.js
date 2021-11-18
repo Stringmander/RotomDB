@@ -8,9 +8,11 @@ import {
 
 export const SupplementalInformationTableWrapper = styled("div")(
   ({ theme }) => ({
-    width: "30%",
     display: "flex",
     flexDirection: "column",
+    [theme.breakpoints.up("sm")]: {
+      width: "30%",
+    },
   })
 );
 
