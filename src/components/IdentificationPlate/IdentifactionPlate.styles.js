@@ -10,7 +10,10 @@ export const Background = styled("div")({
   width: "100%",
   height: "3rem",
   display: "flex",
-  backgroundColor: "black",
+  backgroundColor: "#000",
+  borderTopLeftRadius: "5px",
+  borderTopRightRadius: "5px",
+  overflow: "hidden",
 });
 
 export const SpriteIdBg = styled("div")(({ pokemontypes, theme }) => {

@@ -1,4 +1,4 @@
-import theme from "./themes";
+import theme from "./theme";
 export * from "./pokemonTypeColors";
 
 export default theme;

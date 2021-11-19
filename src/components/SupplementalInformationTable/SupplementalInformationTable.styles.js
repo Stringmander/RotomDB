@@ -1,10 +1,4 @@
-import {
-  styled,
-  TableCell,
-  Toolbar,
-  toolbarClasses,
-  tableCellClasses,
-} from "@mui/material";
+import { styled, TableCell, tableCellClasses } from "@mui/material";
 
 export const SupplementalInformationTableWrapper = styled("div")(
   ({ theme }) => ({
@@ -21,18 +15,7 @@ export const OfficialArtwork = styled("img")(({ theme }) => ({
   margin: "auto",
 }));
 
-export const HeadingToolbar = styled(Toolbar)(({ theme }) => ({
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  backgroundColor: "#000",
-  color: "#fff",
-  [`&.${toolbarClasses.root}`]: {
-    minHeight: "fit-content",
-  },
-}));
-
-export const TableHeadCell = styled(TableCell)(({ theme }) => ({
+export const SupplementalHeadingCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: "#000",
   color: "#fff",
 

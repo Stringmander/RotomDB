@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   Table,
   TableBody,
@@ -6,22 +5,20 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Tooltip,
+  Toolbar,
   Typography,
 } from "@mui/material";
 import {
   OfficialArtwork,
   SupplementalInformationTableWrapper,
-  TableHeadCell,
-  HeadingToolbar,
-  TableBodyCell,
-  TooltipTypography,
+  SupplementalHeadingCell,
 } from ".";
-import { LanguageContext } from "../../context";
 import SexRatioStatBar from "../SexRatioStatBar";
-import { capitalCase, useContextFilter, useMappedFetch } from "../../util";
+import { capitalCase, useMappedFetch } from "../../util";
 import PokeballSpinner from "../PokeballSpinner";
 import EvolutionTable from "../EvolutionTable";
+import AbilityTable from "../AbilityTable";
+import FlavorTextTable from "../FlavorTextTable";
 
 const SupplementalInformationTable = ({
   setUrl,
@@ -29,12 +26,12 @@ const SupplementalInformationTable = ({
   id,
   abilities,
 }) => {
-  const lang = useContext(LanguageContext);
   const {
     gender_rate,
     evolution_chain,
     egg_groups,
     hatch_counter,
+    flavor_text_entries,
   } = speciesResult;
 
   const { isLoading, apiData, serverError } = useMappedFetch(
@@ -42,89 +39,7 @@ const SupplementalInformationTable = ({
     "ability"
   );
 
-  const flavorText = useContextFilter(speciesResult.flavor_text_entries);
-
   const headingTypographyVariant = "subtitle2";
-  const tableCellTypographyVariant = "caption";
-
-  const AbilityTable = () => {
-    const AbilityCells = () => {
-      return apiData.map((ability, i) => {
-        const effectText = ability.effect_entries.find(
-          ({ language }) => language.name === lang.name
-        ).effect;
-
-        return (
-          <TableBodyCell key={ability.name} align="center">
-            <Tooltip title={effectText}>
-              <div>
-                <TooltipTypography variant="body2">
-                  {capitalCase(ability.name)}
-                </TooltipTypography>
-                {abilities[i].is_hidden && (
-                  <div>
-                    <TooltipTypography variant="body2">
-                      (hidden)
-                    </TooltipTypography>
-                  </div>
-                )}
-              </div>
-            </Tooltip>
-          </TableBodyCell>
-        );
-      });
-    };
-
-    return (
-      <>
-        <HeadingToolbar>
-          <Typography variant={headingTypographyVariant}>Abilities</Typography>
-        </HeadingToolbar>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <AbilityCells />
-            </TableRow>
-          </TableBody>
-        </Table>
-      </>
-    );
-  };
-
-  const FlavorTextTable = () => {
-    const FlavorTextCells = () => {
-      return flavorText.map(({ flavor_text, version, language }, i) => {
-        return (
-          <TableCell key={`${version.name}-${language.name}`} align="center">
-            <Tooltip title={flavor_text} placement="top">
-              <div>
-                <TooltipTypography variant={headingTypographyVariant}>
-                  {`Pokémon ${capitalCase(version.name)}`}
-                </TooltipTypography>
-              </div>
-            </Tooltip>
-          </TableCell>
-        );
-      });
-    };
-
-    return (
-      <>
-        <HeadingToolbar>
-          <Typography variant={headingTypographyVariant}>
-            Flavor Text
-          </Typography>
-        </HeadingToolbar>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <FlavorTextCells />
-            </TableRow>
-          </TableBody>
-        </Table>
-      </>
-    );
-  };
 
   return (
     <SupplementalInformationTableWrapper>
@@ -140,64 +55,70 @@ const SupplementalInformationTable = ({
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeadCell align="center">
+                <SupplementalHeadingCell align="center">
                   <Typography variant={headingTypographyVariant}>
                     Sex Ratio
                   </Typography>
-                </TableHeadCell>
-                <TableHeadCell align="center">
+                </SupplementalHeadingCell>
+                <SupplementalHeadingCell align="center">
                   <Typography variant={headingTypographyVariant}>
                     Catch Rate
                   </Typography>
-                </TableHeadCell>
+                </SupplementalHeadingCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableBodyCell align="center">
+                <TableCell variant="supplemental-body" align="center">
                   <SexRatioStatBar genderRate={gender_rate} />
-                </TableBodyCell>
-                <TableBodyCell align="center">
+                </TableCell>
+                <TableCell variant="supplemental-body" align="center">
                   <Typography>{speciesResult.capture_rate}</Typography>
-                </TableBodyCell>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
-          <AbilityTable />
+          <AbilityTable apiData={apiData} abilities={abilities} />
           <Table>
             <TableHead>
               <TableRow>
-                <TableHeadCell align="center"> Egg Groups </TableHeadCell>
-                <TableHeadCell align="center"> Hatch Time </TableHeadCell>
+                <SupplementalHeadingCell align="center">
+                  {" "}
+                  Egg Groups{" "}
+                </SupplementalHeadingCell>
+                <SupplementalHeadingCell align="center">
+                  {" "}
+                  Hatch Time{" "}
+                </SupplementalHeadingCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableBodyCell align="center">
+                <TableCell variant="supplemental-body" align="center">
                   {egg_groups.map((eggGroup) => (
                     <div key={eggGroup.name}>
-                      <Typography variant={tableCellTypographyVariant}>
+                      <Typography variant="caption">
                         - {capitalCase(eggGroup.name)}
                       </Typography>
                     </div>
                   ))}
-                </TableBodyCell>
-                <TableBodyCell align="center">
+                </TableCell>
+                <TableCell variant="supplemental-body" align="center">
                   <Typography>{(hatch_counter + 1) * 255} steps</Typography>
-                </TableBodyCell>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
-          <HeadingToolbar>
+          <Toolbar variant="table-heading">
             <Typography variant={headingTypographyVariant}>
               Evolution
             </Typography>
-          </HeadingToolbar>
+          </Toolbar>
           <EvolutionTable
             setUrl={setUrl}
             evolutionChainUrl={evolution_chain.url}
           />
-          <FlavorTextTable />
+          <FlavorTextTable flavorTextEntries={flavor_text_entries} />
         </TableContainer>
       ) : (
         <></>

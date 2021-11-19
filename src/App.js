@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ThemeProvider, CssBaseline, Container } from "@mui/material";
+import {
+  ThemeProvider,
+  CssBaseline,
+  Toolbar,
+  useMediaQuery,
+} from "@mui/material";
 import { LanguageContextProvider, VersionGroupProvider } from "./context";
 import { useFetch } from "./util";
 import PokemonSearch from "./components/PokemonSearch";
@@ -14,6 +19,7 @@ import { AppWrapper } from "./app.styles";
 function App() {
   const [url, setUrl] = useState("");
   const { isLoading, serverError, apiData } = useFetch(url);
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   // const [team, setTeam] = useState([]);
   // const [shift, setShift] = useState(true);
@@ -53,6 +59,7 @@ function App() {
             {/* <PokemonBG shift={shift} types={result.types} /> */}
             {/* <PokemonTeam team={team} setResult={handleSetResult} /> */}
             <PokemonSearch setUrl={setUrl} />
+            {matches && <Toolbar />}
             {isLoading && <PokeballSpinner />}
             {!isLoading && serverError ? (
               <span>Error in fetching data</span>
