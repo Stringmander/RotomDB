@@ -2,6 +2,8 @@ import { styled, Typography } from "@mui/material";
 import { pokemonTypeColors } from "../../themes";
 
 export const TypeBadgeBackground = styled("div")(({ type }) => ({
+  width: "9rem",
+  height: "3rem",
   display: "flex",
   borderRadius: "5px",
   margin: "5px",
@@ -11,7 +13,7 @@ export const TypeBadgeBackground = styled("div")(({ type }) => ({
 }));
 
 export const TypeIcon = styled("img")({
-  width: "2rem",
+  height: "100%",
   filter: "invert()",
 });
 

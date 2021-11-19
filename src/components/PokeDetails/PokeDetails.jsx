@@ -53,6 +53,7 @@ const PokeDetails = ({ result, setUrl, addToTeam }) => {
             setUrl={setUrl}
             speciesResult={apiData}
             id={id}
+            pokemonTypes={types}
             abilities={abilities}
           />
         ) : (

@@ -7,11 +7,14 @@ import {
   TableRow,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import {
   OfficialArtwork,
   SupplementalInformationTableWrapper,
   SupplementalHeadingCell,
+  TypeBadgeWrapper,
 } from ".";
 import SexRatioStatBar from "../SexRatioStatBar";
 import { capitalCase, useMappedFetch } from "../../util";
@@ -19,11 +22,13 @@ import PokeballSpinner from "../PokeballSpinner";
 import EvolutionTable from "../EvolutionTable";
 import AbilityTable from "../AbilityTable";
 import FlavorTextTable from "../FlavorTextTable";
+import PokemonTypeBadge from "../PokemonTypeBadge";
 
 const SupplementalInformationTable = ({
   setUrl,
   speciesResult,
   id,
+  pokemonTypes,
   abilities,
 }) => {
   const {
@@ -39,6 +44,9 @@ const SupplementalInformationTable = ({
     "ability"
   );
 
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
   const headingTypographyVariant = "subtitle2";
 
   return (
@@ -47,6 +55,13 @@ const SupplementalInformationTable = ({
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
         alt={"/img/missingno-official.png"}
       />
+      {matches && (
+        <TypeBadgeWrapper>
+          {pokemonTypes.map(({ type }) => (
+            <PokemonTypeBadge key={type.name} type={type.name} />
+          ))}
+        </TypeBadgeWrapper>
+      )}
       {isLoading && <PokeballSpinner />}
       {!isLoading && serverError ? (
         <span>Error in fetching data</span>

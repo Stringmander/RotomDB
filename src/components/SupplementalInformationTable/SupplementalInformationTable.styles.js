@@ -36,3 +36,9 @@ export const TooltipTypography = styled("div")(({ theme }) => ({
   textDecoration: "underline",
   cursor: "pointer",
 }));
+
+export const TypeBadgeWrapper = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-evenly",
+  margin: theme.spacing(1),
+}));

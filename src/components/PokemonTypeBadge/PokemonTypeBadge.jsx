@@ -1,10 +1,10 @@
-import { TypeBadgeBackground, TypeBadgeTypography } from ".";
+import { TypeBadgeBackground, TypeBadgeTypography, TypeIcon } from ".";
 import { capitalCase } from "../../util";
 
 function PokemonTypeBadge({ type }) {
   return (
     <TypeBadgeBackground type={type}>
-      <img src={`/icons/${type}.svg`} alt="pokemon" />
+      <TypeIcon src={`/icons/${type}.svg`} alt="pokemon" />
       <TypeBadgeTypography variant="h5">
         {capitalCase(type)}
       </TypeBadgeTypography>
