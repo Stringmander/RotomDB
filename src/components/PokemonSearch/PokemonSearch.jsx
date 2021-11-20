@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { AppBar, Toolbar, Slide, useScrollTrigger } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Search, SearchIconWrapper, StyledInputBase } from ".";
+import {
+  Search,
+  SearchIconWrapper,
+  StyledAppBar,
+  StyledInputBase,
+  StyledToolbar,
+} from ".";
 
 function PokemonSearch({ setUrl }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,8 +28,8 @@ function PokemonSearch({ setUrl }) {
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>
-      <AppBar>
-        <Toolbar>
+      <StyledAppBar>
+        <StyledToolbar>
           <Search onSubmit={handleSubmit}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -34,8 +40,8 @@ function PokemonSearch({ setUrl }) {
               value={searchTerm}
             />
           </Search>
-        </Toolbar>
-      </AppBar>
+        </StyledToolbar>
+      </StyledAppBar>
     </Slide>
   );
 }

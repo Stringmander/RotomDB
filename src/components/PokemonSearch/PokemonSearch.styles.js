@@ -1,7 +1,28 @@
-import { alpha, InputBase, styled } from "@mui/material";
+import {
+  alpha,
+  AppBar,
+  appBarClasses,
+  InputBase,
+  styled,
+  Toolbar,
+  toolbarClasses,
+} from "@mui/material";
+
+export const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  [`&.${appBarClasses.root}`]: {
+    backgroundColor: "#000",
+  },
+}));
+
+export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  [`&.${toolbarClasses.root}`]: {
+    display: "grid",
+  },
+}));
 
 export const Search = styled("form")(({ theme }) => ({
   position: "relative",
+  justifySelf: "center",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
@@ -12,7 +33,7 @@ export const Search = styled("form")(({ theme }) => ({
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto",
+    width: "32%",
   },
 }));
 
