@@ -4,6 +4,9 @@ import { pokemonTypeColors } from "../../themes";
 
 export const useStyles = makeStyles({
   root: {
+    "& .stab-move": {
+      fontWeight: "bold",
+    },
     "& .normal-type-cell": {
       backgroundColor: pokemonTypeColors["normal"].hex,
     },
@@ -63,6 +66,10 @@ export const useStyles = makeStyles({
 
 export const MovesTableWrapper = styled("div")(({ theme }) => ({
   width: "100%",
+  height: 370,
   display: "flex",
-  flexDirection: "column",
 }));
+
+export const CustomFooterWrapper = styled("div")({
+  display: "flex",
+});

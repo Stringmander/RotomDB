@@ -1,14 +1,20 @@
 import { useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { LanguageContext } from "../../context";
+import PokeballSpinner from "../PokeballSpinner";
 import {
   capitalCase,
   mapPokeTypeName,
   useContextFilter,
   useMappedFetch,
 } from "../../util";
-import { MovesTableWrapper, useStyles } from ".";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { CustomFooterWrapper, MovesTableWrapper, useStyles } from ".";
+import {
+  TablePagination,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 const MovesTable = ({ moves, pokeTypes }) => {
   const pokeTypesArr = mapPokeTypeName(pokeTypes);
@@ -17,21 +23,28 @@ const MovesTable = ({ moves, pokeTypes }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // const determineSTAB = (moveType, moveClass) => {
-  //   const StabTextStyle = pokeTypesArr.includes(moveType.name)
-  //     ? moveClass.name === "physical" || moveClass.name === "special"
-  //       ? { fontWeight: "bold" }
-  //       : {}
-  //     : {};
-  //   return StabTextStyle;
-  // };
-
   const filteredMoves = useContextFilter(moves);
+
+  const determineSTAB = (moveType, moveClass) => {
+    const hasSTAB =
+      (moveClass === "physical" || moveClass === "special") &&
+      pokeTypesArr.includes(moveType);
+    return hasSTAB;
+  };
 
   const { isLoading, apiData, serverError } = useMappedFetch(
     filteredMoves,
     "move"
   );
+
+  const customFooter = () => {
+    return (
+      <CustomFooterWrapper>
+        <Typography>*bold indicates move has STAB</Typography>
+        <TablePagination />
+      </CustomFooterWrapper>
+    );
+  };
 
   const rows =
     apiData !== null
@@ -47,18 +60,24 @@ const MovesTable = ({ moves, pokeTypes }) => {
           params.row.names.find(({ language }) => language.name === lang.name)
             .name
         ),
-      width: 120,
+      cellClassName: (params) =>
+        determineSTAB(params.row.type.name, params.row.damage_class.name)
+          ? "stab-move"
+          : "",
+      flex: matches ? 0 : 1,
     },
     {
       field: "type",
       headerName: "Type",
       valueGetter: (params) => capitalCase(params.row.type.name),
       cellClassName: (params) => `${params.row.type.name}-type-cell`,
+      flex: matches ? 0 : 1,
     },
     {
       field: "damage_class",
       headerName: "Class",
       valueGetter: (params) => capitalCase(params.row.damage_class.name),
+      flex: matches ? 0 : 1,
     },
     {
       field: "power",
@@ -80,22 +99,23 @@ const MovesTable = ({ moves, pokeTypes }) => {
       type: "number",
       align: "center",
       headerAlign: "center",
-      width: 80,
     },
   ];
 
   return (
     <MovesTableWrapper className={classes.root}>
-      {isLoading && <span>Loading...</span>}
+      {isLoading && <PokeballSpinner />}
       {!isLoading && serverError ? (
         <span>Error in fetching data</span>
-      ) : rows !== [] ? (
+      ) : !isLoading && rows !== [] ? (
         <DataGrid
           rows={rows}
           columns={columns}
-          autoHeight={true}
           pageSize={5}
           rowsPerPageOptions={[5]}
+          // components={{
+          //   Footer: customFooter,
+          // }}
         />
       ) : (
         <></>
